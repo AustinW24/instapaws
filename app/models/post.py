@@ -15,7 +15,7 @@ class Post(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.now)
 
     users = db.relationship("User")
-    post_likes = db.relationship("User", secondary=likes)
+    postlikes = db.relationship("User", secondary=likes)
     comments = db.relationship("Comment", backref="posts", cascade='delete')
 
     def to_dict(self):
@@ -28,7 +28,7 @@ class Post(db.Model):
             "user_id": self.user_id,
             "timestamp": self.timestamp,
             "user": user.to_dict(),
-            "post_likes": [user.id for user in self.post_likes],
+            "post_likes": [user.id for user in self.postlikes],
             "post_comments": self.comments,
             "likes_count": len(self.post_likes),
             "comments_count": len(self.comments)
@@ -36,8 +36,8 @@ class Post(db.Model):
 
     def to_dict_post_stats(self):
         return {
-            "post_likes": self.post_likes,
-            "likes_count": len(self.post_likes),
+            "post_likes": self.postlikes,
+            "likes_count": len(self.postlikes),
             "comments": self.comments,
             "comments_count": len(self.comments)
         }

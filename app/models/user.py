@@ -34,7 +34,7 @@ class User(db.Model, UserMixin):
             "profile_picture": self.profile_picture
         }
 
-    posts = db.relationship('Post', backref="users")
-    comments = db.relationship('Comment', backref="users")
+    posts = db.relationship('Post', backref="user")
+    comments = db.relationship('Comment', backref="user")
     user_likes = db.relationship(
         "Post", secondary=likes, backref="post_likes")

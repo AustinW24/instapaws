@@ -10,8 +10,8 @@ class Comment(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     timestamp = db.Column(db.DateTime, default=datetime.now)
 
-    user = db.relationship('User')
-    posts = db.relationship('Post')
+    users = db.relationship('User')
+    post = db.relationship('Post')
 
 
 def to_dict(self):
