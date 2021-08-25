@@ -25,6 +25,7 @@ class User(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+
     def to_dict(self):
         return {
             'id': self.id,
@@ -34,7 +35,9 @@ class User(db.Model, UserMixin):
             "profile_picture": self.profile_picture
         }
 
-    posts = db.relationship('Post', backref="user")
-    comments = db.relationship('Comment', backref="user")
-    user_likes = db.relationship(
-        "Post", secondary=likes, backref="post_likes")
+    posts = db.relationship(
+        'Post', back_populates="users")
+    comments = db.relationship(
+        'Comment', back_populates="users")
+    userLikes = db.relationship(
+        "Post", secondary=likes, back_populates="postLikes")

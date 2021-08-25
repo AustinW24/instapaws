@@ -74,9 +74,32 @@ def sign_up():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
+@auth_routes.route('/delete/<int:id>', methods=['DELETE'])
+def delete(id):
+    """
+    Deletes a user and logs them out
+    """
+    user = User.query.get(id)
+    db.session.delete(user)
+    db.session.commit()
+    logout_user()
+    return {'message': 'User logged out'}
+
 @auth_routes.route('/unauthorized')
 def unauthorized():
     """
     Returns unauthorized JSON when flask-login authentication fails
     """
     return {'errors': ['Unauthorized']}, 401
+
+
+@auth_routes.route('/update/<int:id>', methods=['POST'])
+def update(id):
+    user = User.query.get(id)
+    data = request.get_json()
+    user.username = data['username']
+    user.email = data['email']
+    user.description = data['biography']
+    user.vehicle = data['profile_picture']
+    db.session.commit()
+    return user.to_dict()
