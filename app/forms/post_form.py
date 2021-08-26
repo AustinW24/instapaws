@@ -7,5 +7,4 @@ dr = [DataRequired()]
 
 class PostForm(FlaskForm):
     caption = StringField('caption', dr)
-    user_id = IntegerField('User Id', dr)
-    picture_url = StringField("Picture Url", dr)
+    picture_url = StringField("picture_url", dr)
