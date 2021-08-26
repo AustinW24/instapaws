@@ -1,31 +1,38 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createPost } from "./../store/posts"
+import Modal from '.././context/Modal'
 import './PostModal.css'
 // import { createPost } from '.././store/posts'
 
-function PostModal({post, setShowModal}) {
+function PostModal({ post, setShowModal }) {
     const dispatch = useDispatch();
     const [caption, setCaption] = useState('');
-    const [url, setUrl] = useState('');
-
+    const [picture_url, setPictureUrl] = useState('');
+    const [errors, setErrors] = useState([]);
+    const current_user = useSelector(state => state.session.user);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        post.caption = caption;
-        // await dispatch(createPost(post))
+        await dispatch(createPost(caption, picture_url))
         setShowModal(false);
     }
 
     return (
         <>
             <form className='postmodal-form' onSubmit={handleSubmit}>
-            <label className='post-image'>
+                <div className="post-errors">
+                    {errors.map(error => (
+                        <li>{error}</li>
+                    ))}
+                </div>
+                <label className='post-image'>
                     Image: {' '}
                     <input
                         placeholder='Image Url...'
                         type="text"
-                        value={url}
-                        onChange={(e) => setUrl(e.target.value)}
+                        value={picture_url}
+                        onChange={(e) => setPictureUrl(e.target.value)}
                         required
                     />
                 </label>
@@ -39,7 +46,8 @@ function PostModal({post, setShowModal}) {
                         required
                     />
                 </label>
-                <button type="submit" className='confirm' >{'   '}Confirm Change</button>
+                <button type="submit" className='confirm' >{'   '}Create</button>
+                <button onClick={() => setShowModal(false)}>Cancel</button>
             </form>
         </>
     )

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useHistory } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import LoginForm from './auth/LoginForm';
 import Modal from '.././context/Modal'
@@ -14,10 +14,16 @@ const NavBar = () => {
     const current_user = useSelector(state => state.session.user);
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch();
+    const history = useHistory();
     // const username = current_user.username
     useEffect(() => {
         setShowModal()
     }, [dispatch])
+
+
+    const handleRoute = () =>{
+      history.push("/");
+    }
 
     return (
         <header>
@@ -68,9 +74,7 @@ const NavBar = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to={"/"} onClick={() => setShowModal(false)} exact={true} activeClassName='active'>
-                                    <LogoutButton />
-                                </NavLink>
+                                    <LogoutButton onClick={handleRoute}/>
                             </li>
                         </>
                     }

@@ -2,3 +2,18 @@
 .home-container {
     margin-top:10%;
 }
+
+.indv-photo {
+    height: 70vh;
+    width: 60vh;
+}
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.indv-post {
+    display: flex;
+    flex-direction: column;
+}
