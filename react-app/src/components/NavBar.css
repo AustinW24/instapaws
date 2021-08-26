@@ -1,0 +1,35 @@
+.navigation {
+    background-color: #ffffff;
+    height: 70px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.0975);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0px 50px;
+    box-sizing: border-box;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.insta-logo {
+    width: 135px;
+    height: 40px;
+    display: flex;
+    margin-top: 15px;
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+a, li {
+    padding-left: 5px;
+    padding-right: 5px;
+    list-style: none;
+}

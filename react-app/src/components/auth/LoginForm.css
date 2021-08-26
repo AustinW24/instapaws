@@ -1,0 +1,80 @@
+.login-form {
+	margin: 0;
+	padding: 0;
+	font-family: montserrat;
+	height: 30vh;
+	width: 25vh;
+	overflow: hidden;
+	border-radius: 4px;
+	border: 1px solid lightgray;
+	margin-top: 120px;
+
+}
+
+.login-container {
+	position: absolute;
+	top: 50%;
+	left: 45%;
+	transform: translate(-50%, -50%);
+	display: flex;
+}
+
+.errors {
+	padding-bottom: 30px;
+    display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.logo {
+	width: 130px;
+	height: 6vh;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+}
+
+.twophones {
+	height: 60vh;
+}
+
+input {
+	margin: auto;
+	display: block;
+    margin-top: 5px;
+
+}
+
+.login-button {
+    margin: auto;
+	display: block;
+    margin-top: 10px;
+    border-radius: 4px;
+    width: 165px;
+    height: 22px;
+    background-color: #0095F6;
+    color: white;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.login-button:hover {
+    cursor: pointer;
+}
+
+p {
+    font-size: 14px;
+    display: block;
+	margin-left: 15px;;
+	margin-right: auto;
+    margin-top: 20px;
+}
+
+a {
+    margin-right: -10px;
+}
+
+a:hover {
+    cursor: pointer;
+}
