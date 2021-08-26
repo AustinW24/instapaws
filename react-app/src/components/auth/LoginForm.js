@@ -38,7 +38,7 @@ const LoginForm = () => {
         <div className='login-container'>
             <img alt="two phones" src={phones} className='twophones'></img>
             <form onSubmit={onLogin} className='login-form'>
-                <img slt="instapaws logo" className='logo' src={logo}></img>
+                <img alt="instapaws logo" className='logo' src={logo}></img>
                 <div className='errors'>
                     {errors.map((error, ind) => (
                         <div key={ind}>{error}</div>
