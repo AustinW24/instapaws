@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { actionGetPosts, actionGetAllPosts, actionSetPost, actionCreatePost, actionRemovePost, actionLikePost } from '../../store/posts'
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react"
+import { getPosts, getAllPosts, setPost, createPost, removePost, likePost } from '../../store/posts'
 
 export default function HomePage() {
+    const dispatch = useDispatch()
+    const posts = useSelector((state) => Object.values(state.posts))
+    const user = useSelector(state => state.session.user)
 
-    // const posts = useSelector((state) => Object.values(state.posts))
     // console.log(posts)
+
     return (
         <>
         </>

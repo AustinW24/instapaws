@@ -1,163 +1,164 @@
-import { refresh } from './session.js'
 
 const GET_POSTS = 'posts/GET_POSTS'
-const GET_ALL_POSTS = 'posts/GET_ALL_POSTS'
-const REMOVE_POST = 'posts/REMOVE_POST'
-const SET_POST = 'posts/SET_POST'
-const CREATE_POST = 'posts/CREATE_POST'
-const LIKE_POST = 'posts/LIKE_POST'
+// const GET_ALL_POSTS = 'posts/GET_ALL_POSTS'
+// const REMOVE_POST = 'posts/REMOVE_POST'
+// const SET_POST = 'posts/SET_POST'
+// const LIKE_POST = 'posts/LIKE_POST'
+// const CREATE_POST = 'posts/CREATE_POST'
 
-const actionGetPosts = (posts) => ({
+const setPosts = (posts) => ({
     type: GET_POSTS,
-    posts
+    payload: posts
 })
 
-const actionGetAllPosts = (posts) => ({
-    type: GET_ALL_POSTS,
-    posts
-})
 
-const actionRemovePost = (id) => ({
-    type: REMOVE_POST,
-    id
-})
+// const actionRemovePost = (id) => ({
+//     type: REMOVE_POST,
+//     id
+// })
 
-const actionSetPost = (post) => ({
-    type: SET_POST,
-    post
-})
+// const actionSetPost = (post) => ({
+//     type: SET_POST,
+//     post
+// })
 
-const actionCreatePost = (post) => ({
-    type: CREATE_POST,
-    post
-})
+// const actionCreatePost = (post) => ({
+//     type: CREATE_POST,
+//     post
+// })
 
-const actionLikePost = (post) => ({
-    type: LIKE_POST,
-    post,
-});
+// const actionLikePost = (post) => ({
+//     type: LIKE_POST,
+//     post,
+// });
 
 
 
 
 
-export const getPosts = (user) => async dispatch => {
-    const req = await fetch('/api/posts/');
-    if (req.ok) {
-        const posts = await req.json();
-        dispatch(actionGetPosts(posts));
-    }
-    return req;
-}
+// export const getPosts = () => async dispatch => {
+//     const req = await fetch('/api/posts');
+//     if (req.ok) {
+//         const posts = await req.json();
+//         dispatch(actionGetPosts(posts));
+//     }
+//     return req;
+// }
 
-export const getAllPosts = () => async dispatch => {
-    const res = await fetch('api/posts/all')
-    if (res.ok) {
-        const posts = await res.json();
-        dispatch(actionGetAllPosts(posts));
-    }
-    return res
-}
+export const getAllPosts = () => {
+    return async (dispatch) => {
+        const response = await fetch('/api/posts', {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
 
-export const removePost = (id) => async dispatch => {
-    const res = await fetch(`/api/posts/${id}`, {
-        method: "DELETE",
-    })
-
-    if (res.ok) {
-        const removed = await res.json();
-        dispatch(actionRemovePost(id));
-        return removed
-    }
-}
-
-export const editPost = (post) => async dispatch => {
-    const { id, caption } = post;
-
-    const res = await fetch(`/api/posts/${post.id}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(post)
-    });
-
-    if (res.ok) {
-        const data = await res.json();
-        dispatch(actionSetPost(data))
-        return data
-    } else if (res.status < 500) {
-        const data = await res.json();
-        if (data.errors) {
-            return data.errors
+        if (response.ok) {
+            const posts = await response.json();
+            console.log(posts)
         }
-    } else {
-        return ['An error occurred while processing.']
     }
 }
 
+// export const removePost = (id) => async dispatch => {
+//     const res = await fetch(`/api/posts/${id}`, {
+//         method: "DELETE",
+//     })
 
-export const createPost = (picture_url, caption) => async dispatch => {
-    const req = await fetch('/api/posts/new', {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            picture_url,
-            caption
-        })
-    });
+//     if (res.ok) {
+//         const removed = await res.json();
+//         dispatch(actionRemovePost(id));
+//         return removed
+//     }
+// }
 
-    if (req.ok) {
-        const data = await req.json();
-        dispatch(actionCreatePost(data))
+// export const editPost = (post) => async dispatch => {
+//     const { id, caption } = post;
 
-    } else if (req.status < 500) {
-        const data = await req.json();
-        if (data.errors) {
-            return data.errors;
-        }
-    } else {
-        return ['An error occurred while processing.']
-    }
-};
+//     const res = await fetch(`/api/posts/${post.id}`, {
+//         method: "PUT",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify(post)
+//     });
+
+//     if (res.ok) {
+//         const data = await res.json();
+//         dispatch(actionSetPost(data))
+//         return data
+//     } else if (res.status < 500) {
+//         const data = await res.json();
+//         if (data.errors) {
+//             return data.errors
+//         }
+//     } else {
+//         return ['An error occurred while processing.']
+//     }
+// }
 
 
-export const likePost = (post) => async dispatch => {
-    const { id } = post;
+// export const createPost = (picture_url, caption) => async dispatch => {
+//     const req = await fetch('/api/posts', {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify({
+//             picture_url,
+//             caption
+//         })
+//     });
 
-    let res = await fetch(`/api/posts/${id}/like`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(post)
-    });
+//     if (req.ok) {
+//         const data = await req.json();
+//         dispatch(actionCreatePost(data))
 
-    if (res.ok) {
-        const response = await res.json();
-        dispatch(actionLikePost(res))
-        return response
-    };
-};
+//     } else if (req.status < 500) {
+//         const data = await req.json();
+//         if (data.errors) {
+//             return data.errors;
+//         }
+//     } else {
+//         return ['An error occurred while processing.']
+//     }
+// };
+
+
+// export const likePost = (post) => async dispatch => {
+//     const { id } = post;
+
+//     let res = await fetch(`/api/posts/${id}/like`, {
+//         method: 'PUT',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify(post)
+//     });
+
+//     if (res.ok) {
+//         const response = await res.json();
+//         dispatch(actionLikePost(res))
+//         return response
+//     };
+// };
 
 
 
 const initialState = {}
 
-export default function postsReducer(state = initialState, action) {
+export default function posts(state = initialState, action) {
     switch (action.type) {
         case GET_POSTS:
 
             return { ...state, ...action.posts }
 
-        case GET_ALL_POSTS:
+        // case GET_ALL_POSTS:
 
-            return { ...state, ...action.posts }
+        //     return { ...state, ...action.posts }
 
-        case CREATE_POST:
+        // case CREATE_POST:
 
-            const newState = { ...state }
-            return newState
+        //     const newState = { ...state }
+        //     return newState
 
         default:
             return state

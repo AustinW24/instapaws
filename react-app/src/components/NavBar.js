@@ -68,7 +68,9 @@ const NavBar = () => {
                                 </NavLink>
                             </li>
                             <li>
-                                <LogoutButton />
+                                <NavLink to={"/"} onClick={() => setShowModal(false)} exact={true} activeClassName='active'>
+                                    <LogoutButton />
+                                </NavLink>
                             </li>
                         </>
                     }

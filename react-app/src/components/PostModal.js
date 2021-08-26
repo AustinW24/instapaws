@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import './PostModal.css'
-import { createPost } from '.././store/posts'
+// import { createPost } from '.././store/posts'
 
 function PostModal({post, setShowModal}) {
     const dispatch = useDispatch();
@@ -12,7 +12,7 @@ function PostModal({post, setShowModal}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         post.caption = caption;
-        await dispatch(createPost(post))
+        // await dispatch(createPost(post))
         setShowModal(false);
     }
 
