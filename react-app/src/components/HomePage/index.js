@@ -8,7 +8,7 @@ export default function HomePage() {
     const posts = useSelector((state) => Object.values(state.posts))
     const user = useSelector(state => state.session.user)
 
-    // console.log(posts)
+ 
 
     return (
         <>

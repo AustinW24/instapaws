@@ -54,8 +54,9 @@ export const getAllPosts = () => {
         });
 
         if (response.ok) {
-            const posts = await response.json();
-            console.log(posts)
+            const { posts } = await response.json();
+            // console.log(posts)
+            dispatch(setPosts(posts))
         }
     }
 }
@@ -149,7 +150,7 @@ export default function posts(state = initialState, action) {
     switch (action.type) {
         case GET_POSTS:
 
-            return { ...state, ...action.posts }
+            return { ...state, ...action.payload }
 
         // case GET_ALL_POSTS:
 

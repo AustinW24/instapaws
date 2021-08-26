@@ -12,7 +12,7 @@ post_routes = Blueprint('posts', __name__)
 def get_all_posts():
     posts = Post.query.all()
     print('the postsssssss-------------', posts)
-    return { "posts": [post.to_dict() for post in posts] }
+    return { "posts": {post.id: post.to_dict() for post in posts}}
 
 
 # @post_routes.route('/all')
