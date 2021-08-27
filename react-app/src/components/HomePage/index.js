@@ -16,9 +16,10 @@ export default function HomePage() {
         dispatch(getAllPosts())
     }, [dispatch])
 
-    // useEffect(() => {
-    //     dispatch(getAllUsers())
-    // }, [dispatch])
+    useEffect(() => {
+        dispatch(getAllUsers())
+    }, [dispatch])
+
 
 
     return (
@@ -29,7 +30,7 @@ export default function HomePage() {
                     {posts.map((post, idx) => {
                         return (
                             <li key={idx} className="indv-post">
-                                {post.user_id}
+                                <div className="post-header">{post.user_id}</div>
                                 <img alt="users post" src={post.picture_url} className="indv-photo"></img>
                                 {post.caption}
                             </li>

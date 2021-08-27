@@ -2,8 +2,8 @@ from app.models import db, Post
 
 def seed_posts():
     one = Post(
-        caption = "akc german rottweiler ♥️swimming, smiling, and stealing socks, 11/30/16  AZ",
-        picture_url = 'https://i.pinimg.com/originals/f9/cf/2d/f9cf2d702ff73eda61195bdd415817a3.jpg',
+        caption = "Hammy’s got the crazy eyes. Get ready to be pounced…",
+        picture_url = 'http://i.imgur.com/3p2RNEU.jpg',
         user_id = 1,
     )
     two = Post(
