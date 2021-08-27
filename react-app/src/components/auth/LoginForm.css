@@ -52,7 +52,7 @@ input {
     margin-top: 10px;
     border-radius: 4px;
     width: 165px;
-    height: 22px;
+    height: 100px;
     background-color: #0095F6;
     color: white;
     padding-top: 2px;
@@ -76,5 +76,25 @@ a {
 }
 
 a:hover {
+    cursor: pointer;
+}
+
+.profile-dropdown-div {
+    position: absolute;
+    background-color: #FAFAFA;
+    display: flex;
+    flex-direction: column;
+    right: 25px;
+    padding: 10px;
+    width: auto;
+    height: 100px;
+    border-radius: 3px;
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    border: 1.5px solid rgb(131, 132, 133)
+}
+
+.profile-dropdown__a {
     cursor: pointer;
 }

@@ -13,6 +13,7 @@
     flex-direction: row;
     align-items: flex-start;
     z-index:1;
+    margin-right: 100px;
 }
 
 .insta-logo {
