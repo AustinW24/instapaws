@@ -22,7 +22,7 @@ def get_all_posts():
 #     print('THE POSTS--------------', posts)
 #     return {post.id: post.to_dict() for post in posts}
 
-@post_routes.route('/', methods=['GET', 'POST'], strict_slashes=False)
+@post_routes.route('/', methods=['GET', 'POST'])
 @login_required
 def createPost():
     form = PostForm()
