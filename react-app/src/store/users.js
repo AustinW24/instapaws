@@ -10,7 +10,7 @@ const getUsers = (users) => ({
 
 
   export const getAllUsers = () => async (dispatch) => {
-    const response = await fetch("/api/users");
+    const response = await fetch("/api/users/");
 
     if (response.ok) {
       const { users } = await response.json();
