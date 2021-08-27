@@ -100,7 +100,7 @@ export const getAllPosts = () => {
 
 
 export const createPost = (picture_url, caption) => async dispatch => {
-    const req = await fetch('/api/posts/', {
+    const req = await fetch('/api/posts', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
