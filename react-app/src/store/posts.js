@@ -4,7 +4,7 @@ const GET_POSTS = 'posts/GET_POSTS'
 // const REMOVE_POST = 'posts/REMOVE_POST'
 // const SET_POST = 'posts/SET_POST'
 // const LIKE_POST = 'posts/LIKE_POST'
-// const CREATE_POST = 'posts/CREATE_POST'
+const CREATE_POST = 'posts/CREATE_POST'
 
 const setPosts = (posts) => ({
     type: GET_POSTS,
@@ -22,10 +22,10 @@ const setPosts = (posts) => ({
 //     post
 // })
 
-// const actionCreatePost = (post) => ({
-//     type: CREATE_POST,
-//     post
-// })
+const actionCreatePost = (post) => ({
+    type: CREATE_POST,
+    payload: post
+})
 
 // const actionLikePost = (post) => ({
 //     type: LIKE_POST,
@@ -99,31 +99,31 @@ export const getAllPosts = () => {
 // }
 
 
-// export const createPost = (picture_url, caption) => async dispatch => {
-//     const req = await fetch('/api/posts', {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify({
-//             picture_url,
-//             caption
-//         })
-//     });
+export const createPost = (picture_url, caption) => async dispatch => {
+    const req = await fetch('/api/posts/', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            caption,
+            picture_url
+        })
+    });
 
-//     if (req.ok) {
-//         const data = await req.json();
-//         dispatch(actionCreatePost(data))
+    if (req.ok) {
+        const data = await req.json();
+        dispatch(actionCreatePost(data))
 
-//     } else if (req.status < 500) {
-//         const data = await req.json();
-//         if (data.errors) {
-//             return data.errors;
-//         }
-//     } else {
-//         return ['An error occurred while processing.']
-//     }
-// };
+    } else if (req.status < 500) {
+        const data = await req.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ['An error occurred while creating post.']
+    }
+};
 
 
 // export const likePost = (post) => async dispatch => {
@@ -156,10 +156,10 @@ export default function posts(state = initialState, action) {
 
         //     return { ...state, ...action.posts }
 
-        // case CREATE_POST:
+        case CREATE_POST:
 
-        //     const newState = { ...state }
-        //     return newState
+            const newState = { ...state }
+            return newState
 
         default:
             return state

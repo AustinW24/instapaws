@@ -5,6 +5,7 @@ import './index.css';
 import App from './App';
 import configureStore from './store';
 import {getAllPosts} from  './store/posts'
+import {getAllUsers} from './store/users'
 
 const store = configureStore();
 
@@ -12,6 +13,7 @@ const store = configureStore();
 if(process.env.NODE_ENV === 'development') {
     window.dispatch = store.dispatch;
     window.getAllPosts = getAllPosts;
+    window.getAllUsers = getAllUsers;
 }
 
 ReactDOM.render(
@@ -22,3 +24,6 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root')
 );
+
+//postgres://kmokqprtxlgkdw:58b3fb22a2aefcb5623af09bb0bc6a6f06e7f93a4563e5218bbc2a3c628d5656@ec2-44-196-170-156.compute-1.amazonaws.com:5432/dcuqodcin6r0a0
+

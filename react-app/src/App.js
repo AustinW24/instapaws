@@ -12,42 +12,40 @@ import HomePage from './components/HomePage'
 import { authenticate } from './store/session';
 
 function App() {
-  const [loaded, setLoaded] = useState(false);
-  const dispatch = useDispatch();
+    const [loaded, setLoaded] = useState(false);
+    const dispatch = useDispatch();
 
-  useEffect(() => {
-    (async() => {
-      await dispatch(authenticate());
-      setLoaded(true);
-    })();
-  }, [dispatch]);
+    useEffect(() => {
+        (async () => {
+            await dispatch(authenticate());
+            setLoaded(true);
+        })();
+    }, [dispatch]);
 
-  if (!loaded) {
-    return null;
-  }
+    if (!loaded) {
+        return null;
+    }
 
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route path='/' exact={true}>
-          <LoginForm />
-        </Route>
-        <NavBar />
-        <Route path='/home' exact={true}>
-            <HomePage />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute>
-      </Switch>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <Switch>
+                <Route path='/' exact={true}>
+                    <LoginForm />
+                </Route>
+                <Route path='/home' exact={true}>
+                    <NavBar />
+                    <HomePage />
+                </Route>
+                <Route path='/sign-up' exact={true}>
+                    <SignUpForm />
+                </Route>
+                <NavBar />
+                <ProtectedRoute path='/users/:userId' exact={true} >
+                    <User />
+                </ProtectedRoute>
+            </Switch>
+        </BrowserRouter>
+    );
 }
 
 export default App;
