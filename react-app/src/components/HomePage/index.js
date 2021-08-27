@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react"
 import { getAllPosts } from '../../store/posts'
 import { getAllUsers } from '../../store/users'
+import Modal from '../../context/Modal'
+import { BiDotsHorizontalRounded } from "react-icons/bi";
 import './HomePage.css'
 
 export default function HomePage() {
@@ -10,7 +12,9 @@ export default function HomePage() {
     const posts = useSelector((state) => Object.values(state.posts));
     const user = useSelector(state => state.session.user);
     const allUsers = useSelector(state => Object.values(state.users))
-    console.log("ALL USERS", allUsers)
+
+    const [clicked, setClicked] = useState(false)
+
 
     useEffect(() => {
         dispatch(getAllPosts())
@@ -22,6 +26,7 @@ export default function HomePage() {
 
 
 
+
     return (
         <>
             <div className='home-container'>
@@ -30,7 +35,19 @@ export default function HomePage() {
                     {posts.map((post, idx) => {
                         return (
                             <li key={idx} className="indv-post">
-                                <div className="post-header">{post.user_id}</div>
+                                <div className="post-header">{post.user_id}
+                                    {post.user_id === user.id ?
+                                        <button className='post-dropdown' onClick={() => setClicked(!clicked)}><BiDotsHorizontalRounded /></button> : null
+                                    }
+                                    {clicked &&
+                                        <>
+                                            <div>
+                                                <a className="edit-button">edit</a>
+                                                <a className="delete-button">delete</a>
+                                            </div>
+                                        </>}
+
+                                </div>
                                 <img alt="users post" src={post.picture_url} className="indv-photo"></img>
                                 {post.caption}
                             </li>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createPost } from "./../store/posts"
-import Modal from '.././context/Modal'
+import { createPost } from "../store/posts"
+import Modal from '../context/Modal'
 import './PostModal.css'
 // import { createPost } from '.././store/posts'
 
