@@ -3,7 +3,7 @@ from app.models import db, Post
 def seed_posts():
     one = Post(
         caption = "Hammy’s got the crazy eyes. Get ready to be pounced…",
-        picture_url = 'http://i.imgur.com/3p2RNEU.jpg',
+        picture_url = 'https://i.insider.com/5654150584307663008b4ed8?width=750&format=jpeg&auto=webp',
         user_id = 1,
     )
     two = Post(
