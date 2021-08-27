@@ -47,7 +47,7 @@ const actionCreatePost = (post) => ({
 
 export const getAllPosts = () => {
     return async (dispatch) => {
-        const response = await fetch('/api/posts/', {
+        const response = await fetch('/api/posts', {
             headers: {
                 'Content-Type': 'application/json',
             }
