@@ -12,7 +12,7 @@
     box-sizing: border-box;
     flex-direction: row;
     align-items: flex-start;
-    z-index:1; 
+    z-index:1;
 }
 
 .insta-logo {
@@ -20,6 +20,7 @@
     height: 40px;
     display: flex;
     margin-top: 15px;
+    margin-left: -100px;
 }
 
 ul {

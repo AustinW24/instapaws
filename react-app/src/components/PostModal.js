@@ -29,7 +29,7 @@ function PostModal({ post, setShowModal }) {
                 <label className='post-image'>
                     Image: {' '}
                     <input
-                        placeholder='Image Url...'
+                        placeholder='caption...'
                         type="text"
                         value={picture_url}
                         onChange={(e) => setPictureUrl(e.target.value)}
@@ -39,15 +39,17 @@ function PostModal({ post, setShowModal }) {
                 <label className='post-caption'>
                     Caption: {' '}
                     <input
-                        placeholder='Caption...'
+                        placeholder='img address...'
                         type="text"
                         value={caption}
                         onChange={(e) => setCaption(e.target.value)}
                         required
                     />
                 </label>
-                <button type="submit" className='confirm' >{'   '}Create</button>
-                <button onClick={() => setShowModal(false)}>Cancel</button>
+                <div className="post-buttons">
+                    <button type="submit" className='confirm' >{'   '}Create</button>
+                    <button onClick={() => setShowModal(false)}>Cancel</button>
+                </div>
             </form>
         </>
     )

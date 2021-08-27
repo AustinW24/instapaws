@@ -47,7 +47,7 @@ const actionCreatePost = (post) => ({
 
 export const getAllPosts = () => {
     return async (dispatch) => {
-        const response = await fetch('/api/posts', {
+        const response = await fetch('/api/posts/', {
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -157,7 +157,7 @@ export default function posts(state = initialState, action) {
         //     return { ...state, ...action.posts }
 
         case CREATE_POST:
-            
+
             const newState = { ...state }
             return newState
 
