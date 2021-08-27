@@ -1,5 +1,6 @@
 from flask import Blueprint, request
 from ..models.post import Post
+from ..forms.post_form import PostForm
 from ..models.db import db
 # from app.forms import PostForm, CommentForm
 from datetime import datetime
@@ -21,7 +22,7 @@ def get_all_posts():
 #     print('THE POSTS--------------', posts)
 #     return {post.id: post.to_dict() for post in posts}
 
-@post_routes.route('/', methods=['GET', 'POST'])
+@post_routes.route('/', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
 def createPost():
     form = PostForm()

@@ -24,7 +24,7 @@ export default function HomePage() {
     return (
         <>
             <div className='home-container'>
-                <h1>{user.username}'s feed</h1>
+                <h1>Home feed</h1>
                 <ul className='post-list'>
                     {posts.map((post, idx) => {
                         return (

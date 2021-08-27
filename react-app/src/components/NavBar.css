@@ -1,17 +1,18 @@
 .navigation {
     background-color: #ffffff;
-    height: 70px;
+    height: 80px;
     position: fixed;
     width: 100%;
     top: 0;
     left: 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.0975);
+    border-bottom: 1.5px solid rgba(0, 0, 0, 0.0975);
     display: flex;
     align-items: center;
     justify-content: space-around;
     box-sizing: border-box;
     flex-direction: row;
     align-items: flex-start;
+    z-index:1; 
 }
 
 .insta-logo {
