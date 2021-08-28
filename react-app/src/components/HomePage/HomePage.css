@@ -16,8 +16,8 @@
 }
 
 .indv-photo {
-    height: 55vh;
-    width: 58vh;
+    height: 60vh;
+    width: 65vh;
 }
 
 .post-list {
@@ -28,6 +28,5 @@
 .indv-post {
     display: flex;
     flex-direction: column;
-    width: 63vh;
+    width: 68vh;
 }
-

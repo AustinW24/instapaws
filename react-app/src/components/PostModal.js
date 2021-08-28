@@ -5,7 +5,7 @@ import Modal from '../context/Modal'
 import './PostModal.css'
 // import { createPost } from '.././store/posts'
 
-function PostModal({ post, setShowModal }) {
+function PostModal({setShowModal }) {
     const dispatch = useDispatch();
     const [caption, setCaption] = useState('');
     const [picture_url, setPictureUrl] = useState('');
@@ -27,7 +27,7 @@ function PostModal({ post, setShowModal }) {
                     ))}
                 </div>
                 <label className='post-image'>
-                    Image: {' '}
+
                     <input
                         placeholder='caption...'
                         type="text"
@@ -37,7 +37,7 @@ function PostModal({ post, setShowModal }) {
                     />
                 </label>
                 <label className='post-caption'>
-                    Caption: {' '}
+      
                     <input
                         placeholder='img address...'
                         type="text"

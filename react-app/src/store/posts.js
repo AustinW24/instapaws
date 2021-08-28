@@ -2,7 +2,7 @@
 const GET_POSTS = 'posts/GET_POSTS'
 // const GET_ALL_POSTS = 'posts/GET_ALL_POSTS'
 // const REMOVE_POST = 'posts/REMOVE_POST'
-// const SET_POST = 'posts/SET_POST'
+const EDIT_POST = 'posts/EDIT_POST'
 // const LIKE_POST = 'posts/LIKE_POST'
 const CREATE_POST = 'posts/CREATE_POST'
 
@@ -17,10 +17,10 @@ const setPosts = (posts) => ({
 //     id
 // })
 
-// const actionSetPost = (post) => ({
-//     type: SET_POST,
-//     post
-// })
+const actionEditPost = (post) => ({
+    type: EDIT_POST,
+    post
+})
 
 const actionCreatePost = (post) => ({
     type: CREATE_POST,
@@ -73,30 +73,28 @@ export const getAllPosts = () => {
 //     }
 // }
 
-// export const editPost = (post) => async dispatch => {
-//     const { id, caption } = post;
+export const editPost = (post) => async dispatch => {
+    const { id, caption } = post;
 
-//     const res = await fetch(`/api/posts/${post.id}`, {
-//         method: "PUT",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify(post)
-//     });
+    const res = await fetch(`/api/posts/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify(post)
+    });
 
-//     if (res.ok) {
-//         const data = await res.json();
-//         dispatch(actionSetPost(data))
-//         return data
-//     } else if (res.status < 500) {
-//         const data = await res.json();
-//         if (data.errors) {
-//             return data.errors
-//         }
-//     } else {
-//         return ['An error occurred while processing.']
-//     }
-// }
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(actionEditPost(data))
+        return data
+    } else if (res.status < 500) {
+        const data = await res.json();
+        if (data.errors) {
+            return data.errors
+        }
+    } else {
+        return ['An error occurred while processing.']
+    }
+}
 
 
 export const createPost = (picture_url, caption) => async dispatch => {
@@ -150,7 +148,7 @@ export default function posts(state = initialState, action) {
     switch (action.type) {
         case GET_POSTS:
 
-            return { ...state, ...action.payload }
+            return { ...state, ...action.payload };
 
         // case GET_ALL_POSTS:
 
@@ -159,7 +157,11 @@ export default function posts(state = initialState, action) {
         case CREATE_POST:
 
             const newState = { ...state }
-            return newState
+            return newState;
+
+        case EDIT_POST:
+            const updatedState = { ...state, [action.post.id]: action.post}
+            return updatedState;
 
         default:
             return state

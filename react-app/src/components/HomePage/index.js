@@ -1,19 +1,21 @@
-import { Link } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react"
-import { getAllPosts } from '../../store/posts'
+import { getAllPosts, editPost } from '../../store/posts'
 import { getAllUsers } from '../../store/users'
+import EditModal from '../EditModal.js'
 import Modal from '../../context/Modal'
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import './HomePage.css'
 
 export default function HomePage() {
-    const dispatch = useDispatch();
     const posts = useSelector((state) => Object.values(state.posts));
     const user = useSelector(state => state.session.user);
     const allUsers = useSelector(state => Object.values(state.users))
-
     const [clicked, setClicked] = useState(false)
+    const [showModal, setShowModal] = useState(false);
+    const dispatch = useDispatch();
+
 
 
     useEffect(() => {
@@ -23,7 +25,6 @@ export default function HomePage() {
     useEffect(() => {
         dispatch(getAllUsers())
     }, [dispatch])
-
 
 
 
@@ -42,7 +43,12 @@ export default function HomePage() {
                                     {clicked &&
                                         <>
                                             <div>
-                                                <a className="edit-button">edit</a>
+                                                <a className="edit-button" onClick={() => setShowModal(true)}>edit</a>
+                                                {showModal && (
+                                                    <Modal onClose={() => setShowModal(false)}>
+                                                        <EditModal post={post} setShowModal={setShowModal} />
+                                                    </Modal>
+                                                )}
                                                 <a className="delete-button">delete</a>
                                             </div>
                                         </>}

@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from ..models.post import Post
 from ..forms.post_form import PostForm
+from ..forms.edit_form import EditForm
 from ..models.db import db
 # from app.forms import PostForm, CommentForm
 from datetime import datetime
@@ -13,7 +14,7 @@ post_routes = Blueprint('posts', __name__)
 def get_all_posts():
     posts = Post.query.all()
     print('the postsssssss-------------', posts)
-    return { "posts": {post.id: post.to_dict() for post in posts}}
+    return {"posts": {post.id: post.to_dict() for post in posts}}
 
 
 # @post_routes.route('/all')
@@ -32,9 +33,9 @@ def createPost():
     print('before validate', form.data)
     if form.validate_on_submit():
         new_post = Post(
-            user_id = user.id,
-            caption = form.data['caption'],
-            picture_url = form.data['picture_url'],
+            user_id=user.id,
+            caption=form.data['caption'],
+            picture_url=form.data['picture_url'],
             timestamp=datetime.now()
         )
 
@@ -43,3 +44,40 @@ def createPost():
         print('inside validation p', new_post.to_dict())
         return {'posts': [new_post.to_dict()]}
     return {'errors': [form.errors]}
+
+
+@post_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def editPost(id):
+    form = EditForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    print('before validate', form.data)
+    if form.validate_on_submit():
+        post = Post.query.filter(Post.id == id).first()
+        data = form.data
+        post.caption = data["caption"]
+        db.session.commit()
+        return post.to_dict()
+    return {'errors': [form.errors]}
+
+# @post_routes.route('/posts/:id', methods=['PUT'])
+# @login_required
+# def editPost():
+#     form = EditForm()
+#     user = current_user
+#     form['csrf_token'].data = request.cookies['csrf_token']
+
+#     print('before validate', form.data)
+#     if form.validate_on_submit():
+#         edited_post = Post(
+#             user_id=user.id,
+#             caption=form.data['caption'],
+#             timestamp=datetime.now()
+#         )
+
+#         db.session.add(edited_post)
+#         db.session.commit()
+#         print('inside validation p', edited_post.to_dict())
+#         return {'posts': [edited_post.to_dict()]}
+#     return {'errors': [form.errors]}
