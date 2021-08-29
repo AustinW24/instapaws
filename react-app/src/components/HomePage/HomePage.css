@@ -16,17 +16,64 @@
 }
 
 .indv-photo {
-    height: 60vh;
-    width: 65vh;
+    height: 58vh;
+    width: 63vh;
+    padding: 0px;
 }
 
 .post-list {
+    margin-top: 70px;
     display: flex;
     flex-direction: column;
 }
 
 .indv-post {
+    padding-top: 20px;
+    height: calc(80vh - 50px);
+    width: 68vh;
+}
+
+.post-header {
+    display: flex;
+    position: relative;
+}
+
+.post-dropdown {
+    border: none;
+    padding: 0;
+    background: none;
+    font-size: 25px;
+    margin-left: auto;
+
+}
+
+.post-dropdown:hover {
+    cursor: pointer;
+}
+
+.dot-dropdown {
+    position: absolute;
+    background-color: #FAFAFA;
     display: flex;
     flex-direction: column;
-    width: 68vh;
+    right: 0px;
+    padding: 10px;
+    margin-top: 25px;
+    width: 8vh;
+    height: 50px;
+    border-radius: 3px;
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    border: 1.5px solid rgb(131, 132, 133);
+    text-align: center;
+
+}
+
+edit-button delete-button {
+    text-align: center;
+}
+
+edit-button:hover delete-button:hover {
+    background-color: red;
 }

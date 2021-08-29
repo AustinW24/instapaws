@@ -1,0 +1,24 @@
+.deletemodal-form {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+    width: 400px;
+    height: 200px;
+    border: 1px solid lightgray;;
+}
+
+
+.delete {
+    margin-top: 15px;
+    text-align: center;
+
+}
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}

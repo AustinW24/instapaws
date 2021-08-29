@@ -17,21 +17,41 @@
 }
 
 .insta-logo {
-    width: 135px;
-    height: 40px;
+    width: 150px;
+    height: 45px;
     display: flex;
     margin-top: 15px;
-    margin-left: -100px;
+    margin-left: auto;
+    padding-left: 25px;
+
 }
 
 ul {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-left: auto;
+    padding-right: 10px;
+
 }
 
 a, li {
     padding-left: 5px;
     padding-right: 5px;
     list-style: none;
+}
+
+.logout-button {
+    list-style: none;
+    height: 40px;
+    width: 40px;
+    background-size: 100%;
+    background-size: 40px auto;
+    border-radius: 18px;
+    border: 2px solid lightgray;
+}
+
+.logout-button:hover {
+    color: white;
+    cursor: pointer;
 }

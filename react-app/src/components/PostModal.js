@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom"
 import { createPost } from "../store/posts"
 import Modal from '../context/Modal'
 import './PostModal.css'
@@ -7,13 +8,17 @@ import './PostModal.css'
 
 function PostModal({setShowModal }) {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [caption, setCaption] = useState('');
     const [picture_url, setPictureUrl] = useState('');
     const [errors, setErrors] = useState([]);
     const current_user = useSelector(state => state.session.user);
 
+    const posts = useSelector((state) => Object.values(state.posts));
+
+
     const handleSubmit = async (e) => {
-        e.preventDefault();
+
         await dispatch(createPost(caption, picture_url))
         setShowModal(false);
     }
@@ -37,7 +42,7 @@ function PostModal({setShowModal }) {
                     />
                 </label>
                 <label className='post-caption'>
-      
+
                     <input
                         placeholder='img address...'
                         type="text"

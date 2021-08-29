@@ -1,7 +1,7 @@
 
 const GET_POSTS = 'posts/GET_POSTS'
 // const GET_ALL_POSTS = 'posts/GET_ALL_POSTS'
-// const REMOVE_POST = 'posts/REMOVE_POST'
+const REMOVE_POST = 'posts/REMOVE_POST'
 const EDIT_POST = 'posts/EDIT_POST'
 // const LIKE_POST = 'posts/LIKE_POST'
 const CREATE_POST = 'posts/CREATE_POST'
@@ -12,10 +12,10 @@ const setPosts = (posts) => ({
 })
 
 
-// const actionRemovePost = (id) => ({
-//     type: REMOVE_POST,
-//     id
-// })
+const actionRemovePost = (id) => ({
+    type: REMOVE_POST,
+    id
+})
 
 const actionEditPost = (post) => ({
     type: EDIT_POST,
@@ -61,17 +61,17 @@ export const getAllPosts = () => {
     }
 }
 
-// export const removePost = (id) => async dispatch => {
-//     const res = await fetch(`/api/posts/${id}`, {
-//         method: "DELETE",
-//     })
+export const removePost = (id) => async dispatch => {
+    const res = await fetch(`/api/posts/${id}`, {
+        method: "DELETE",
+    })
 
-//     if (res.ok) {
-//         const removed = await res.json();
-//         dispatch(actionRemovePost(id));
-//         return removed
-//     }
-// }
+    if (res.ok) {
+        const removed = await res.json();
+        dispatch(actionRemovePost(id));
+        return removed
+    }
+}
 
 export const editPost = (post) => async dispatch => {
     const { id, caption } = post;
@@ -160,8 +160,15 @@ export default function posts(state = initialState, action) {
             return newState;
 
         case EDIT_POST:
+            
             const updatedState = { ...state, [action.post.id]: action.post}
             return updatedState;
+
+        case REMOVE_POST:
+
+            const removedState = { ...state }
+            delete removedState[action.id]
+            return removedState
 
         default:
             return state

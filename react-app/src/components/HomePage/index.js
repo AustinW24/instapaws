@@ -1,9 +1,10 @@
-import { useParams, Link, useHistory } from "react-router-dom";
+
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react"
 import { getAllPosts, editPost } from '../../store/posts'
 import { getAllUsers } from '../../store/users'
 import EditModal from '../EditModal.js'
+import DeleteModal from '../DeleteModal.js'
 import Modal from '../../context/Modal'
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import './HomePage.css'
@@ -13,7 +14,8 @@ export default function HomePage() {
     const user = useSelector(state => state.session.user);
     const allUsers = useSelector(state => Object.values(state.users))
     const [clicked, setClicked] = useState(false)
-    const [showModal, setShowModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
     const dispatch = useDispatch();
 
 
@@ -31,30 +33,36 @@ export default function HomePage() {
     return (
         <>
             <div className='home-container'>
-                <h1>Home feed</h1>
                 <ul className='post-list'>
-                    {posts.map((post, idx) => {
+                    {posts.slice(0).reverse().map((post, idx) => {
                         return (
                             <li key={idx} className="indv-post">
-                                <div className="post-header">{post.user_id}
+                                <div className="post-header">
+                                    {post.user_id}
                                     {post.user_id === user.id ?
                                         <button className='post-dropdown' onClick={() => setClicked(!clicked)}><BiDotsHorizontalRounded /></button> : null
                                     }
-                                    {clicked &&
+                                    {(clicked && post.user_id === user.id ) &&
                                         <>
-                                            <div>
-                                                <a className="edit-button" onClick={() => setShowModal(true)}>edit</a>
-                                                {showModal && (
-                                                    <Modal onClose={() => setShowModal(false)}>
-                                                        <EditModal post={post} setShowModal={setShowModal} />
+                                            <div className="dot-dropdown">
+                                                <a className="edit-button" onClick={() => setShowEditModal(true)}>edit</a>
+                                                {showEditModal && (
+                                                    <Modal onClose={() => setShowEditModal(false)}>
+                                                        <EditModal post={post} setShowEditModal={setShowEditModal} />
                                                     </Modal>
                                                 )}
-                                                <a className="delete-button">delete</a>
+                                                <a className="delete-button" onClick={() => setShowDeleteModal(true)}>delete</a>
+                                                {showDeleteModal && (
+                                                    <Modal onClose={() => setShowDeleteModal(false)}>
+                                                        <DeleteModal post={post} setShowDeleteModal={setShowDeleteModal} />
+                                                    </Modal>
+                                                )}
                                             </div>
                                         </>}
 
                                 </div>
                                 <img alt="users post" src={post.picture_url} className="indv-photo"></img>
+                                {user.username}
                                 {post.caption}
                             </li>
                         )

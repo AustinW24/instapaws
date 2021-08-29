@@ -78,17 +78,19 @@ const NavBar = () => {
                     }
                     {current_user &&
                         <>
-                            <li>
-                                <button onClick={() => setShowModal(true)} >Upload</button>
-                                {showModal && (
-                                    <Modal onClose={() => setShowModal(false)}>
-                                        <PostModal setShowModal={setShowModal} />
-                                    </Modal>
-                                )}
-                            </li>
-                            <li>
-                                <LogoutButton onClick={handleRoute} />
-                            </li>
+
+                                <li>
+                                    <button onClick={() => setShowModal(true)} >Upload</button>
+                                    {showModal && (
+                                        <Modal onClose={() => setShowModal(false)}>
+                                            <PostModal setShowModal={setShowModal} />
+                                        </Modal>
+                                    )}
+                                </li>
+                                <li>
+                                    <LogoutButton onClick={handleRoute} />
+                                </li>
+                        
                         </>
                     }
                 </ul>

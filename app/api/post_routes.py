@@ -61,23 +61,9 @@ def editPost(id):
         return post.to_dict()
     return {'errors': [form.errors]}
 
-# @post_routes.route('/posts/:id', methods=['PUT'])
-# @login_required
-# def editPost():
-#     form = EditForm()
-#     user = current_user
-#     form['csrf_token'].data = request.cookies['csrf_token']
-
-#     print('before validate', form.data)
-#     if form.validate_on_submit():
-#         edited_post = Post(
-#             user_id=user.id,
-#             caption=form.data['caption'],
-#             timestamp=datetime.now()
-#         )
-
-#         db.session.add(edited_post)
-#         db.session.commit()
-#         print('inside validation p', edited_post.to_dict())
-#         return {'posts': [edited_post.to_dict()]}
-#     return {'errors': [form.errors]}
+@post_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def deletePost(id):
+    post = Post.query.get(id)
+    db.session.delete(post)
+    db.session.commit()
