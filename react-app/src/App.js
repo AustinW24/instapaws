@@ -5,8 +5,8 @@ import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import User from './components/User';
+// import UsersList from './components/UsersList';
+import User from './components/ProfilePage/User';
 import HomePage from './components/HomePage'
 // import PostModal from './components/PostModal';
 import { authenticate } from './store/session';
@@ -40,7 +40,7 @@ function App() {
                     <SignUpForm />
                 </Route>
                 <NavBar />
-                <ProtectedRoute path='/users/:userId' exact={true} >
+                <ProtectedRoute path='/users/:id' exact={true} >
                     <User />
                 </ProtectedRoute>
             </Switch>

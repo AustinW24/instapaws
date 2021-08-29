@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams, Link } from "react-router-dom";
 import { editPost } from "../store/posts"
 import Modal from '../context/Modal'
 import './EditModal.css'
 
 
-export default function EditModal({ post, setShowModal }) {
+export default function EditModal({ post, setShowEditModal }) {
     const dispatch = useDispatch();
+
     const [caption, setCaption] = useState("");
 
-    const posts = useSelector((state) => Object.values(state.posts));
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,7 +21,8 @@ export default function EditModal({ post, setShowModal }) {
         }
 
         await dispatch(editPost(editedCaption))
-        setShowModal(false);
+        setShowEditModal(false);
+
     }
     return (
         <>
@@ -38,7 +38,7 @@ export default function EditModal({ post, setShowModal }) {
 
                 <div className="edit-buttons">
                     <button type="submit" className='confirm' onChange={(e) => setCaption(e.target.value)}> {'   '}confirm</button>
-                    <button onClick={() => setShowModal(false)}>cancel</button>
+                    <button onClick={() => setShowEditModal(false)}>cancel</button>
                 </div>
             </form>
         </>

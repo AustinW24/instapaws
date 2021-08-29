@@ -21,19 +21,18 @@ const LogoutButton = () => {
 
     return (
         <>
+        <div>
           <button className='logout-button' onClick={() => setClicked(!clicked)} style={{backgroundImage: `url(${current_user.profile_picture})`}}>
-
           </button>
+          </div>
           {clicked &&
             <>
               <div className='profile-dropdown-div'>
-                <div>
-                  <h4 className='profile-dropdown__greeting'>{`Hello, ${current_user.username}!`}</h4>
-                </div>
+
                 <Link to={`/users/${current_user.id}`} onClick={() => setClicked(false)}>
                   profile
                 </Link>
-                <Link className='profile-dropdown__a' onClick={onLogout} to='/'>
+                <Link className='profile-dropdown__a' onClick={onLogout}>
                   logout
                 </Link>
               </div>
