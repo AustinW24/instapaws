@@ -76,7 +76,7 @@ export const removePost = (id) => async dispatch => {
 export const editPost = (post) => async dispatch => {
     const { id, caption } = post;
 
-    const res = await fetch(`/api/posts/${id}`, {
+    const res = await fetch(`/api/posts/${id}/`, {
         method: "PUT",
         headers: { "Content-Type": "application/json"},
         body: JSON.stringify(post)
