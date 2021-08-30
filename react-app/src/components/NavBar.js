@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { NavLink, Link, useHistory, useParams } from 'react-router-dom';
+import { NavLink, Link, useHistory, useParams, Redirect } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import LoginForm from './auth/LoginForm';
 import Modal from '.././context/Modal'
@@ -39,9 +39,7 @@ const NavBar = () => {
     }, [dispatch])
 
 
-    const handleRoute = () => {
-        history.push("/");
-    }
+
 
     return (
         <header>
@@ -88,9 +86,9 @@ const NavBar = () => {
                                     )}
                                 </li>
                                 <li>
-                                    <LogoutButton onClick={handleRoute} />
+                                    <LogoutButton  />
                                 </li>
-                        
+
                         </>
                     }
                 </ul>

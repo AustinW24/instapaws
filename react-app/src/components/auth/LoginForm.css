@@ -2,12 +2,12 @@
 	margin: 0;
 	padding: 0;
 	font-family: montserrat;
-	height: 30vh;
-	width: 25vh;
+	height: 45vh;
+	width: 37vh;
 	overflow: hidden;
 	border-radius: 5px;
 	border: 2.5px solid lightgray;
-	margin-top: 160px;
+	margin-top: 140px;
 
 }
 
@@ -22,12 +22,12 @@
 .errors {
 	padding-bottom: 30px;
     display: block;
-    font-size: 12px;
+    font-size: 14px;
 	margin-left: auto;
 	margin-right: auto;
-    margin-top: 10px;
+    margin-top: 25px;
     text-align: center;
-    height: 60px;
+    height: 20px;
     font-family: Montserrat, Helvetica, Arial, sans-serif;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .twophones {
-	height: 60vh;
+	height: 70vh;
 }
 
 input {
@@ -102,4 +102,8 @@ a:hover {
 
 .profile-dropdown__a {
     cursor: pointer;
+}
+
+.email-field {
+    padding-top: 10px;
 }
