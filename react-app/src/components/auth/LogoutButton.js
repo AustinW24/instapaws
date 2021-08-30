@@ -32,7 +32,7 @@ const LogoutButton = () => {
                 <Link to={`/users/${current_user.id}`} onClick={() => setClicked(false)}>
                   profile
                 </Link>
-                <Link className='profile-dropdown__a' onClick={onLogout}>
+                <Link to="/" className='profile-dropdown__a' onClick={onLogout}>
                   logout
                 </Link>
               </div>

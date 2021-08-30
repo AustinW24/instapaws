@@ -22,9 +22,9 @@ const getUsers = (users) => ({
   export const getAUser = (id) => async (dispatch) => {
     const response = await fetch(`api/users/${id}`);
 
+    console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$users")
     if (response.ok) {
       const { users } = await response.json();
-      console.log(users)
       dispatch(getUsers(users));
     }
   };

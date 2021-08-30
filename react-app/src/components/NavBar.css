@@ -17,11 +17,11 @@
 }
 
 .insta-logo {
-    width: 150px;
-    height: 45px;
+    width: 24vh;
+    height: 7vh;
     display: flex;
-    margin-top: 15px;
-    margin-left: auto;
+    margin-top: 10px;
+    margin-left: 50px;
     padding-left: 25px;
 
 }
@@ -36,7 +36,7 @@ ul {
 }
 
 a, li {
-    padding-left: 5px;
+    padding-top: 5px;
     padding-right: 5px;
     list-style: none;
 }

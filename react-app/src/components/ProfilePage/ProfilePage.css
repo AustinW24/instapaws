@@ -1,7 +1,24 @@
 .profile-header {
-    top: 50%;
+    margin-top: 80px;
+    display: flex;
 }
 
 .profile-username {
-    font-size: 1000px;
+    font-size: 50px;
+    margin-top: 0px;
+    /* vertical-align: top; */
+    padding-left: 75px;
+
+}
+
+.profile-picture {
+    margin-left: 120px;
+    height: 20vh;
+    width: 20vh;
+    border-radius:  90px;
+
+}
+
+.user-info {
+    width: 20vh;
 }
