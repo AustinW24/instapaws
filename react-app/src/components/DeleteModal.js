@@ -11,6 +11,8 @@ export default function DeleteModal({ post, setShowDeleteModal }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
+    const { id } = useParams();
+
     // const posts = useSelector((state) => Object.values(state.posts));
 
     const handleDelete = async (e) => {
