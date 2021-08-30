@@ -7,7 +7,7 @@ from ..models.db import db
 from datetime import datetime
 from flask_login import login_required, current_user
 
-post_routes = Blueprint('posts', __name__)
+post_routes = Blueprint('posts/', __name__)
 
 
 @post_routes.route('/')
