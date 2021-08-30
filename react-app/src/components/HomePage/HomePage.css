@@ -72,5 +72,5 @@ edit-button delete-button {
 }
 
 edit-button:hover delete-button:hover {
-	background-color: red;
+    filter: brightness(50%);
 }

@@ -38,20 +38,20 @@ export default function HomePage() {
                         return (
                             <li key={idx} className="indv-post">
                                 <div className="post-header">
-                                    {post.user_id}
+                                    
                                     {post.user_id === user.id &&
                                         <button className='post-dropdown' onClick={() => setClicked(!clicked)}><BiDotsHorizontalRounded /></button>
                                     }
                                     {(clicked && post.user_id === user.id ) &&
 
                                         <div className="dot-dropdown">
-                                        <button className="edit-button"  onClick={() => setShowEditModal(true)}>edit</button>
+                                        <a className="edit-button"  onClick={() => setShowEditModal(true)}>edit</a>
                                         {showEditModal && (
                                             <Modal onClose={() => setShowEditModal(false)}>
                                             <EditModal post={post} setShowEditModal={setShowEditModal} />
                                             </Modal>
                                             )}
-                                                <button className="delete-button"  onClick={() => setShowDeleteModal(true)}>delete</button>
+                                                <a className="delete-button"  onClick={() => setShowDeleteModal(true)}>delete</a>
                                                 {showDeleteModal && (
                                                     <Modal onClose={() => setShowDeleteModal(false)}>
                                                     <DeleteModal post={post} setShowDeleteModal={setShowDeleteModal} />
