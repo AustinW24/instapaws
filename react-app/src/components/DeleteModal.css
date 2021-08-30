@@ -5,7 +5,8 @@
 	transform: translate(-50%, -50%);
     width: 400px;
     height: 200px;
-    border: 1px solid lightgray;;
+    border: 1px solid lightgray;
+    background-color: white;
 }
 
 
@@ -21,4 +22,9 @@
     align-items: center;
     justify-content: center;
 
+}
+
+.checkmark {
+    text-align: center;
+    margin-top: 15px;
 }

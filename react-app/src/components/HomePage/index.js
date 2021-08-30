@@ -39,7 +39,7 @@ export default function HomePage() {
                             <li key={idx} className="indv-post">
                                 <div className="post-header">
                                     {post.user_id}
-                                    {post.user_id === user.id && 
+                                    {post.user_id === user.id &&
                                         <button className='post-dropdown' onClick={() => setClicked(!clicked)}><BiDotsHorizontalRounded /></button>
                                     }
                                     {(clicked && post.user_id === user.id ) &&
@@ -62,7 +62,7 @@ export default function HomePage() {
 
                                 </div>
                                 <img alt="users post" src={post.picture_url} className="indv-photo"></img>
-                                {user.username}
+                                <strong className="homepage-username">{user.username}</strong>
                                 {post.caption}
                             </li>
                         )

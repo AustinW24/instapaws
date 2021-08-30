@@ -47,7 +47,7 @@ const actionCreatePost = (post) => ({
 
 export const getAllPosts = () => {
     return async (dispatch) => {
-        const response = await fetch('/api/posts', {
+        const response = await fetch('/api/posts/', {
             headers: {
                 'Content-Type': 'application/json',
             }
@@ -62,7 +62,7 @@ export const getAllPosts = () => {
 }
 
 export const removePost = (id) => async dispatch => {
-    const res = await fetch(`/api/posts/${id}`, {
+    const res = await fetch(`/api/posts/${id}/`, {
         method: "DELETE",
     })
 
@@ -160,7 +160,7 @@ export default function posts(state = initialState, action) {
             return newState;
 
         case EDIT_POST:
-            
+
             const updatedState = { ...state, [action.post.id]: action.post}
             return updatedState;
 
