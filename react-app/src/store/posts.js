@@ -62,7 +62,7 @@ export const getAllPosts = () => {
 }
 
 export const removePost = (id) => async dispatch => {
-    const res = await fetch(`/api/posts/${id}/`, {
+    const res = await fetch(`/api/posts/${id}`, {
         method: "DELETE",
     })
 
@@ -76,9 +76,9 @@ export const removePost = (id) => async dispatch => {
 export const editPost = (post) => async dispatch => {
     const { id, caption } = post;
 
-    const res = await fetch(`/api/posts/${id}/`, {
+    const res = await fetch(`/api/posts/${id}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json"},
+        headers: { "Content-Type": "application/json", 'Accept': 'application/json'},
         body: JSON.stringify(post)
     });
 

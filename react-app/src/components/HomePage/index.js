@@ -45,13 +45,13 @@ export default function HomePage() {
                                     {(clicked && post.user_id === user.id ) &&
 
                                         <div className="dot-dropdown">
-                                        <a className="edit-button" onClick={() => setShowEditModal(true)}>edit</a>
+                                        <button className="edit-button"  onClick={() => setShowEditModal(true)}>edit</button>
                                         {showEditModal && (
                                             <Modal onClose={() => setShowEditModal(false)}>
                                             <EditModal post={post} setShowEditModal={setShowEditModal} />
                                             </Modal>
                                             )}
-                                                <a className="delete-button" onClick={() => setShowDeleteModal(true)}>delete</a>
+                                                <button className="delete-button"  onClick={() => setShowDeleteModal(true)}>delete</button>
                                                 {showDeleteModal && (
                                                     <Modal onClose={() => setShowDeleteModal(false)}>
                                                     <DeleteModal post={post} setShowDeleteModal={setShowDeleteModal} />

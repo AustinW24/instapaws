@@ -22,3 +22,19 @@
 .user-info {
     width: 20vh;
 }
+
+.profile-body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 1px;
+    row-gap: 1em;
+    place-items: center;
+    margin-top: 60px;
+
+}
+
+.profile-images {
+    width: 240px;
+    height: 250px;
+
+}
