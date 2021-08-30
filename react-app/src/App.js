@@ -39,7 +39,6 @@ function App() {
                 <Route path='/sign-up' exact={true}>
                     <SignUpForm />
                 </Route>
-
                 <ProtectedRoute path='/users/:id'  >
                     <NavBar />.
                     <User />

@@ -41,10 +41,11 @@ const LoginForm = () => {
                 <img alt="instapaws logo" className='logo' src={logo}></img>
                 <div className='errors'>
                     {errors.map((error, ind) => (
+                        error.includes("Invalid") &&
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
-                <div className='txt-field'>
+                <div className='email-field'>
                     <input
                         name='email'
                         type='text'
