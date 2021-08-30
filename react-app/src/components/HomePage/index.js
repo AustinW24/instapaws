@@ -39,26 +39,26 @@ export default function HomePage() {
                             <li key={idx} className="indv-post">
                                 <div className="post-header">
                                     {post.user_id}
-                                    {post.user_id === user.id ?
-                                        <button className='post-dropdown' onClick={() => setClicked(!clicked)}><BiDotsHorizontalRounded /></button> : null
+                                    {post.user_id === user.id && 
+                                        <button className='post-dropdown' onClick={() => setClicked(!clicked)}><BiDotsHorizontalRounded /></button>
                                     }
                                     {(clicked && post.user_id === user.id ) &&
-                                        <>
-                                            <div className="dot-dropdown">
-                                                <a className="edit-button" onClick={() => setShowEditModal(true)}>edit</a>
-                                                {showEditModal && (
-                                                    <Modal onClose={() => setShowEditModal(false)}>
-                                                        <EditModal post={post} setShowEditModal={setShowEditModal} />
-                                                    </Modal>
-                                                )}
+
+                                        <div className="dot-dropdown">
+                                        <a className="edit-button" onClick={() => setShowEditModal(true)}>edit</a>
+                                        {showEditModal && (
+                                            <Modal onClose={() => setShowEditModal(false)}>
+                                            <EditModal post={post} setShowEditModal={setShowEditModal} />
+                                            </Modal>
+                                            )}
                                                 <a className="delete-button" onClick={() => setShowDeleteModal(true)}>delete</a>
                                                 {showDeleteModal && (
                                                     <Modal onClose={() => setShowDeleteModal(false)}>
-                                                        <DeleteModal post={post} setShowDeleteModal={setShowDeleteModal} />
+                                                    <DeleteModal post={post} setShowDeleteModal={setShowDeleteModal} />
                                                     </Modal>
-                                                )}
+                                                    )}
                                             </div>
-                                        </>}
+                                        }
 
                                 </div>
                                 <img alt="users post" src={post.picture_url} className="indv-photo"></img>
