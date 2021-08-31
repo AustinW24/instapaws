@@ -32,6 +32,7 @@ function PostModal({setShowModal }) {
                         placeholder='caption...'
                         type="text"
                         value={picture_url}
+                        className="caption-input"
                         onChange={(e) => setPictureUrl(e.target.value)}
                         required
                     />

@@ -77,9 +77,9 @@ const NavBar = () => {
                     }
                     {current_user &&
                         <>
-                                <li><button className="home-button"><AiFillHome size={40}/></button></li>
+                                <li><a  href="/home" className="home-button"><AiFillHome size={38}/></a></li>
                                 <li>
-                                    <button onClick={() => setShowModal(true)} className="plus-button"><FiPlusSquare  size={40}/></button>
+                                    <button onClick={() => setShowModal(true)} className="plus-button"><FiPlusSquare  size={38}/></button>
                                     {showModal && (
                                         <Modal onClose={() => setShowModal(false)}>
                                             <PostModal setShowModal={setShowModal} />

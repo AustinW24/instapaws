@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { getAUser } from '../../store/users'
 import { getAllPosts } from '../../store/posts'
@@ -49,7 +49,7 @@ function User() {
 
                     return (post.user_id === +userId.id) && (
                         <div className="picture-block" key={idx}>
-                            <img alt="cat on dogs head" className="profile-images" src={post.picture_url}></img>
+                           <Link to={`/posts/${post.id}`}><img alt="cat on dogs head" className="profile-images" src={post.picture_url}></img></Link>
                         </div>
                     )
                 })}
