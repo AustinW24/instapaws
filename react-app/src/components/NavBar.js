@@ -1,11 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { NavLink, Link, useHistory, useParams, Redirect } from 'react-router-dom';
+import { NavLink, Link, useHistory, useParams } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import LoginForm from './auth/LoginForm';
 import Modal from '.././context/Modal'
 import PostModal from './PostModal'
+import {FiPlusSquare} from "react-icons/fi"
+import {AiFillHome} from "react-icons/ai"
 import './NavBar.css'
 import './PostModal.css'
 import logo from '../instapaw.png'
@@ -14,7 +16,6 @@ const NavBar = () => {
     const current_user = useSelector(state => state.session.user);
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch();
-    const history = useHistory();
     // const username = current_user.username
     const [user, setUser] = useState({});
     const { userId } = useParams();
@@ -76,9 +77,9 @@ const NavBar = () => {
                     }
                     {current_user &&
                         <>
-
+                                <li><button className="home-button"><AiFillHome size={40}/></button></li>
                                 <li>
-                                    <button onClick={() => setShowModal(true)} >Upload</button>
+                                    <button onClick={() => setShowModal(true)} className="plus-button"><FiPlusSquare  size={40}/></button>
                                     {showModal && (
                                         <Modal onClose={() => setShowModal(false)}>
                                             <PostModal setShowModal={setShowModal} />

@@ -13,14 +13,16 @@
 
 .profile-picture {
     margin-left: 120px;
-    height: 20vh;
-    width: 20vh;
+    height: 160px;
+    width: 160px;
     border-radius:  90px;
 
 }
 
-.user-info {
-    width: 20vh;
+
+.user-details {
+    margin-left: 70px;
+    vertical-align: top;
 }
 
 .profile-body {
@@ -42,4 +44,9 @@
 .profile-images:hover {
     filter: brightness(50%);
     cursor: pointer;
+}
+
+.bio {
+    margin-left: 73px;
+
 }
