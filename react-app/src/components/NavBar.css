@@ -51,7 +51,15 @@ a, li {
     border: 2px solid lightgray;
 }
 
-.logout-button:hover {
-    color: white;
+.logout-button:hover, .plus-button:hover {
     cursor: pointer;
+}
+
+.plus-button, .home-button {
+    border: none;
+	padding: 0;
+	background: none;
+    margin-right: 15px;
+    text-decoration: none;
+    color: inherit;
 }

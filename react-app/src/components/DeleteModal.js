@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams, Link } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { removePost } from "../store/posts"
 import { FcCheckmark } from "react-icons/fc"
-import Modal from '../context/Modal'
 import './DeleteModal.css'
 
 

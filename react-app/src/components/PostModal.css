@@ -5,7 +5,9 @@
 	transform: translate(-50%, -50%);
     width: 400px;
     height: 200px;
-    border: 1px solid lightgray;;
+    border: 1.5px solid lightgray;
+    background: white;
+    border-radius: 4px;
 }
 
 .post-buttons {
@@ -27,4 +29,13 @@
     border: 1px solid lightgray;
     padding: 20px;
     margin-top: 20px;
+}
+
+.caption-input {
+    margin-top: 50px;
+}
+
+.confirm {
+    background-color: #0095F6;
+    color: white;
 }

@@ -1,7 +1,14 @@
-/* .login-form {
+.signup-form {
 	position: fixed;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-    height: 40vh;
-} */
+	font-family: montserrat;
+	justify-content: center;
+}
+
+.signup-button {
+	text-align: center;
+    display: block;
+    margin: 0 auto;
+}

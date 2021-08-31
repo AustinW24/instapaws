@@ -74,3 +74,7 @@ edit-button delete-button {
 edit-button:hover delete-button:hover {
     filter: brightness(50%);
 }
+
+.homepage-username {
+    margin-top: 20px;
+}

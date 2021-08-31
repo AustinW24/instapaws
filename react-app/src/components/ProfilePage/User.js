@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { getAUser } from '../../store/users'
 import { getAllPosts } from '../../store/posts'
@@ -41,15 +41,15 @@ function User() {
             <div className="profile-header">
                 <img className="profile-picture" src={currentUser.profile_picture} alt="profile"></img>
                 <div className="user-Info"><h1 className="profile-username">{currentUser.username}</h1>
-                    <div className="user-details"><strong>{numOfPosts(posts)}</strong>posts</div>
-                    <strong>{currentUser.biography}</strong></div>
+                    <div className="user-details"><strong>{numOfPosts(posts)}</strong>{"  "}posts</div>
+                    <span className="bio">{currentUser.biography}</span></div>
             </div>
             <div className="profile-body">
                 {posts.slice(0).reverse().map((post, idx) => {
 
                     return (post.user_id === +userId.id) && (
                         <div className="picture-block" key={idx}>
-                            <img alt="cat on dogs head" className="profile-images" src={post.picture_url}></img>
+                           <Link to={`/posts/${post.id}`}><img alt="cat on dogs head" className="profile-images" src={post.picture_url}></img></Link>
                         </div>
                     )
                 })}

@@ -1,5 +1,6 @@
 
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react"
 import { getAllPosts, editPost } from '../../store/posts'
 import { getAllUsers } from '../../store/users'
@@ -16,10 +17,15 @@ export default function HomePage() {
     const [clicked, setClicked] = useState(false)
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [username, setUsername] = useState("")
+    const [usersId, setUsersId] = useState(0);
     const dispatch = useDispatch();
+    const { id } = useParams();
 
 
+    const correctUser = useSelector((state) => Object.values(state.users).filter(post => post.user_id === +id))
 
+    console.log("all users", allUsers)
     useEffect(() => {
         dispatch(getAllPosts())
     }, [dispatch])
@@ -28,6 +34,10 @@ export default function HomePage() {
         dispatch(getAllUsers())
     }, [dispatch])
 
+    const show = (post) => {
+        setUsersId(post.id);
+        setClicked(!clicked)
+    }
 
 
     return (
@@ -37,33 +47,35 @@ export default function HomePage() {
                     {posts.slice(0).reverse().map((post, idx) => {
                         return (
                             <li key={idx} className="indv-post">
+
+
                                 <div className="post-header">
-                                    
+
                                     {post.user_id === user.id &&
-                                        <button className='post-dropdown' onClick={() => setClicked(!clicked)}><BiDotsHorizontalRounded /></button>
+                                        <button className='post-dropdown' onClick={show}><BiDotsHorizontalRounded /></button>
                                     }
-                                    {(clicked && post.user_id === user.id ) &&
+                                    {(clicked && post.user_id === user.id) &&
 
                                         <div className="dot-dropdown">
-                                        <a className="edit-button"  onClick={() => setShowEditModal(true)}>edit</a>
-                                        {showEditModal && (
-                                            <Modal onClose={() => setShowEditModal(false)}>
-                                            <EditModal post={post} setShowEditModal={setShowEditModal} />
-                                            </Modal>
+                                            <a className="edit-button" onClick={() => setShowEditModal(true)}>edit</a>
+                                            {showEditModal && (
+                                                <Modal onClose={() => setShowEditModal(false)}>
+                                                    <EditModal post={post} setShowEditModal={setShowEditModal} />
+                                                </Modal>
                                             )}
-                                                <a className="delete-button"  onClick={() => setShowDeleteModal(true)}>delete</a>
-                                                {showDeleteModal && (
-                                                    <Modal onClose={() => setShowDeleteModal(false)}>
+                                            <a className="delete-button" onClick={() => setShowDeleteModal(true)}>delete</a>
+                                            {showDeleteModal && (
+                                                <Modal onClose={() => setShowDeleteModal(false)}>
                                                     <DeleteModal post={post} setShowDeleteModal={setShowDeleteModal} />
-                                                    </Modal>
-                                                    )}
-                                            </div>
-                                        }
+                                                </Modal>
+                                            )}
+                                        </div>
+                                    }
 
                                 </div>
                                 <img alt="users post" src={post.picture_url} className="indv-photo"></img>
                                 <strong className="homepage-username">{user.username}</strong>
-                                {post.caption}
+                                {"   "}{post.caption}
                             </li>
                         )
                     })}
