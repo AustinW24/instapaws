@@ -8,7 +8,7 @@ import { getAllUsers } from '../../store/users'
 // import DeleteModal from '../DeleteModal.js'
 // import Modal from '../../context/Modal'
 // import { BiDotsHorizontalRounded } from "react-icons/bi";
-import '.././HomePage/HomePage.css'
+import './Post.css'
 
 
 
@@ -16,35 +16,35 @@ function Post() {
     const { id } = useParams()
     const post = useSelector((state) => state.posts);
     // const user = useSelector(state => state.session.user);
-    // const allUsers = useSelector(state => Object.values(state.users))
+    const allUsers = useSelector(state => Object.values(state.users))
     // const [clicked, setClicked] = useState(false)
     // const [showEditModal, setShowEditModal] = useState(false);
     // const [showDeleteModal, setShowDeleteModal] = useState(false);
     // const [postsId, setPostsId] = useState(0);
     const dispatch = useDispatch();
-    const [ postObj, setPostObj ] = useState(null);
+    const [postObj, setPostObj] = useState(null);
 
-   useEffect(() => {
-      if (post) {
-         const newPost = post[id];
-         console.log('post object', newPost);
+    useEffect(() => {
+        if (post) {
+            const newPost = post[id];
+            console.log('post object', newPost);
 
-         setPostObj(newPost);
-      }
-   }, [post, id]);
+            setPostObj(newPost);
+        }
+    }, [post, id]);
 
-    // const newId = posts.find(p => p.id === id)
+    // const postUserId = postObj
 
-    // useEffect(() => {
-    //     dispatch(getAllPosts(allUsers))
-    // }, [dispatch])
+    useEffect(() => {
+        dispatch(getAllUsers())
+    }, [dispatch])
 
     useEffect(() => {
         dispatch(getPost(id))
     }, [dispatch])
 
 
-    console.log("****", post)
+    console.log("****", allUsers)
 
     // const show = (post) => {
     //     setPostsId(post.id);
@@ -53,11 +53,17 @@ function Post() {
 
 
     return (
-
-        <div className="post-container">
-            { postObj && <img src={postObj.picture_url}></img>}
-
-        </div>
+        <div className="post-comments">
+            <div className="post-container">
+                <span>hello</span>
+                { postObj && <img className="postid-pic" src={postObj.picture_url}></img>}
+            </div>
+            <div className="comments-container">
+                <div className="comments-header">
+                   {/* { postObj && <img src={allUsers[postObj.user_id].profile_picture}></img>} */}
+                </div>
+            </div>
+        </div >
 
         // <button className='post-dropdown' onClick={() => show()}><BiDotsHorizontalRounded /></button>
 
