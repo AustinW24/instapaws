@@ -14,7 +14,7 @@ import '.././HomePage/HomePage.css'
 
 function Post() {
     const { id } = useParams()
-    const posts = useSelector((state) => state.posts[id]);
+    const post = useSelector((state) => state.posts);
     // const user = useSelector(state => state.session.user);
     // const allUsers = useSelector(state => Object.values(state.users))
     // const [clicked, setClicked] = useState(false)
@@ -22,6 +22,17 @@ function Post() {
     // const [showDeleteModal, setShowDeleteModal] = useState(false);
     // const [postsId, setPostsId] = useState(0);
     const dispatch = useDispatch();
+    const [ postObj, setPostObj ] = useState(null);
+
+   useEffect(() => {
+      if (post) {
+         const newPost = post[id];
+         console.log('post object', newPost);
+
+         setPostObj(newPost);
+      }
+   }, [post, id]);
+
     // const newId = posts.find(p => p.id === id)
 
     // useEffect(() => {
@@ -33,7 +44,7 @@ function Post() {
     }, [dispatch])
 
 
-    console.log("****", posts)
+    console.log("****", post)
 
     // const show = (post) => {
     //     setPostsId(post.id);
@@ -44,14 +55,13 @@ function Post() {
     return (
 
         <div className="post-container">
-            {/* <img src={post.picture_url}></img> */}
+            { postObj && <img src={postObj.picture_url}></img>}
+
         </div>
 
         // <button className='post-dropdown' onClick={() => show()}><BiDotsHorizontalRounded /></button>
 
-
         // {clicked &&
-
         //     <div className="dot-dropdown">
         //         <a className="edit-button" onClick={() => setShowEditModal(true)}>edit</a>
         //         {showEditModal && (

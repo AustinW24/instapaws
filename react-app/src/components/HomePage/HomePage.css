@@ -15,25 +15,32 @@
 }
 
 .indv-photo {
-	height: 415px;
-	width: 430px;
+	height: 455px;
+	width: 475px;
+    margin-left: 0;
+    margin-right: 30px;
 }
 
 .post-list {
 	margin-top: 70px;
 	display: flex;
 	flex-direction: column;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .indv-post {
 	padding-top: 20px;
-	height: 520px;
-	width: 475px;
+	height: 590px;
+	width: 495px;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .post-header {
 	display: flex;
 	position: relative;
+    margin-bottom: 5px;
 }
 
 .post-dropdown {
@@ -75,10 +82,29 @@ edit-button:hover delete-button:hover {
 }
 
 .homepage-username {
-    margin-top: 20px;
+    margin-top: 5px;
+    margin-left: 5px;
+    font-weight: bold;
 }
 
 .profile-pic {
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
+    border-radius: 20px;
+    margin-bottom: 5px;
+    margin-right: 4px;
+    margin-left: 15px;
+}
+.bottom-homepage-username {
+    margin-top: 15px;
+    margin-left: 5px;
+    font-weight: bold;
+    padding-right: 5px;
+}
+
+.bottom-profile-pic {
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    margin-left: 15px;
 }
