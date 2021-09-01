@@ -1,6 +1,5 @@
 
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react"
 import { getAllPosts, editPost } from '../../store/posts'
 import { getAllUsers } from '../../store/users'
@@ -17,27 +16,27 @@ export default function HomePage() {
     const [clicked, setClicked] = useState(false)
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [username, setUsername] = useState("")
-    const [usersId, setUsersId] = useState(0);
+    const [postsId, setPostsId] = useState(0);
     const dispatch = useDispatch();
-    const { id } = useParams();
 
 
-    const correctUser = useSelector((state) => Object.values(state.users).filter(post => post.user_id === +id))
 
-    console.log("all users", allUsers)
     useEffect(() => {
         dispatch(getAllPosts())
-    }, [dispatch])
+    }, [])
 
     useEffect(() => {
         dispatch(getAllUsers())
-    }, [dispatch])
+    }, [])
+
 
     const show = (post) => {
-        setUsersId(post.id);
+        setPostsId(post.id);
         setClicked(!clicked)
     }
+    // console.log(posts)
+    // console.log(allUsers[1].username)
+    // console.log("allUsers Object", allUsers[user.id].username)
 
 
     return (
@@ -45,16 +44,20 @@ export default function HomePage() {
             <div className='home-container'>
                 <ul className='post-list'>
                     {posts.slice(0).reverse().map((post, idx) => {
+
                         return (
                             <li key={idx} className="indv-post">
 
 
                                 <div className="post-header">
+                                    {/* {allUsers[post.user_id]} */}
+                                    {/* {allUsers[post?.user_id].username} */}
 
                                     {post.user_id === user.id &&
-                                        <button className='post-dropdown' onClick={show}><BiDotsHorizontalRounded /></button>
+                                        <button className='post-dropdown' onClick={() => show(post)}><BiDotsHorizontalRounded /></button>
+
                                     }
-                                    {(clicked && post.user_id === user.id) &&
+                                    {clicked && postsId === post.id &&
 
                                         <div className="dot-dropdown">
                                             <a className="edit-button" onClick={() => setShowEditModal(true)}>edit</a>
@@ -74,7 +77,7 @@ export default function HomePage() {
 
                                 </div>
                                 <img alt="users post" src={post.picture_url} className="indv-photo"></img>
-                                <strong className="homepage-username">{user.username}</strong>
+                                {/* <strong className="homepage-username">{allUsers[post.user_id].username}</strong> */}
                                 {"   "}{post.caption}
                             </li>
                         )

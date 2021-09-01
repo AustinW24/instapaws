@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createPost } from "../store/posts"
 import './PostModal.css'
+import uploadlogo from ".././upload.png"
 // import { createPost } from '.././store/posts'
 
 function PostModal({setShowModal }) {
@@ -26,8 +27,8 @@ function PostModal({setShowModal }) {
                         <li>{error}</li>
                     ))}
                 </div>
-                <label className='post-image'>
-
+                <div className='post-image'>
+                    <img  className="upload-logo" src={uploadlogo}></img>
                     <input
                         placeholder='caption...'
                         type="text"
@@ -36,7 +37,6 @@ function PostModal({setShowModal }) {
                         onChange={(e) => setPictureUrl(e.target.value)}
                         required
                     />
-                </label>
                 <label className='post-caption'>
 
                     <input
@@ -45,8 +45,9 @@ function PostModal({setShowModal }) {
                         value={caption}
                         onChange={(e) => setCaption(e.target.value)}
                         required
-                    />
+                        />
                 </label>
+                        </div>
                 <div className="post-buttons">
                     <button type="submit" className='confirm' >{'   '}Create</button>
                     <button onClick={() => setShowModal(false)}>Cancel</button>

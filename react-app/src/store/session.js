@@ -13,6 +13,7 @@ const removeUser = () => ({
   type: REMOVE_USER,
 })
 
+
 const initialState = { user: null };
 
 export const authenticate = () => async (dispatch) => {
@@ -70,10 +71,9 @@ export const logout = () => async (dispatch) => {
 
   if (response.ok) {
     dispatch(removeUser());
-    const history = useHistory();
-    history.push("/")
   }
 };
+
 
 
 export const signUp = (username, email, password) => async (dispatch) => {

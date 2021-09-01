@@ -15,9 +15,8 @@
 }
 
 .indv-photo {
-	height: 58vh;
-	width: 63vh;
-	padding: 0px;
+	height: 415px;
+	width: 430px;
 }
 
 .post-list {
@@ -28,8 +27,8 @@
 
 .indv-post {
 	padding-top: 20px;
-	height: calc(80vh - 50px);
-	width: 68vh;
+	height: 520px;
+	width: 475px;
 }
 
 .post-header {
@@ -57,7 +56,7 @@
 	right: 0px;
 	padding: 10px;
 	margin-top: 25px;
-	width: 8vh;
+	width: 60px;
 	height: 50px;
 	border-radius: 3px;
 	z-index: 100;
@@ -77,4 +76,9 @@ edit-button:hover delete-button:hover {
 
 .homepage-username {
     margin-top: 20px;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
 }

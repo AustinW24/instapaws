@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { editPost } from "../store/posts"
-import Modal from '../context/Modal'
 import './EditModal.css'
+import editlogo from '.././edit.png'
 
 
 export default function EditModal({ post, setShowEditModal }) {
@@ -27,12 +27,13 @@ export default function EditModal({ post, setShowEditModal }) {
     return (
         <>
             <form className="editmodal-form" type="form" onSubmit={handleSubmit}>
-                {/* <img src={posts.picture_url}></img> */}
+                <img className="editlogo" src={editlogo}></img>
                 <input
                     placeholder='change caption...'
                     type="text"
                     value={caption}
                     onChange={(e) => setCaption(e.target.value)}
+                    className="postmodal-caption"
                     required
                 />
 
