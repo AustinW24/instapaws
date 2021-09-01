@@ -69,9 +69,7 @@ export default function HomePage() {
 
                                 <div className="post-header">
                                     <img className="profile-pic" src={allUsers[post.user_id].profile_picture}></img>
-                                    <span >{allUsers[post.user_id].username}</span>
-                                    {/* {allUsers[post.user_id]} */}
-                                    {/* {allUsers[post?.user_id].username} */}
+                                    <a to={`/${allUsers[post.user_id]}`} className="homepage-username">{allUsers[post.user_id].username}</a>
 
                                     {post.user_id === user.id &&
                                         <button className='post-dropdown' onClick={() => show(post)}><BiDotsHorizontalRounded /></button>
@@ -97,8 +95,9 @@ export default function HomePage() {
 
                                 </div>
                                 <img alt="users post" src={post.picture_url} className="indv-photo"></img>
-                                {/* <strong className="homepage-username">{allUsers[post.user_id].username}</strong> */}
-                                {"   "}{post.caption}
+                                <img className="bottom-profile-pic" src={allUsers[post.user_id].profile_picture}></img>
+                                <a to={`/${allUsers[post.user_id]}`} className="bottom-homepage-username">{allUsers[post.user_id].username}</a>
+                                {post.caption}
                             </li>
                         )
                     })}
