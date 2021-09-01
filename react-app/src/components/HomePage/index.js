@@ -12,10 +12,11 @@ import './HomePage.css'
 export default function HomePage() {
     const posts = useSelector((state) => Object.values(state.posts));
     const user = useSelector(state => state.session.user);
-    const allUsers = useSelector(state => Object.values(state.users))
+    const allUsers = useSelector(state => state.users)
     const [clicked, setClicked] = useState(false)
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [postObj, setPostObj] = useState(null);
     const [postsId, setPostsId] = useState(0);
     const dispatch = useDispatch();
 
@@ -23,17 +24,36 @@ export default function HomePage() {
 
     useEffect(() => {
         dispatch(getAllPosts())
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
         dispatch(getAllUsers())
-    }, [])
+    }, [dispatch])
 
 
     const show = (post) => {
         setPostsId(post.id);
         setClicked(!clicked)
     }
+
+    console.log(posts)
+
+    // useEffect(() => {
+    //     if(allUsers) {
+    //         const postImg = allUsers
+    //         console.log("post object", postImg)
+    //         setPostObj(postImg)
+    //     }
+    // }, [allUsers, posts])
+
+    // useEffect(() => {
+    //     if (post) {
+    //        const newPost = post[id];
+    //        console.log('post object', newPost);
+
+    //        setPostObj(newPost);
+    //     }
+    //  }, [post, id]);
     // console.log(posts)
     // console.log(allUsers[1].username)
     // console.log("allUsers Object", allUsers[user.id].username)
@@ -44,12 +64,12 @@ export default function HomePage() {
             <div className='home-container'>
                 <ul className='post-list'>
                     {posts.slice(0).reverse().map((post, idx) => {
-
                         return (
                             <li key={idx} className="indv-post">
 
-
                                 <div className="post-header">
+                                    <img className="profile-pic" src={allUsers[post.user_id].profile_picture}></img>
+                                    <span >{allUsers[post.user_id].username}</span>
                                     {/* {allUsers[post.user_id]} */}
                                     {/* {allUsers[post?.user_id].username} */}
 
