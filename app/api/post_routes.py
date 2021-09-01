@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from ..models.post import Post
 from ..forms.post_form import PostForm
 from ..forms.edit_form import EditForm
@@ -7,7 +7,7 @@ from ..models.db import db
 from datetime import datetime
 from flask_login import login_required, current_user
 
-post_routes = Blueprint('posts/', __name__)
+post_routes = Blueprint('posts', __name__)
 
 
 @post_routes.route('/')
@@ -16,6 +16,15 @@ def get_all_posts():
 
     return {"posts": {post.id: post.to_dict() for post in posts}}
 
+@post_routes.route('/<id>')
+@login_required
+def postOne(id):
+  print("@@@@@@@@@@@@@@@@@@")
+  post = Post.query.get(id)
+  print(post)
+  return {post.id: post.to_dict() }
+
+
 
 # @post_routes.route('/all')
 # def get_posts():
@@ -23,9 +32,10 @@ def get_all_posts():
 #     print('THE POSTS--------------', posts)
 #     return {post.id: post.to_dict() for post in posts}
 
-@post_routes.route('/', methods=['GET', 'POST'])
+@post_routes.route('/', methods=['POST'])
 @login_required
 def createPost():
+    # print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     form = PostForm()
     user = current_user
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -38,12 +48,14 @@ def createPost():
             picture_url=form.data['picture_url'],
             timestamp=datetime.now()
         )
+    else:
+        return {'errors': [form.errors]}
 
-        db.session.add(new_post)
-        db.session.commit()
-        print('inside validation p', new_post.to_dict())
-        return {'posts': [new_post.to_dict()]}
-    return {'errors': [form.errors]}
+    db.session.add(new_post)
+    db.session.commit()
+    print('inside validation p', new_post.to_dict())
+    return {'posts': [new_post.to_dict()]}
+
 
 
 @post_routes.route('/<int:id>', methods=['PUT'])
@@ -61,9 +73,12 @@ def editPost(id):
         return post.to_dict()
     return {'errors': [form.errors]}
 
+
 @post_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def deletePost(id):
+    print("IDDDDDDDDDDDDDDDDDDDDDDDDDDD", id)
     post = Post.query.get(id)
     db.session.delete(post)
     db.session.commit()
+    return jsonify("THIS WAS SUCCESFULLLLLLLLLLLL")

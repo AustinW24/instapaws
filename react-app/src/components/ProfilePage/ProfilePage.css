@@ -1,13 +1,16 @@
 .profile-header {
     margin-top: 80px;
     display: flex;
+    margin-left: 120px;
+    margin-bottom: 60px;
 }
 
 .profile-username {
     font-size: 50px;
     margin-top: 0px;
     /* vertical-align: top; */
-    padding-left: 75px;
+    padding-left: 70px;
+    height: 40px;
 
 }
 
@@ -23,21 +26,22 @@
 .user-details {
     margin-left: 70px;
     vertical-align: top;
+    margin-bottom: 20px;
 }
 
 .profile-body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    column-gap: 1px;
     row-gap: 1em;
     place-items: center;
     margin-top: 100px;
-
+    width: 70%;
+    margin: 0 auto;
 }
 
 .profile-images {
-    width: 240px;
-    height: 250px;
+    width: 265px;
+    height: 260px;
 
 }
 

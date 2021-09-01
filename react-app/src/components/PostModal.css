@@ -3,39 +3,55 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-    width: 400px;
-    height: 200px;
-    border: 1.5px solid lightgray;
-    background: white;
-    border-radius: 4px;
+	width: 400px;
+	height: 200px;
+	border: 1.5px solid lightgray;
+	background: white;
+	border-radius: 4px;
 }
 
 .post-buttons {
-    margin-top: 15px;
-    text-align: center;
-
+	margin-top: 55px;
+	text-align: center;
 }
 
 .post-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 .indv-post {
-    width: 60vh;
-    border: 1px solid lightgray;
-    padding: 20px;
-    margin-top: 20px;
+	width: 60vh;
+	border: 1px solid lightgray;
+	padding: 20px;
+	margin-top: 20px;
 }
 
 .caption-input {
-    margin-top: 50px;
+	margin-top: 10px;
 }
 
 .confirm {
-    background-color: #0095F6;
-    color: white;
+	background-color: #0095f6;
+	color: white;
+	margin-right: 10px;
+	border-radius: 3px;
+}
+
+.confirm:hover {
+    cursor: pointer;
+}
+
+.upload-logo {
+	width: 80px;
+	height: 80px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.post-image {
+	height: 100px;
 }

@@ -8,6 +8,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 // import UsersList from './components/UsersList';
 import User from './components/ProfilePage/User';
 import HomePage from './components/HomePage'
+import Post from './components/Post'
 // import PostModal from './components/PostModal';
 import { authenticate } from './store/session';
 
@@ -29,19 +30,23 @@ function App() {
     return (
         <BrowserRouter>
             <Switch>
-                <Route path='/' exact={true}>
-                    <LoginForm />
-                </Route>
-                <Route path='/home' exact={true}>
-                    <NavBar />
-                    <HomePage />
-                </Route>
                 <Route path='/sign-up' exact={true}>
                     <SignUpForm />
                 </Route>
-                <ProtectedRoute path='/users/:id'  >
+                <Route path='/' exact={true}>
+                    <LoginForm />
+                </Route>
+                <ProtectedRoute path='/home' exact={true}>
+                    <NavBar />
+                    <HomePage />
+                </ProtectedRoute>
+                <ProtectedRoute exact={true} path='/users/:id'  >
                     <NavBar />.
                     <User />
+                </ProtectedRoute>
+                <ProtectedRoute exact={true} path='/posts/:id'>
+                    <NavBar/>
+                    <Post/>
                 </ProtectedRoute>
             </Switch>
         </BrowserRouter>

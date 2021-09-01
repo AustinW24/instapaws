@@ -14,7 +14,7 @@ const LogoutButton = () => {
 
 
     const onLogout = async (e) => {
-        await dispatch(logout());
+        dispatch(logout());
         if(!current_user) {
         history.push('/')
         }

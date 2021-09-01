@@ -1,3 +1,7 @@
+.signup-body {
+    background-color: #3769A3;
+}
+
 .signup-form {
 	position: fixed;
 	top: 50%;
@@ -5,10 +9,51 @@
 	transform: translate(-50%, -50%);
 	font-family: montserrat;
 	justify-content: center;
+    border: 2px solid lightgray;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.0);
+    padding: 30px;
+    background-color: white;
+    border-radius: 3px;
 }
 
 .signup-button {
 	text-align: center;
     display: block;
     margin: 0 auto;
+    background-color: #0095F6;
+    color: white;
+    margin-top: 20px;
+    width: 200px;
+    padding: 3px;
+    border-radius: 3px;
+}
+
+.signup-button:hover {
+    cursor: pointer;
+}
+
+.signup-label {
+    margin-left: 38px;
+    font-size: 13px;
+}
+
+.passwords {
+    margin-top: 30px;
+}
+
+.signup-input {
+    width: 200px;
+    margin-bottom: 5px;
+}
+
+.create-account {
+    margin-bottom: 40px;
+    font-size: 30px;
+}
+
+.signup-errors {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: red;
 }
