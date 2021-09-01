@@ -32,7 +32,7 @@
 .indv-post {
 	padding-top: 20px;
 	height: 590px;
-	width: 495px;
+	width: 515px;
     margin-left: 0;
     margin-right: 0;
 }
@@ -85,6 +85,9 @@ edit-button:hover delete-button:hover {
     margin-top: 5px;
     margin-left: 5px;
     font-weight: bold;
+    font-family: Arial;
+
+
 }
 
 .profile-pic {
@@ -99,7 +102,10 @@ edit-button:hover delete-button:hover {
     margin-top: 15px;
     margin-left: 5px;
     font-weight: bold;
+    font-size: 14px;
     padding-right: 5px;
+    margin-bottom: 10px;
+    font-family: Arial;
 }
 
 .bottom-profile-pic {
@@ -107,4 +113,11 @@ edit-button:hover delete-button:hover {
     height: 25px;
     border-radius: 25px;
     margin-left: 15px;
+    margin-top: 10px;
+}
+
+.post-caption {
+    margin-left: 4px;
+    font-size: 14px;
+    font-family: "Helvetica Neue", Helvetica
 }
