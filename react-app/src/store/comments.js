@@ -1,9 +1,16 @@
 const SET_COMMENT = 'comments/SET_COMMENT'
+const REMOVE_COMMENT = 'comments/REMOVE_COMMENT'
+
 
 
 const setComment = (comment) => ({
     type: SET_COMMENT,
     comment
+})
+
+const removeComment = (id) => ({
+    type: REMOVE_COMMENT,
+    id
 })
 
 
@@ -45,8 +52,21 @@ export const createComment = (payload) => async dispatch => {
     } else {
         return ['An error occurred. Please try again.']
     }
-
 }
+
+export const deleteComment = (id) => async dispatch => {
+    console.log("before fetch delete")
+    const res = await fetch(`/api/comments/${id}`, {
+        method: 'DELETE'
+    })
+
+    if (res.ok) {
+        await res.json();
+        dispatch(removeComment(id))
+    }
+}
+
+
 
 const initialState = {};
 
@@ -56,6 +76,9 @@ const comments = (state = initialState, action) => {
     switch (action.type) {
         case SET_COMMENT:
             const newState = {...state, ...action.comment}
+            return newState
+        case REMOVE_COMMENT:
+            delete newState[action.id]
             return newState
         default:
             return state;
