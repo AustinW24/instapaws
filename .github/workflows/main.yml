@@ -14,7 +14,7 @@ jobs:
     - name: Login to Heroku Container registry
       run: heroku container:login
     - name: Build and push
-      run: heroku container:push -a aa-capstone web
+      run: heroku container:push -a instapaw web
     - name: Release
-      run: heroku container:release -a aa-capstone web
+      run: heroku container:release -a instapaw web
 
