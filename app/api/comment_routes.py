@@ -32,6 +32,16 @@ def createComment(id):
     print('inside validation p', new_comment.to_dict())
     return {'comments': [new_comment.to_dict()]}
 
+@comment_routes.route('/<id>', methods=['DELETE'])
+@login_required
+def deleteComment(id):
+    comment = Comment.query.filter(Comment.id == id).first()
+    db.session.delete(comment)
+    db.session.commit()
+    return {'comments': id}
+
+
+
 
 
     # @comment_routes("")
