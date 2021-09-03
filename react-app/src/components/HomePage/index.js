@@ -1,11 +1,9 @@
 
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react"
-import { getAllPosts, editPost } from '../../store/posts'
-import { getComments } from '../../store/comments'
+import { useEffect, useState } from "react";
+import { getAllPosts, editPost } from '../../store/posts';
+import { createComment, getComments } from '../../store/comments';
 import { getAllUsers } from '../../store/users'
-
-
 import EditModal from '../EditModal.js'
 import DeleteModal from '../DeleteModal.js'
 import Modal from '../../context/Modal'
@@ -13,26 +11,48 @@ import { BiDotsHorizontalRounded } from "react-icons/bi";
 import './HomePage.css'
 
 export default function HomePage() {
+    const dispatch = useDispatch();
     const posts = useSelector((state) => state.posts?.posts);
     const user = useSelector(state => state.session.user);
     const comment = useSelector(state => state.comments);
-
-    // const allUsers = useSelector(state => Object.values(state.users));
+    const allUsers = useSelector(state => state.users)
     const [clicked, setClicked] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-    // const [postObj, setPostObj] = useState(null);
+    const [comments, setComments] = useState('')
     const [postsId, setPostsId] = useState(0);
-    const dispatch = useDispatch();
+    const [postUserId, setPostUserId] = useState(0)
 
+     useEffect(() => {
+         if(postsId) {
+        dispatch(getComments(postsId))
+         }
+    }, [dispatch])
 
     useEffect(() => {
         if (!posts) {
             dispatch(getAllUsers())
             dispatch((getAllPosts()))
-            // dispatch(getComments())
         }
         }, [dispatch])
+    console.log(allUsers)
+
+    const handleNewSubmit = async e => {
+        e.preventDefault()
+
+        let payload = {
+            comments,
+            post_id: Number.parseInt(postsId),
+            user_id: postUserId,
+    }
+        console.log(postsId)
+        await dispatch(createComment(payload))
+  }
+
+    const postDetails = (pId, uId) => {
+        setPostsId(pId)
+        setPostUserId(uId)
+    }
 
 
     const show = (post) => {
@@ -40,19 +60,6 @@ export default function HomePage() {
         setClicked(!clicked)
     }
 
-    // console.log(posts, "POSTSSSS")
-    // console.log(allUsers, "allUsers")
-    console.log("one post", posts)
-
-
-    // useEffect(() => {
-    //     if (post) {
-    //        const newPost = post[id];
-    //        console.log('post object', newPost);
-
-    //        setPostObj(newPost);
-    //     }
-    //  }, [post, id]);
 
 
 
@@ -94,19 +101,21 @@ export default function HomePage() {
                                 </div>
                                 <img alt="users post" src={post.picture_url} className="indv-photo"></img>
                                 <div className="post-footer">
-                                    <img className="bottom-profile-pic" src={post.user.profile_picture}></img>
-                                    <a to={`/${post.user.id}`} className="bottom-homepage-username">{post.user.username}</a>
-                                    <span className="post-caption">{post.caption}</span>
-                                    <div className="homepage-comments">
+                                        <img className="bottom-profile-pic" src={post.user.profile_picture}></img>
+                                        <a to={`/${post.user.id}`} className="bottom-homepage-username">{post.user.username}</a>
+                                        <span className="post-caption">{post.caption}</span>
+                                        <div className="homepage-comments">
                                          <div>{post?.post_comments.map((comm, idx) => <div className={'indv-comment'} key={idx}>
-                                                <img className="post-profile-pic" src={comm?.user_pic}></img>
-                                                <div>{comm?.comment}</div>
+                                                    <img className="post-profile-pic" src={comm?.user_pic}></img>
+                                                    <div>{comm?.comment}</div>
                                          </div>)}
                                      </div>
                                     </div>
                                     <div className="footer-comment">
-                                         <textarea  className="text-box" placeholder="Add a comment..."></textarea>
-                                         <button className="postt-button">Post</button>
+                                        <form className='comment-form' onSubmit={handleNewSubmit}>
+                                                <textarea  className="text-box" placeholder="Add a comment..." value={comments} onChange={e => setComments(e.target.value)}></textarea>
+                                                <button  onClick={() => postDetails(post?.id, post?.user.id)} className="postt-button" type="submit">Post</button>
+                                         </form>
                                     </div>
                                 </div>
                             </li>

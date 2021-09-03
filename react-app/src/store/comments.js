@@ -1,4 +1,4 @@
-const SET_COMMENT = 'comments/SET_COMMNET'
+const SET_COMMENT = 'comments/SET_COMMENT'
 
 
 const setComment = (comment) => ({
@@ -9,8 +9,7 @@ const setComment = (comment) => ({
 
 
 export const getComments = (postId) => async dispatch => {
-    const res = await fetch(`/api/posts/${postId}/comments`)
-
+    const res = await fetch(`/api/comments${postId}`)
     if (res.ok) {
         const comments = await res.json();
         dispatch(setComment(comments));
@@ -19,20 +18,22 @@ export const getComments = (postId) => async dispatch => {
 }
 
 
-
 export const createComment = (payload) => async dispatch => {
-    const { comment, post_id, user_id } = payload;
+    const { comments, post_id, user_id } = payload;
 
         console.log("before fetching comments", payload)
-    const res = await fetch(`/api/posts/${post_id}/comments`, {
+    const res = await fetch(`/api/comments/${post_id}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({
+            comments, post_id, user_id
+        })
     });
 
     if (res.ok) {
+        console.log("RES OKAY")
         const data = await res.json();
         dispatch(setComment(data))
         return data
@@ -49,14 +50,12 @@ export const createComment = (payload) => async dispatch => {
 
 const initialState = {};
 
+
 const comments = (state = initialState, action) => {
     let newState = { ...state }
     switch (action.type) {
         case SET_COMMENT:
-            console.log("action comment", action.comment)
-            action.comment.forEach(comm => {
-                newState[comm.id] = comm
-            })
+            const newState = {...state, ...action.comment}
             return newState
         default:
             return state;
