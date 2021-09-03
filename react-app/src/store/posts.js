@@ -1,4 +1,5 @@
 
+
 const GET_POSTS = 'posts/GET_POSTS'
 const GET_POST = 'posts/GET_POST'
 // const GET_ALL_POSTS = 'posts/GET_ALL_POSTS'
@@ -13,7 +14,7 @@ const setPosts = (posts) => ({
 })
 const setPost = (post) => ({
     type: GET_POST,
-    post,
+    payload: post
 })
 
 
@@ -58,19 +59,23 @@ export const getAllPosts = () => {
             }
         });
         if (response.ok) {
-            const { posts } = await response.json();
+            const posts = await response.json();
+            console.log(posts)
             dispatch(setPosts(posts))
+            return posts
+        } else {
+            return ["an error occured getting posts"]
         }
-        return response
     }
 }
+
 
 export const getPost = (id) => async dispatch => {
     const res = await fetch(`/api/posts/${id}`)
     console.log('inside thunk for getPost')
     if (res.ok) {
         console.log("RES IS OK for thunk getPost")
-        const  post   = await res.json()
+        const post = await res.json()
         console.log(post)
         dispatch(setPost(post))
     }
@@ -81,7 +86,6 @@ export const removePost = (id) => async dispatch => {
     const res = await fetch(`/api/posts/${id}`, {
         method: "DELETE",
     })
-
     if (res.ok) {
         const removed = await res.json();
         await dispatch(actionRemovePost(id));
@@ -166,7 +170,7 @@ export default function posts(state = initialState, action) {
         }
         case GET_POST: {
 
-            return { ...state, ...action.post };
+            return { ...state, ... action.payload };
         }
         // case GET_ALL_POSTS:
 
