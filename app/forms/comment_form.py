@@ -5,6 +5,6 @@ from wtforms.validators import DataRequired
 dr = [DataRequired()]
 
 class CommentForm(FlaskForm):
-    comment = StringField('Comment', dr)
-    post_id = IntegerField('Event ID', dr)
-    user_id = StringField('User ID', dr)
+    comments = StringField('comments', dr)
+    post_id = IntegerField('post_id', dr)
+    user_id = IntegerField('user_id', dr)

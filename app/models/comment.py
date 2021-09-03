@@ -30,15 +30,15 @@ class Comment(db.Model):
             }
 
 
-# def to_dict_ex_user(self):
+        def to_dict_ex_user(self):
 
-#     return {
-#         "id": self.id,
-#         "user_id": self.users.id,
-#         "user": self.users.username,
-#         "user_pic": self.users.profile_picture,
-#         "comment": self.comment,
-#         "post_id": self.post_id,
-#         "createdAt": self.createdAt,
-#         "updatedAt": self.updatedAt,
-#     }
+            return {
+                "id": self.id,
+                "user_id": self.users.id,
+                "user": self.users.username,
+                "user_pic": self.users.profile_picture,
+                "comment": self.comment,
+                "post_id": self.post_id,
+                "createdAt": self.createdAt,
+                "updatedAt": self.updatedAt,
+            }
