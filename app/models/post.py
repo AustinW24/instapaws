@@ -15,10 +15,10 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     timestamp = db.Column(db.DateTime, default=datetime.now)
 
+
     users = db.relationship("User", back_populates="posts")
     comments = db.relationship("Comment", back_populates="posts")
     postLikes = db.relationship("User", secondary=likes, back_populates="userLikes")
-
     def to_dict(self):
         user = User.query.filter(User.id == self.user_id).first()
 
@@ -29,7 +29,7 @@ class Post(db.Model):
             "user_id": self.user_id,
             "timestamp": self.timestamp,
             "user": user.to_dict(),
-            "post_comments": [comment.comment for comment in self.comments],
+            "post_comments": [comment.to_dict() for comment in self.comments],
             "post_likes": [user.id for user in self.postLikes],
             "likes_count": len(self.postLikes),
             "comments_count": len(self.comments)

@@ -5,6 +5,7 @@ import { getAllPosts, editPost } from '../../store/posts'
 import { getComments } from '../../store/comments'
 import { getAllUsers } from '../../store/users'
 
+
 import EditModal from '../EditModal.js'
 import DeleteModal from '../DeleteModal.js'
 import Modal from '../../context/Modal'
@@ -28,7 +29,7 @@ export default function HomePage() {
     useEffect(() => {
         if (!posts) {
             dispatch(getAllUsers())
-            dispatch(getAllPosts())
+            dispatch((getAllPosts()))
             // dispatch(getComments())
         }
         }, [dispatch])
@@ -41,6 +42,7 @@ export default function HomePage() {
 
     // console.log(posts, "POSTSSSS")
     // console.log(allUsers, "allUsers")
+    console.log("one post", posts)
 
 
     // useEffect(() => {
@@ -66,7 +68,7 @@ export default function HomePage() {
                                 <div className="post-header">
 
                                      <img className="profile-pic" src={post?.user.profile_picture}></img>
-                                    <a to={`/${post?.user.id}`} className="homepage-username">{post?.user.username}{" "}</a>
+                                    <a href={`users/${post?.user.id}`} className="homepage-username">{post?.user.username}{" "}</a>
 
                                     {post.user_id === user.id &&
                                         <button className='post-dropdown' onClick={() => show(post)}><BiDotsHorizontalRounded /></button>
@@ -95,7 +97,17 @@ export default function HomePage() {
                                     <img className="bottom-profile-pic" src={post.user.profile_picture}></img>
                                     <a to={`/${post.user.id}`} className="bottom-homepage-username">{post.user.username}</a>
                                     <span className="post-caption">{post.caption}</span>
-                                    <div className="homepage-comments">{post.post_comments.username}{post.post_comments}</div>
+                                    <div className="homepage-comments">
+                                         <div>{post?.post_comments.map((comm, idx) => <div className={'indv-comment'} key={idx}>
+                                                <img className="post-profile-pic" src={comm?.user_pic}></img>
+                                                <div>{comm?.comment}</div>
+                                         </div>)}
+                                     </div>
+                                    </div>
+                                    <div className="footer-comment">
+                                         <textarea  className="text-box" placeholder="Add a comment..."></textarea>
+                                         <button className="postt-button">Post</button>
+                                    </div>
                                 </div>
                             </li>
                         )

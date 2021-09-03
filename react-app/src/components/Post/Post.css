@@ -38,3 +38,22 @@
     border: 1.5px solid rgb(221, 221, 221);
     height: 50px;
 }
+
+indv-comment {
+    float: right;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-profile-pic {
+    width: 30px;
+    height: 30px;
+    border-radius: 16px;
+    float: left;
+}
+
+.text-area {
+    resize: none;
+    position: absolute;
+    bottom: 0;
+}

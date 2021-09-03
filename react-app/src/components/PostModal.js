@@ -37,7 +37,7 @@ function PostModal({setShowModal }) {
                         onChange={(e) => setPictureUrl(e.target.value)}
                         required
                     />
-                <label className='post-caption'>
+                <label >
 
                     <input
                         placeholder='img address...'

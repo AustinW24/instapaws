@@ -35,6 +35,7 @@
 	width: 515px;
     margin-left: 0;
     margin-right: 0;
+    position: relative;
 }
 
 .post-header {
@@ -86,7 +87,7 @@ edit-button:hover delete-button:hover {
     margin-left: 5px;
     font-weight: bold;
     font-family: Arial;
-
+    text-decoration: none;
 
 }
 
@@ -120,4 +121,28 @@ edit-button:hover delete-button:hover {
     margin-left: 8px;
     font-size: 14px;
     font-family: "Helvetica Neue", Helvetica
+}
+
+.footer-comment {
+    bottom: 0;
+    margin-bottom: 2px;
+    position: absolute;
+    width: 90%;
+
+}
+
+.postt-button {
+    position: absolute;
+    bottom: 0;
+    margin-right: 200px;
+    /* border: none; */
+}
+
+.text-box {
+    border: none;
+    height: 25px;
+    background-color: transparent;
+    outline: none;
+    width: 95%;
+    resize: none;
 }
