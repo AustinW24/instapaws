@@ -31,7 +31,7 @@
 
 .indv-post {
 	padding-top: 20px;
-	height: 590px;
+	height: 670px;
 	width: 515px;
     margin-left: 0;
     margin-right: 0;
@@ -99,7 +99,7 @@ edit-button:hover delete-button:hover {
     margin-left: 15px;
 }
 .bottom-homepage-username {
-    margin-top: 15px;
+    margin-top: 13px;
     margin-left: 5px;
     font-weight: bold;
     font-size: 14px;
@@ -117,7 +117,7 @@ edit-button:hover delete-button:hover {
 }
 
 .post-caption {
-    margin-left: 4px;
+    margin-left: 8px;
     font-size: 14px;
     font-family: "Helvetica Neue", Helvetica
 }

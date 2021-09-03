@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
 import { getAllPosts, editPost, getPost } from '../../store/posts'
+import { getComments } from '../../store/comments'
 import { getAllUsers } from '../../store/users'
 // import EditModal from '../EditModal.js'
 // import DeleteModal from '../DeleteModal.js'
@@ -60,8 +61,10 @@ function Post() {
             </div>
             <div className="comments-container">
                 <div className="comments-header">
-                   {/* { postObj && <img src={allUsers[postObj.user_id].profile_picture}></img>} */}
+                   {postObj && <img className="bottom-profile-pic"src={postObj?.user.profile_picture}></img>}
+                   <div className="bottom-homepage-username">{postObj?.user.username}</div>
                 </div>
+                <div className="homepage-comments"></div>
             </div>
         </div >
 

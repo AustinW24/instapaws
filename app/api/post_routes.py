@@ -3,6 +3,7 @@ from ..models.post import Post
 from ..forms.post_form import PostForm
 from ..forms.edit_form import EditForm
 from ..models.db import db
+import json
 # from app.forms import PostForm, CommentForm
 from datetime import datetime
 from flask_login import login_required, current_user
@@ -13,13 +14,17 @@ post_routes = Blueprint('posts', __name__)
 @post_routes.route('/')
 def get_all_posts():
     posts = Post.query.all()
+    print("@@@@@@@@@@@@@@@@@")
+    return {"posts": [post.to_dict() for post in posts]}
 
-    return {"posts": {post.id: post.to_dict() for post in posts}}
+
+    # return {"posts": {post.id: post.to_dict() for post in posts}}
+    # return "HELLO WORLDDDDDDDDD"
+
 
 @post_routes.route('/<id>')
 @login_required
 def postOne(id):
-  print("@@@@@@@@@@@@@@@@@@")
   post = Post.query.get(id)
   print(post)
   return {post.id: post.to_dict() }
@@ -77,8 +82,8 @@ def editPost(id):
 @post_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def deletePost(id):
-    print("IDDDDDDDDDDDDDDDDDDDDDDDDDDD", id)
+    print("DELETE ROUTE ENTERED", id)
     post = Post.query.get(id)
     db.session.delete(post)
     db.session.commit()
-    return jsonify("THIS WAS SUCCESFULLLLLLLLLLLL")
+    return jsonify("DELETE SUCESSFUL")
