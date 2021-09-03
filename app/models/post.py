@@ -29,7 +29,7 @@ class Post(db.Model):
             "user_id": self.user_id,
             "timestamp": self.timestamp,
             "user": user.to_dict(),
-            "post_comments": [comment.comment for comment in self.comments],
+            "post_comments": [comment.to_dict() for comment in self.comments],
             "post_likes": [user.id for user in self.postLikes],
             "likes_count": len(self.postLikes),
             "comments_count": len(self.comments)

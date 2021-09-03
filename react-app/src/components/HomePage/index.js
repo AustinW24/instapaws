@@ -98,7 +98,15 @@ export default function HomePage() {
                                     <a to={`/${post.user.id}`} className="bottom-homepage-username">{post.user.username}</a>
                                     <span className="post-caption">{post.caption}</span>
                                     <div className="homepage-comments">
-                                        {post?.post_comments}
+                                         <div>{post?.post_comments.map((comm, idx) => <div className={'indv-comment'} key={idx}>
+                                                <img className="post-profile-pic" src={comm?.user_pic}></img>
+                                                <div>{comm?.comment}</div>
+                                         </div>)}
+                                     </div>
+                                    </div>
+                                    <div className="footer-comment">
+                                         <textarea  className="text-box" placeholder="Add a comment..."></textarea>
+                                         <button className="postt-button">Post</button>
                                     </div>
                                 </div>
                             </li>

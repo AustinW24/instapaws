@@ -45,7 +45,7 @@ function Post() {
     }, [dispatch])
 
 
-    console.log("****", allUsers)
+    console.log("****", postObj?.post_comments['0'])
 
     // const show = (post) => {
     //     setPostsId(post.id);
@@ -57,13 +57,18 @@ function Post() {
         <div className="post-comments">
             <div className="post-container">
                 <span>hello</span>
-                { postObj && <img className="postid-pic" src={postObj.picture_url}></img>}
+                {postObj && <img className="postid-pic" src={postObj.picture_url}></img>}
             </div>
             <div className="comments-container">
                 <div className="comments-header">
-                   {postObj && <img className="bottom-profile-pic"src={postObj?.user.profile_picture}></img>}
-                   <div className="bottom-homepage-username">{postObj?.user.username}</div>
+                    {postObj && <img className="bottom-profile-pic" src={postObj?.user.profile_picture}></img>}
+                    <div className="bottom-homepage-username">{postObj?.user.username}</div>
                 </div>
+                    <div>{postObj?.post_comments.map((comm, idx) => <div className={'indv-comment'} key={idx}>
+                    <img className="post-profile-pic" src={comm?.user_pic}></img>
+                    <div>{comm?.comment}</div>
+                    </div>)}
+                    </div>
                 <div className="homepage-comments"></div>
             </div>
         </div >

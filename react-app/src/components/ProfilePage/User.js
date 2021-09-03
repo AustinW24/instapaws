@@ -47,7 +47,7 @@ function User() {
 
 
 
-    // console.log(posts)
+    console.log(user, "userrr")
 
 
     return (
@@ -63,7 +63,7 @@ function User() {
 
                     return (post?.user.id == +userId.id) && (
                         <div className="picture-block" key={idx}>
-                           <Link to={`/posts/${post.id}`}><img alt="cat on dogs head" className="profile-images" src={post.picture_url}></img></Link>
+                           <Link to={`/posts/${post.id}`}><img alt="pictures of dogs and cats" className="profile-images" src={post.picture_url}></img></Link>
                         </div>
                     )
                 })}

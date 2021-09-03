@@ -24,12 +24,13 @@ export default function DeleteModal({ post, setShowDeleteModal }) {
         <>
             <form className="deletemodal-form" type="form" onSubmit={handleDelete}>
                 {/* <img src={posts.picture_url}></img> */}
-
-                <span className="delete-message">Are you sure?</span>
-                <div className="checkmark"><FcCheckmark /></div>
-                <div className="delete-buttons">
-                    <button type="submit" className='confirm' > {'   '}confirm</button>
-                    <button onClick={() => setShowDeleteModal(false)}>cancel</button>
+                <div className="delete-content">
+                    <span className="delete-message">Are you sure?</span>
+                    <div className="checkmark"><FcCheckmark /></div>
+                    <div className="delete-buttons">
+                        <button type="submit" className='confirm' > {'   '}confirm</button>
+                        <button onClick={() => setShowDeleteModal(false)}>cancel</button>
+                    </div>
                 </div>
             </form>
         </>
