@@ -6,7 +6,7 @@ import { FcCheckmark } from "react-icons/fc"
 import './DeleteModal.css'
 
 
-export default function DeleteModal({ post, setShowDeleteModal }) {
+export default function DeleteModal({ post, setShowDeleteModal, setClicked }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -20,6 +20,13 @@ export default function DeleteModal({ post, setShowDeleteModal }) {
         setShowDeleteModal(false);
         history.push("/home")
     }
+
+    const exitModal = () => {
+        setShowDeleteModal(false)
+        setClicked(false)
+    }
+
+
     return (
         <>
             <form className="deletemodal-form" type="form" onSubmit={handleDelete}>
@@ -29,7 +36,7 @@ export default function DeleteModal({ post, setShowDeleteModal }) {
                     <div className="checkmark"><FcCheckmark /></div>
                     <div className="delete-buttons">
                         <button type="submit" className='confirm' > {'   '}confirm</button>
-                        <button onClick={() => setShowDeleteModal(false)}>cancel</button>
+                        <button onClick={exitModal}>cancel</button>
                     </div>
                 </div>
             </form>

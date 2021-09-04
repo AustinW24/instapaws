@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { getAllPosts } from '../../store/posts'
 
 import "./ProfilePage.css"
 
 function User() {
+    const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user)
     const posts = useSelector((state) => state.posts?.posts);
     const userId= useParams();
     const [update, setUpdate] = useState(false)
     const [user, setUser] = useState({});
-
-    console.log(userId)
+    // console.log(posts)
+    // console.log(userId, "userId")
 
     useEffect(() => {
         if(!userId) {
@@ -20,9 +22,15 @@ function User() {
         (async () => {
             const response = await fetch(`/api/users/${userId.id}`);
             const user = await response.json();
-            setUser(user)
+            setUser(user, "usa")
         })();
     }, [userId])
+
+     useEffect(() => {
+        if (!posts) {
+            dispatch((getAllPosts()))
+        }
+        }, [dispatch])
 
     useEffect(() => {
         (async () => {
@@ -36,7 +44,7 @@ function User() {
     const numOfPosts = (posts) => {
         let count = 0;
         posts?.map(post => {
-            if (+post.user_id === currentUser.id) {
+            if (+post.user_id === user.id) {
                count += 1
             }
         }
@@ -46,9 +54,7 @@ function User() {
 
 
 
-
-    console.log(user, "userrr")
-
+    console.log(posts, "POSTS")
 
     return (
         <>

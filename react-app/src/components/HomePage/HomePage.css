@@ -31,7 +31,7 @@
 
 .indv-post {
 	padding-top: 20px;
-	height: 670px;
+	height: 680px;
 	width: 515px;
     margin-left: 0;
     margin-right: 0;
@@ -135,6 +135,7 @@ edit-button:hover delete-button:hover {
     position: absolute;
     bottom: 0;
     margin-right: 200px;
+    margin-bottom: 10px;
     /* border: none; */
 }
 
