@@ -56,7 +56,6 @@ function Post() {
     return (
         <div className="post-comments">
             <div className="post-container">
-                <span>hello</span>
                 {postObj && <img className="postid-pic" src={postObj.picture_url}></img>}
             </div>
             <div className="comments-container">

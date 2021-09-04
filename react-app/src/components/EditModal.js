@@ -5,7 +5,7 @@ import './EditModal.css'
 import editlogo from '.././edit.png'
 
 
-export default function EditModal({ post, setShowEditModal }) {
+export default function EditModal({ post, setShowEditModal, setClicked }) {
     const dispatch = useDispatch();
 
     const [caption, setCaption] = useState("");
@@ -22,8 +22,13 @@ export default function EditModal({ post, setShowEditModal }) {
 
         await dispatch(editPost(editedCaption))
         setShowEditModal(false);
-
     }
+
+        const exitModal = () => {
+        setShowEditModal(false)
+        setClicked(false)
+    }
+
     return (
         <>
             <form className="editmodal-form" type="form" onSubmit={handleSubmit}>
@@ -39,7 +44,7 @@ export default function EditModal({ post, setShowEditModal }) {
 
                 <div className="edit-buttons">
                     <button type="submit" className='confirm' onChange={(e) => setCaption(e.target.value)}> {'   '}confirm</button>
-                    <button onClick={() => setShowEditModal(false)}>cancel</button>
+                    <button onClick={exitModal}>cancel</button>
                 </div>
             </form>
         </>
