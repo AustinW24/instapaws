@@ -26,7 +26,7 @@ export default function HomePage() {
     const [editComment, setEditComment] = useState('')
     const [postsId, setPostsId] = useState(0);
     const [postUserId, setPostUserId] = useState(0);
-    const [commentId, setCommentId] = useState(0);
+    // const [commentId, setCommentId] = useState(0);
     const [removeDiv, setRemoveDiv] = useState({display: 'none'})
 
 
@@ -57,11 +57,6 @@ export default function HomePage() {
         history.push("/home")
   }
 
-    const handleDeleteSubmit = async e => {
-    e.preventDefault()
-
-    await dispatch(deleteComment())
-  }
 
     const postDetails = (pId, uId) => {
         setPostsId(pId)

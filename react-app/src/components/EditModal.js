@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {useHistory, Redirect} from 'react-router-dom'
+import { useDispatch } from "react-redux";
 import { editPost } from "../store/posts"
 import './EditModal.css'
 import editlogo from '.././edit.png'
@@ -7,27 +8,30 @@ import editlogo from '.././edit.png'
 
 export default function EditModal({ post, setShowEditModal, setClicked }) {
     const dispatch = useDispatch();
-
+    const history = useHistory();
     const [caption, setCaption] = useState("");
 
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+
 
         const editedCaption = {
             id: post.id,
             caption: caption,
             user_id: post.user_id
         }
-
         await dispatch(editPost(editedCaption))
+        history.push("/home")
         setShowEditModal(false);
+
     }
 
         const exitModal = () => {
         setShowEditModal(false)
         setClicked(false)
     }
+
+
 
     return (
         <>

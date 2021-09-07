@@ -57,7 +57,7 @@
 .comments-list {
     display: flex;
     padding-inline-start: 14px;
-    
+
 }
 
 .comment-scroll {
@@ -90,7 +90,7 @@
     margin-bottom: 2px;
     position: fixed;
     left: 75%;
-    top: 94%;
+    top: 95%;
     transform: translate(-50%, -50%);
 }
 
@@ -194,3 +194,21 @@
     display: flex;
 
 }
+
+
+/* <div className="post-user-comment">
+
+                        <span onMouseEnter={e => {setRemoveDiv({display: 'block'}) }}
+                    onMouseLeave={e => { setRemoveDiv({display: 'none'}) }} className="post-comment">
+                        <strong className="post-username">{comm?.user} </strong><span className="post-comm">{comm?.comment}
+                        </span>
+                    </span>
+
+                         <button onMouseEnter={e => {setRemoveDiv({display: 'block'})}} onMouseLeave={e => { setRemoveDiv({display: 'none'}) }} className="comment-dot" style={removeDiv} onClick={handleDelete}><BiDotsHorizontalRounded/>
+                         </button>
+                         {showCommentModal && (
+                        <Modal onClose={() => setShowCommentModal(false)}>
+                              <CommentModal comm={commentId}  setShowCommentModal={setShowCommentModal} setClicked={setClicked}/>
+                        </Modal>
+                         )}
+                         </div> */
