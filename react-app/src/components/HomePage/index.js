@@ -29,6 +29,7 @@ export default function HomePage() {
     const [commentId, setCommentId] = useState(0);
     const [removeDiv, setRemoveDiv] = useState({display: 'none'})
 
+
      useEffect(() => {
          if(postsId) {
         dispatch(getComments(postsId))
@@ -75,14 +76,12 @@ export default function HomePage() {
 
 
 
-
-
     return (
         <>
             <div className='home-container'>
                 <ul className='post-list'>
                     {posts?.slice(0).reverse().map((post, idx) => {
-                        console.log(post)
+
                         return (
                             <li key={idx} className="indv-post">
 
@@ -115,43 +114,46 @@ export default function HomePage() {
                                 </div>
                                 <img alt="users post" src={post.picture_url} className="indv-photo"></img>
                                 <div className="post-footer">
+                                    <div className="post-footer-head">
                                         <img className="bottom-profile-pic" src={post.user.profile_picture}></img>
                                         <a to={`/${post.user.id}`} className="bottom-homepage-username">{post.user.username}</a>
                                         <span className="post-caption">{post.caption}</span>
+                                        </div>
                                         <div className="homepage-comments">
                                         {post?.post_comments.length < 2 &&
                                          <div>{post?.post_comments.map((comm, idx) => <div className='indv-comment' key={idx}>
                                                     <img className="post-profile-pic" src={comm?.user_pic}></img>
-                                                    {comm?.comment}
+
                                                     {user &&
-                                                    <div style={{border: '1px solid gray', width: 50, height: 50, padding: 10}}
+                                                    <div style={{padding: 10}}
                                                     onMouseEnter={e => {
                                                         setRemoveDiv({display: 'block'});
                                                     }}
                                                     onMouseLeave={e => {
                                                         setRemoveDiv({display: 'none'})
-                                                    }}
+                                                    }} className="comment-row"
                                                 >
-                                                    <button style={removeDiv} onClick={() => setShowDeleteModal(true)}><BiDotsHorizontalRounded/></button>
-                                                    {showDeleteModal && (
-                                                <Modal onClose={() => setShowDeleteModal(false)}>
-                                                    <CommentModal comm={comm} setShowCommentModal={setShowCommentModal} />
+                                                    {comm?.comment}
+                                                    <button style={removeDiv} onClick={() => setShowCommentModal(true)}><BiDotsHorizontalRounded/></button>
+                                                    {showCommentModal && (
+                                                        <Modal onClose={() => setShowCommentModal(false)}>
+                                                    <CommentModal comm={comm} setShowCommentModal={setShowCommentModal} setClicked={setClicked}/>
                                                 </Modal>
                                             )}
                                                 </div>}
-                                         </div>)}
+                                                    </div>)}
                                      </div>
                                        } {post?.post_comments.length > 2 &&
-                                                <div className="indv-comment">
-                                                    <a href={`/posts/${post?.id}`}>view all comments</a>
+                                                <div className="indv-comment-home">
+                                                    <a href={`/posts/${post?.id}`} className="viewall">view all comments</a>
                                                      <img className="post-profile-pic" src={post?.post_comments['0'].user_pic}></img>
-                                                     <div>{post?.post_comments['1'].comment}</div>
+                                                     <div className="shown-comment" >{"  ."}{post?.post_comments['1'].comment}</div>
                                                 </div>
 
                                         }
                                     </div>
                                     <div className="footer-comment">
-                                        <form className='comment-form' onSubmit={handleNewSubmit}>
+                                        <form className='home-comment-form' onSubmit={handleNewSubmit}>
                                                 <textarea  className="text-box" placeholder="Add a comment..." value={comments} onChange={e => setComments(e.target.value)}></textarea>
                                                 <button  onClick={() => postDetails(post?.id, post?.user.id)} className="postt-button" type="submit">Post</button>
                                          </form>

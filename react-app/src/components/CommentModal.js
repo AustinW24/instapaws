@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { deleteComment } from "../store/comments"
-// import './CommentModal.css'
+import './CommentModal.css'
 
 
-export default function CommentModal({ comm, setShowCommentModal }) {
+export default function CommentModal({ comm, setShowCommentModal, setClicked }) {
     const dispatch = useDispatch();
 
 
@@ -13,15 +13,23 @@ export default function CommentModal({ comm, setShowCommentModal }) {
         await dispatch(deleteComment(comm.id))
         setShowCommentModal(false);
     }
+
+    const handleModal = () => {
+        setShowCommentModal(false)
+        setClicked(false)
+    }
+
+
     return (
         <>
             <form className="deletemodal-form" type="form">
                 <div className="delete-comment">
-                     <button type="submit" className='delete'  onClick={handleDelete}> delete</button>
+                     <button type="submit" className='delete'  onClick={handleDelete}> Delete</button>
+                     < hr/>
                     <div className="comment-cancel">
-                        <button onClick={() => setShowCommentModal(false)}>cancel</button>
-                    </div>
+                        <button className='cancel' onClick={handleModal}>Cancel</button>
                 </div>
+                    </div>
             </form>
         </>
     )
