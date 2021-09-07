@@ -2,46 +2,64 @@
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-.home-container {
-	margin-top: 10%;
-	background-color: #fafafa;
-	/* position: fixed; */
-	margin: 0;
-	padding: 0;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+
+
+.post-list {
+    top: 50%;
+    left: 50%;
+    margin-top: 75px;
 }
 
 .indv-photo {
 	height: 455px;
-	width: 475px;
-    margin-left: 0;
-    margin-right: 30px;
+	width: 101%;
+    margin-left: 0px;
+    margin-left: 0px;
+
 }
 
-.post-list {
-	margin-top: 70px;
-	display: flex;
-	flex-direction: column;
-    margin-left: 0;
-    margin-right: 0;
-}
 
 .indv-post {
 	padding-top: 20px;
-	height: 680px;
+	border: 1px solid lightgray;
+	height: 685px;
 	width: 515px;
-    margin-left: 0;
-    margin-right: 0;
+    /* margin-left: 680px;
+    margin-right: 0; */
     position: relative;
+    margin-top: 30px;
+    border-radius: 3.5px;
+}
+
+.indv-comment {
+    font-size: 13px;
+    display: inline-block;
+    width: 100%;
+    word-wrap: break-word;
+    overflow-y: scroll;
+    /* padding-left: 14px; */
+    padding-right: 4px;
+}
+
+
+.indv-comment-home {
+    font-size: 12px;
+    padding-top: 0px;
+    display: inline-block;
+    width: 100%;
+    word-wrap: break-word;
+    overflow-y: scroll;
+    padding-right: 4px;
+    justify-items: center;
 }
 
 .post-header {
 	display: flex;
 	position: relative;
-    margin-bottom: 5px;
+    width: 100%;
+    margin-right: 8px;
+    background-color: #FFFFFF;
+    margin-bottom: 6px;
 }
 
 .post-dropdown {
@@ -99,6 +117,16 @@ edit-button:hover delete-button:hover {
     margin-right: 4px;
     margin-left: 15px;
 }
+
+.post-profile-pic {
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    margin-left: 14px;
+}
+
+
+
 .bottom-homepage-username {
     margin-top: 13px;
     margin-left: 5px;
@@ -114,11 +142,13 @@ edit-button:hover delete-button:hover {
     height: 25px;
     border-radius: 25px;
     margin-left: 15px;
-    margin-top: 10px;
+    margin-top: 8px;
+    margin-right: 5px;
 }
 
 .post-caption {
     margin-left: 8px;
+    margin-top: 18px;
     font-size: 14px;
     font-family: "Helvetica Neue", Helvetica
 }
@@ -134,9 +164,18 @@ edit-button:hover delete-button:hover {
 .postt-button {
     position: absolute;
     bottom: 0;
-    margin-right: 200px;
-    margin-bottom: 10px;
-    /* border: none; */
+    margin-bottom: 15px;
+    font-weight: bold;
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
+.postt-button:hover {
+    color: #08A3F1
 }
 
 .text-box {
@@ -144,6 +183,27 @@ edit-button:hover delete-button:hover {
     height: 25px;
     background-color: transparent;
     outline: none;
-    width: 95%;
+    width: 97%;
     resize: none;
+    padding-top: 5px;
+    padding-left: 10px;
+
+}
+
+.home-comment-form {
+    width: 100%;
+}
+
+.post-footer-head {
+    display: flex;
+    justify-items: center;
+}
+
+.viewall {
+    display: inline-block;
+    width: 100%;
+    padding-top: 0;
+    font-size: 13px;
+    margin-left: 14px;
+    padding-bottom: 10px;
 }
