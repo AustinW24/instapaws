@@ -10,7 +10,9 @@ export default function CommentModal({ comm, setShowCommentModal, setClicked }) 
 
 
     const handleDelete = async (e) => {
+        console.log("COMM IDD", comm.id)
         await dispatch(deleteComment(comm.id))
+
         setShowCommentModal(false);
     }
 

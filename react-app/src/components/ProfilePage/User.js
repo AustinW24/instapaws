@@ -64,6 +64,7 @@ function User() {
                     <div className="user-details"><strong>{numOfPosts(posts)}</strong>{"  "}posts</div>
                     <span className="bio">{user.biography}</span></div>
             </div>
+            {/* <hr className="hr-tag" style={{width: '1250px', margin: '60px'}}/> */}
             <div className="profile-body">
                 {posts?.reverse().map((post, idx) => {
 

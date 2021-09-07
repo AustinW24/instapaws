@@ -37,11 +37,11 @@ function Post() {
     useEffect(() => {
         if (post) {
             const newPost = post[id];
-            console.log('post object', newPost);
-
             setPostObj(newPost);
         }
     }, [post, id]);
+
+
 
 
     useEffect(() => {
@@ -50,7 +50,7 @@ function Post() {
 
     useEffect(() => {
         dispatch(getPost(id))
-    }, [dispatch])
+    }, [dispatch, comments])
 
 
         const handleDeleteSubmit = async e => {
@@ -113,29 +113,30 @@ function Post() {
                                         </div>
                                     }
                 </div>
-                    <div className="user-caption"><img className="bottom-profile-pic" src={postObj?.user.profile_picture}></img>{postObj?.caption}</div>
+                    <div className="user-caption"><img className="bottom-profile-pic" src={postObj?.user.profile_picture}></img><span className="caption-span">{postObj?.caption}</span></div>
                     <div className="comment-scroll">
                     <div>{postObj?.post_comments.map((comm, idx) =>
                     <div className={'indv-comment'} key={idx}>
                     <ul className="comments-list">
-                    <li className="comment-row">
+                    <li className="comment-row2">
                     <img className="post-profile-av" src={comm?.user_pic}></img>
                     {user.username !== comm?.user ? (
-
+                        <div className="post-comment">
+                        <strong className="post-username">{comm?.user}</strong>
                         <span>{comm?.comment}</span>
-                    ) : (<div>
+                        </div>
+                    ) : (<div className="post-user-comment">
+
                         <span onMouseEnter={e => {setRemoveDiv({display: 'block'}) }}
-                    onMouseLeave={e => { setRemoveDiv({display: 'none'}) }} className="post-comment">{comm?.comment}</span>
+                    onMouseLeave={e => { setRemoveDiv({display: 'none'}) }} className="post-comment"><strong className="post-username">{comm?.user}</strong><span className="post-comm">{comm?.comment}</span></span>
 
                          <button onMouseEnter={e => {setRemoveDiv({display: 'block'})}} onMouseLeave={e => { setRemoveDiv({display: 'none'}) }} className="comment-dot" style={removeDiv} onClick={() => setShowCommentModal(true)}><BiDotsHorizontalRounded/></button>
-
-                                                    {showCommentModal && (
-                                                        <Modal onClose={() => setShowCommentModal(false)}>
-                                                    <CommentModal comm={comm} setShowCommentModal={setShowCommentModal} setClicked={setClicked}/>
-                                                </Modal>
-                                            )}
-                    </div>
-                    )
+                        {showCommentModal && (
+                        <Modal onClose={() => setShowCommentModal(false)}>
+                              <CommentModal comm={comm} setShowCommentModal={setShowCommentModal} setClicked={setClicked}/>
+                        </Modal>
+                         )}
+                    </div> )
                     }
                                                 </li>
                     </ul>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp, login } from '../../store/session';
+import Footer from "../Footer.js"
 import './SignUpForm.css'
 
 const SignUpForm = () => {
@@ -22,11 +23,11 @@ const SignUpForm = () => {
             if (data) {
                 console.log(data)
                 setErrors(data)
-            } else if (!data.email.include("@")) {
+            } else if (!data?.email.include("@")) {
                 setErrors(['Please enter a valid email address'])
             }
         } else {
-            setErrors(["Passwords do not match!"])
+            setErrors(["Passwords do not match"])
         }
     };
 
@@ -54,7 +55,7 @@ const SignUpForm = () => {
 
 
     return (
-
+<div>
         <form onSubmit={onSignUp} className='signup-form'>
             <h1 className="create-account">Create an account</h1>
             <div className="signup-errors">
@@ -107,6 +108,8 @@ const SignUpForm = () => {
             </div>
             <button className="signup-button" type='submit'>Sign Up</button>
         </form>
+        <Footer/>
+        </div>
     );
 };
 

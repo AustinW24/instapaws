@@ -46,7 +46,7 @@ const LoginForm = () => {
             <img alt="two phones" src={phones} className='twophones'></img>
             <form onSubmit={onLogin} className='login-form'>
                 <img alt="instapaws logo" className='logo' src={logo}></img>
-                <div className='errors'>
+                <div className='errors' style={{color: "red"}}>
                     {errors.map((error, ind) => (
                         error.includes("Invalid") &&
                         <div key={ind}>{error}</div>
@@ -77,6 +77,7 @@ const LoginForm = () => {
                     <a  onClick={demoLogin}>Sign in as Demo</a>
                     </div>
             </form>
+
         </div>
     );
 };
