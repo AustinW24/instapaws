@@ -19,7 +19,7 @@ to view and comment on.
 
 ### Application Architecture
 
-As mentioned, Instapaw is a fullstack PERN application. Most of the logic occurs within the react-redux store and it's 
+As mentioned, Instapaw is a fullstack React / Flask application. Most of the logic occurs within the react-redux store and it's 
 interactions with your UI as a function of your state, and updates this and the database in response to actions.
 
 The backend serves the frontend, responds to frontend requests, acts as an intermediary to serve the apps data to the frontend, 
