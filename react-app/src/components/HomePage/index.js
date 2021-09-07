@@ -1,7 +1,7 @@
 
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom"
+import { useHistory} from "react-router-dom"
 import { getAllPosts, editPost } from '../../store/posts';
 import { createComment, getComments, deleteComment } from '../../store/comments';
 import { getAllUsers } from '../../store/users'
@@ -115,14 +115,19 @@ export default function HomePage() {
                                 <img alt="users post" src={post.picture_url} className="indv-photo"></img>
                                 <div className="post-footer">
                                     <div className="post-footer-head">
+
                                         <img className="bottom-profile-pic" src={post.user.profile_picture}></img>
-                                        <a to={`/${post.user.id}`} className="bottom-homepage-username">{post.user.username}</a>
+                                        <a href={`/users/${post.user.id}`} className="bottom-homepage-username">{post.user.username}</a>
                                         <span className="post-caption">{post.caption}</span>
                                         </div>
                                         <div className="homepage-comments">
                                         {post?.post_comments.length < 2 &&
-                                         <div>{post?.post_comments.map((comm, idx) => <div className='indv-comment' key={idx}>
+                                            <div className="comment-row">{post?.post_comments.map((comm, idx) => <div className='indv-comment' key={idx}>
+                                                    <div className="home-pic-comment">
+                                                    <a  href={`/users/${comm?.user_id}`} className="span-username">{comm.user}</a>
                                                     <img className="post-profile-pic" src={comm?.user_pic}></img>
+                                                    </div>
+
 
                                                     {user &&
                                                     <div style={{padding: 10}}
@@ -134,7 +139,8 @@ export default function HomePage() {
                                                     }} className="comment-row"
                                                 >
                                                     {comm?.comment}
-                                                    <button style={removeDiv} onClick={() => setShowCommentModal(true)}><BiDotsHorizontalRounded/></button>
+                                                    <button className="comment-dot" style={removeDiv} onClick={() => setShowCommentModal(true)}><BiDotsHorizontalRounded/></button>
+
                                                     {showCommentModal && (
                                                         <Modal onClose={() => setShowCommentModal(false)}>
                                                     <CommentModal comm={comm} setShowCommentModal={setShowCommentModal} setClicked={setClicked}/>
@@ -142,12 +148,16 @@ export default function HomePage() {
                                             )}
                                                 </div>}
                                                     </div>)}
-                                     </div>
-                                       } {post?.post_comments.length > 2 &&
-                                                <div className="indv-comment-home">
+                                                    </div>
+                                       }
+                                   {post?.post_comments.length > 1 &&
+                                                    <div>
                                                     <a href={`/posts/${post?.id}`} className="viewall">view all comments</a>
+                                                    <div className="indv-comment-home">
                                                      <img className="post-profile-pic" src={post?.post_comments['0'].user_pic}></img>
-                                                     <div className="shown-comment" >{"  ."}{post?.post_comments['1'].comment}</div>
+                                                     <a href={`/users/${post?.post_comments['0'].user_id}`} className="span-username" ><strong>{post?.post_comments['0'].user}</strong></a>
+                                                     <div className="shown-comment" >{"  "}{post?.post_comments['0'].comment}</div>
+                                                </div>
                                                 </div>
 
                                         }

@@ -7,7 +7,7 @@
 	overflow: hidden;
 	border-radius: 5px;
 	border: 2.5px solid lightgray;
-	margin-top: 140px;
+	margin-top: 80px;
 
 }
 
@@ -42,6 +42,7 @@
 
 .twophones {
 	height: 70vh;
+    margin-top: -40px;
 }
 
 input {
@@ -78,10 +79,13 @@ p {
 
 a {
     margin-right: -10px;
+    text-decoration: none;
+
 }
 
 a:hover {
     cursor: pointer;
+
 }
 
 .profile-dropdown-div {
@@ -97,11 +101,19 @@ a:hover {
     z-index: 100;
     justify-content: center;
     align-items: center;
-    border: 1.5px solid rgb(131, 132, 133)
+    border: 1.5px solid rgb(131, 132, 133);
+
 }
 
-.profile-dropdown__a {
+.profile-dropdown__a, .profile-dropdown__b {
     cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+    color: #08A3F1;
+}
+
+.profile-dropdown__a:hover, .profile-dropdown__b:hover {
+    color: rgb(216, 216, 216);
 }
 
 .email-field {

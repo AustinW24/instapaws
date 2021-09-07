@@ -45,7 +45,7 @@
 .indv-comment-home {
     font-size: 12px;
     padding-top: 0px;
-    display: inline-block;
+    display: flex;
     width: 100%;
     word-wrap: break-word;
     overflow-y: scroll;
@@ -104,7 +104,7 @@ edit-button:hover delete-button:hover {
     margin-top: 5px;
     margin-left: 5px;
     font-weight: bold;
-    font-family: Arial;
+    font-family: Montserrat;
     text-decoration: none;
 
 }
@@ -122,7 +122,7 @@ edit-button:hover delete-button:hover {
     width: 25px;
     height: 25px;
     border-radius: 25px;
-    margin-left: 14px;
+    margin-left: 15px;
 }
 
 
@@ -131,7 +131,7 @@ edit-button:hover delete-button:hover {
     margin-top: 13px;
     margin-left: 5px;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 13px;
     padding-right: 5px;
     margin-bottom: 10px;
     font-family: Arial;
@@ -149,7 +149,7 @@ edit-button:hover delete-button:hover {
 .post-caption {
     margin-left: 8px;
     margin-top: 18px;
-    font-size: 14px;
+    font-size: 13px;
     font-family: "Helvetica Neue", Helvetica
 }
 
@@ -185,7 +185,7 @@ edit-button:hover delete-button:hover {
     outline: none;
     width: 97%;
     resize: none;
-    padding-top: 5px;
+    padding-top: 8px;
     padding-left: 10px;
 
 }
@@ -203,7 +203,22 @@ edit-button:hover delete-button:hover {
     display: inline-block;
     width: 100%;
     padding-top: 0;
-    font-size: 13px;
+    font-size: 12px;
     margin-left: 14px;
     padding-bottom: 10px;
+}
+
+.shown-comment {
+    margin-top: 5px;
+    margin-left: 8px;
+}
+
+.span-username {
+    margin-left: 4px;
+    font-weight: bold;
+}
+
+.comment-row {
+    display: flex;
+
 }

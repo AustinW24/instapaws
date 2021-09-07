@@ -7,6 +7,7 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import User from './components/ProfilePage/User';
 import HomePage from './components/HomePage'
+import Footer from './components/Footer'
 import Post from './components/Post'
 import { authenticate } from './store/session';
 
@@ -30,9 +31,11 @@ function App() {
             <Switch>
                 <Route path='/sign-up' exact={true}>
                     <SignUpForm />
+    
                 </Route>
                 <Route path='/' exact={true}>
                     <LoginForm />
+                    <Footer/>
                 </Route>
                 <ProtectedRoute path='/home' exact={true}>
                     <NavBar />
