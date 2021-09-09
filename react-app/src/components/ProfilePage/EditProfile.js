@@ -17,12 +17,22 @@ function EditProfileModal({setShowProfileModal, currentUser}) {
     const handleSubmit = async (e) => {
 
        const data =  await dispatch(update(user_id, profile_picture, biography))
+
        if(data ) {
            setErrors(data)
        }
        console.log(data)
         // history.push(`/users/${+id}`)
         setShowProfileModal(false);
+    }
+
+    const handleEmptyInput = () => {
+        if(profile_picture.length < 10) {
+            setProfilePic(currentUser.profile_picture)
+        } else if (biography.length < 1) {
+            setBiography(currentUser.biography)
+        }
+
     }
 
 
@@ -57,7 +67,8 @@ function EditProfileModal({setShowProfileModal, currentUser}) {
 
                         </div>
                 <div className="post-buttons">
-                    <button type="submit" className='submit' >{'   '}Submit</button>
+                    {profile_picture.value < 10 ? setProfilePic(currentUser.profile_picture) : null}
+                    <button onClick={handleEmptyInput} type="submit" className='submit' >{'   '}Submit</button>
                     <button onClick={() => setShowProfileModal(false)}>Cancel</button>
                 </div>
             </form>

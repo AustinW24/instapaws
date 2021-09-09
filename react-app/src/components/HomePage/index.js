@@ -159,7 +159,7 @@ export default function HomePage() {
                                     </div>
                                     <div className="footer-comment">
                                         <form className='home-comment-form' onSubmit={handleNewSubmit}>
-                                                <textarea  className="text-box" placeholder="Add a comment..." value={comments} onChange={e => setComments(e.target.value)}></textarea>
+                                                <textarea  className="text-box-home" placeholder="Add a comment..." value={comments} onChange={e => setComments(e.target.value)}></textarea>
                                                 <button  onClick={() => postDetails(post?.id, post?.user.id)} className="postt-button" type="submit">Post</button>
                                          </form>
                                     </div>

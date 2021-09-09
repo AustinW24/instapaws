@@ -1,15 +1,24 @@
+body {
+    background-color: #FAFAFA;
+}
+
 .profile-header {
+    position: relative;
     margin-top: 80px;
     display: flex;
-    margin-left: 120px;
-    margin-bottom: 60px;
+    margin-bottom: 70px;
+    justify-content: center;
+    /* margin-right: 650px; */
+    margin-left: 25%;
+    margin-right: 75%;
 }
 
 .profile-username {
-    font-size: 50px;
+    font-size: 40px;
     margin-top: 0px;
-    /* vertical-align: top; */
-    padding-left: 70px;
+    font-weight: 300;
+    color: rgb(68, 68, 68);
+    /* padding-left: 70px; */
     height: 40px;
 
 }
@@ -22,9 +31,7 @@
 
 }
 
-.hr-tag {
-   
-}
+
 
 
 .user-details {
@@ -55,6 +62,20 @@
 }
 
 .bio {
-    margin-left: 73px;
+    margin-left: 70px;
+}
+
+.edit-profile-button {
+    font-weight: bold;
+    padding: 5px 6px 5px 6px;
+    background-color: #FAFAFA;
+    margin-left: 20px;
+    border: 1.5px solid lightgray;
+    border-radius: 4px;
+    cursor: pointer;
+    color: rgb(88, 88, 88);
+    height: 27px;
+    width: 90px;
+    margin-top: 10.5px;
 
 }
