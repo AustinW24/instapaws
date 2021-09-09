@@ -1,8 +1,7 @@
-
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
-import { getAllPosts, editPost, getPost } from '../../store/posts'
+import { getPost } from '../../store/posts'
 import { getComments, deleteComment, createComment } from '../../store/comments'
 import { getAllUsers } from '../../store/users'
 import CommentModal from '../CommentModal.js'
@@ -38,7 +37,7 @@ function Post() {
             const newPost = post[id];
             setPostObj(newPost);
         }
-    }, [ post, id]);
+    }, [post, id]);
 
 
 
@@ -81,84 +80,102 @@ function Post() {
         setPostUserId(uId)
     }
 
+    const handleClicked = () => {
+        if (clicked) {
+            setClicked(false)
+        }
+    }
+
+    const handleCommentClick = (comment) => {
+        setCommentId(comment.id);
+        if (showCommentModal === false) {
+            setShowCommentModal(true)
+        } else {
+            setShowCommentModal(false)
+        }
+        console.log(commentId)
+    }
+
 
     return (
-        <div className="post-comments">
-            <div className="post-container">
-                {postObj && <img className="postid-pic" src={postObj?.picture_url}></img>}
-            </div>
-            <div className="comments-container">
-                <div className="comments-header">
-                    {postObj && <img className="bottom-profile-pic" src={postObj?.user.profile_picture}></img>}
-                    <div className="bottom-homepage-username">{postObj?.user.username}</div>
-                    {postObj?.user_id == user.id &&
-                        <button className='post-dropdown' onClick={() => show(post)}><BiDotsHorizontalRounded /></button>
-                    }
-                    {clicked &&
-
-                        <div className="dot-dropdown">
-                            <a className="edit-button" onClick={() => setShowEditModal(true)}>edit</a>
-                            {showEditModal && (
-                                <Modal onClose={() => setShowEditModal(false)}>
-                                    <EditModal post={postObj} setShowEditModal={setShowEditModal} setClicked={setClicked} />
-                                </Modal>
-                            )}
-                            <a className="delete-button" onClick={() => setShowDeleteModal(true)}>delete</a>
-                            {showDeleteModal && (
-                                <Modal onClose={() => setShowDeleteModal(false)}>
-                                    <DeleteModal post={postObj} setShowDeleteModal={setShowDeleteModal} setClicked={setClicked} />
-                                </Modal>
-                            )}
-                        </div>
-                    }
+        <div className="body" onClick={handleClicked}>
+            <div className="post-comments">
+                <div className="post-container">
+                    {postObj && <img className="postid-pic" src={postObj?.picture_url}></img>}
                 </div>
+                <div className="comments-container">
+                    <div className="comments-header">
+                        {postObj && <img className="bottom-profile-pic" src={postObj?.user.profile_picture}></img>}
+                        <div className="bottom-homepage-username">{postObj?.user.username}</div>
+                        {postObj?.user_id == user.id &&
+                            <button className='post-dropdown' onClick={() => show(post)}><BiDotsHorizontalRounded /></button>
+                        }
+                        {clicked &&
 
-                <div className="user-caption"><img className="bottom-profile-pic" src={postObj?.user.profile_picture}></img><span className="caption-span">{postObj?.caption}</span>
-                </div>
-                <div className="comment-scroll">
-                    <div>{postObj?.post_comments.map((comm, idx) =>
-                        <div className={'indv-comment'} key={idx}>
-                            <ul className="comments-list">
-                                <li className="comment-row2">
-                                    <img className="post-profile-av" src={comm?.user_pic}></img>
-                                    {user.username !== comm?.user &&
-                                        <div className="post-comment">
-                                            <strong className="post-username">{comm?.user}</strong>
-                                            <span>{comm?.comment}</span>
-                                        </div>
-                                    }
-                                    {user.username === comm?.user &&
-                                        <div className="post-user-comment">
-                                            <span onMouseEnter={e => { setRemoveDiv({ display: 'block' }) }}
-                                                onMouseLeave={e => { setRemoveDiv({ display: 'none' }) }} className="post-comment">
-                                                <strong className="post-username">{comm?.user} </strong>
-                                                <span className="post-comm">{comm?.comment}</span>
-                                            </span>
-
-                                            <button onMouseEnter={e => { setRemoveDiv({ display: 'block' }) }} onMouseLeave={e => { setRemoveDiv({ display: 'none' }) }}
-                                            className="comment-dot"  style={removeDiv} onClick={(e) =>{showCommentModal === false ? setShowCommentModal(true) : setShowCommentModal(false)
-                                             }}><BiDotsHorizontalRounded />
-                                            </button>
-                                            {showCommentModal && (
-                                                <Modal onClose={() => setShowCommentModal(false)}>
-                                                    <CommentModal comm={comm} setShowCommentModal={setShowCommentModal} setClicked={setClicked} />
-                                                </Modal>
-                                            )}
-                                        </div>
-                                        }
-                                </li>
-                            </ul>
-                        </div>)}
+                            <div className="dot-dropdown">
+                                <a className="edit-button" onClick={() => setShowEditModal(true)}>edit</a>
+                                {showEditModal && (
+                                    <Modal onClose={() => setShowEditModal(false)}>
+                                        <EditModal post={postObj} setShowEditModal={setShowEditModal} setClicked={setClicked} />
+                                    </Modal>
+                                )}
+                                <a className="delete-button" style={{ "color": "red" }} onClick={() => setShowDeleteModal(true)}>delete</a>
+                                {showDeleteModal && (
+                                    <Modal onClose={() => setShowDeleteModal(false)}>
+                                        <DeleteModal post={postObj} setShowDeleteModal={setShowDeleteModal} setClicked={setClicked} />
+                                    </Modal>
+                                )}
+                            </div>
+                        }
                     </div>
 
-                    <form className='comment-form' onSubmit={handleNewSubmit}>
-                        <textarea className="text-box" placeholder="Add a comment..." value={comments} onChange={e => setComments(e.target.value)}></textarea>
-                        <button className="post-button" onClick={() => postDetails(postObj?.id, postObj?.user.id)} type="submit">Post</button>
-                    </form>
-                </div>
-            </div>
-        </div >
+                    <div className="user-caption"><img className="bottom-profile-pic" src={postObj?.user.profile_picture}></img><span className="caption-span">{postObj?.caption}</span>
+                    </div>
+                    <div className="comment-scroll">
+                        <div>{postObj?.post_comments.map((comm, id) =>
+                            <div className={'indv-comment'} key={comm?.id}>
+                                <ul className="comments-list">
+                                    <li className="comment-row2">
+                                        <img className="post-profile-av" src={comm?.user_pic}></img>
+                                        {user.username !== comm?.user &&
+                                            <div className="post-comment">
+                                                <strong className="post-username">{comm?.user}</strong>
+                                                <span>{comm?.comment}</span>
+                                            </div>
+                                        }
+                                        {user.username === comm?.user &&
+                                            <div className="post-user-comment">
+                                                <span onMouseEnter={e => { setRemoveDiv({ display: 'block' }) }}
+                                                    onMouseLeave={e => { setRemoveDiv({ display: 'none' }) }} className="post-comment">
+                                                    <strong className="post-username">{comm?.user} </strong>
+                                                    <span className="post-comm">{comm?.comment}</span>
+                                                </span>
 
+                                                <button onMouseEnter={e => { setRemoveDiv({ display: 'block' }) }} onMouseLeave={e => { setRemoveDiv({ display: 'none' }) }}
+                                                    className="comment-dot" style={removeDiv} onClick={(e) => {
+                                                        handleCommentClick(comm)
+                                                    }}><BiDotsHorizontalRounded />
+                                                </button>
+                                                {showCommentModal && (
+                                                    <Modal onClose={() => setShowCommentModal(false)}>
+                                                        <CommentModal commentId={commentId} setShowCommentModal={setShowCommentModal} setClicked={setClicked} />
+                                                    </Modal>
+                                                )}
+                                            </div>
+                                        }
+                                    </li>
+                                </ul>
+                            </div>)}
+                        </div>
+
+                        <form className='comment-form' onSubmit={handleNewSubmit}>
+                            <textarea className="text-box" placeholder="Add a comment..." value={comments} onChange={e => setComments(e.target.value)}></textarea>
+                            <button className="post-button" onClick={() => postDetails(postObj?.id, postObj?.user.id)} type="submit">Post</button>
+                        </form>
+                    </div>
+                </div>
+            </div >
+        </div>
 
 
     )

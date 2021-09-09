@@ -5,11 +5,11 @@ import { deleteComment } from "../store/comments"
 import './CommentModal.css'
 
 
-export default function CommentModal({ comm, setShowCommentModal, setClicked }) {
+export default function CommentModal({ commentId, setShowCommentModal, setClicked }) {
     const dispatch = useDispatch();
 
     const handleDelete = async (e) => {
-        await dispatch(deleteComment(comm.id))
+        await dispatch(deleteComment(commentId))
         setShowCommentModal(false);
     }
 
