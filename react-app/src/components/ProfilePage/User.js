@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllPosts } from '../../store/posts'
+import EditProfileModal from './EditProfile.js'
+import Modal from '../../context/Modal'
 
 import "./ProfilePage.css"
 
@@ -10,10 +12,12 @@ function User() {
     const currentUser = useSelector(state => state.session.user)
     const posts = useSelector((state) => state.posts?.posts);
     const userId= useParams();
-    const [update, setUpdate] = useState(false)
+    const [update, setUpdate] = useState(false);
+    const [showProfileModal, setShowProfileModal] = useState(false);
+    const [clicked, setClicked] = useState(false);
+
     const [user, setUser] = useState({});
-    // console.log(posts)
-    // console.log(userId, "userId")
+
 
     useEffect(() => {
         if(!userId) {
@@ -22,7 +26,7 @@ function User() {
         (async () => {
             const response = await fetch(`/api/users/${userId.id}`);
             const user = await response.json();
-            setUser(user, "usa")
+            setUser(user)
         })();
     }, [userId])
 
@@ -54,14 +58,21 @@ function User() {
 
 
 
-    console.log(posts, "POSTS")
+
 
     return (
         <>
             <div className="profile-header">
                 <img className="profile-picture" src={user.profile_picture} alt="profile"></img>
-                <div className="user-Info"><h1 className="profile-username">{user.username}</h1>
-                    <div className="user-details"><strong>{numOfPosts(posts)}</strong>{"  "}posts</div>
+                <div className="user-Info">
+                    <h1 className="profile-username">{user.username}<button onClick={() => setShowProfileModal(true)}>Edit Profile</button></h1>
+                    {showProfileModal && (
+                                <Modal  style={{ overlay: { background: 'black' } }} onClose={() => setShowProfileModal(false) }>
+                                    <EditProfileModal userId={userId} currentUser={currentUser} setShowProfileModal={setShowProfileModal} setClicked={setClicked} />
+                                </Modal>
+                            )}
+                <div className="user-details">
+                    <strong>{numOfPosts(posts)}</strong>{"  "}posts</div>
                     <span className="bio">{user.biography}</span></div>
             </div>
             {/* <hr className="hr-tag" style={{width: '1250px', margin: '60px'}}/> */}

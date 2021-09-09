@@ -1,0 +1,7 @@
+.profile-modal {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    border: 1.5px solid lightgray;
+    background-color: #fff;
+}
