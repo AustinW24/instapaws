@@ -12,7 +12,7 @@
 
 .indv-photo {
 	height: 455px;
-	width: 101%;
+	width: 100%;
     margin-left: 0px;
     margin-left: 0px;
 
@@ -20,10 +20,10 @@
 
 
 .indv-post {
-	padding-top: 20px;
+    padding: 0;
 	border: 1px solid lightgray;
-	height: 685px;
-	width: 515px;
+	height: 665px;
+	width: 520px;
     /* margin-left: 680px;
     margin-right: 0; */
     position: relative;
@@ -59,7 +59,9 @@
     width: 100%;
     margin-right: 8px;
     background-color: #FFFFFF;
-    margin-bottom: 6px;
+    margin-bottom: 0px;
+    margin-top: 12px;
+    height: 50px;
 }
 
 .post-dropdown {
@@ -187,7 +189,18 @@ edit-button:hover delete-button:hover {
     resize: none;
     padding-top: 8px;
     padding-left: 10px;
+}
 
+.text-box-home {
+     border: none;
+     height: 25px;
+     background-color: transparent;
+     outline: none;
+     width: 100%;
+     resize: none;
+     padding-top: 8px;
+     padding-left: 15px;
+     margin-bottom: 10px;
 }
 
 .home-comment-form {

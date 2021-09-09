@@ -18,7 +18,7 @@ function User() {
 
     const [user, setUser] = useState({});
 
-
+    console.log(currentUser.biography)
     useEffect(() => {
         if(!userId) {
             return;
@@ -62,10 +62,14 @@ function User() {
 
     return (
         <>
+        <body>
             <div className="profile-header">
                 <img className="profile-picture" src={user.profile_picture} alt="profile"></img>
                 <div className="user-Info">
-                    <h1 className="profile-username">{user.username}<button onClick={() => setShowProfileModal(true)}>Edit Profile</button></h1>
+                    <div style={{"display": "flex"}}>
+                    <h1 className="profile-username">{user.username}</h1>
+                    <button  className="edit-profile-button" onClick={() => setShowProfileModal(true)}>Edit Profile</button>
+                    </div>
                     {showProfileModal && (
                                 <Modal  style={{ overlay: { background: 'black' } }} onClose={() => setShowProfileModal(false) }>
                                     <EditProfileModal userId={userId} currentUser={currentUser} setShowProfileModal={setShowProfileModal} setClicked={setClicked} />
@@ -75,7 +79,7 @@ function User() {
                     <strong>{numOfPosts(posts)}</strong>{"  "}posts</div>
                     <span className="bio">{user.biography}</span></div>
             </div>
-            {/* <hr className="hr-tag" style={{width: '1250px', margin: '60px'}}/> */}
+            <hr className="hr-tag" style={{ 'border': '1px solid lightgray', width: '62%', 'margin-bottom': '60px'}}/>
             <div className="profile-body">
                 {posts?.reverse().map((post, idx) => {
 
@@ -86,6 +90,7 @@ function User() {
                     )
                 })}
             </div>
+            </body>
         </>
     );
 }
