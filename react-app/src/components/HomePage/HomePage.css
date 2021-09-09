@@ -60,16 +60,17 @@
     margin-right: 8px;
     background-color: #FFFFFF;
     margin-bottom: 0px;
-    margin-top: 12px;
-    height: 50px;
+    /* margin-top: 12px; */
+    height: 55px;
 }
 
 .post-dropdown {
 	border: none;
 	padding: 0;
 	background: none;
-	font-size: 25px;
+	font-size: 22px;
 	margin-left: auto;
+    margin-right: 10px;
 }
 
 .post-dropdown:hover {
@@ -78,12 +79,12 @@
 
 .dot-dropdown {
 	position: absolute;
-	background-color: #fafafa;
+	background-color: #ffffff;
 	display: flex;
 	flex-direction: column;
 	right: 0px;
 	padding: 10px;
-	margin-top: 25px;
+	margin-top: 35px;
 	width: 60px;
 	height: 50px;
 	border-radius: 3px;
@@ -103,7 +104,7 @@ edit-button:hover delete-button:hover {
 }
 
 .homepage-username {
-    margin-top: 5px;
+    margin-top: 12px;
     margin-left: 5px;
     font-weight: bold;
     font-family: Montserrat;
@@ -115,7 +116,7 @@ edit-button:hover delete-button:hover {
     width: 35px;
     height: 35px;
     border-radius: 20px;
-    margin-bottom: 5px;
+    margin-top: 12px;
     margin-right: 4px;
     margin-left: 15px;
 }

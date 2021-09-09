@@ -1,11 +1,16 @@
+.body {
+    width: 100vw;
+    height: 100vw;
+}
+
 .post-comments {
     display: flex;
     flex-wrap: wrap;
     width: 620px;
     /* margin-right: 300px; */
-    top: 80%;
+    top: 50%;
     left: 50%;
-    margin-top: -200px;
+
     border: rgb(58, 58, 58) solid .001px;
     position: fixed;
     transform: translate(-50%, -50%);
@@ -21,6 +26,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 600px;
 
 }
 
@@ -57,6 +63,8 @@
 .comments-list {
     display: flex;
     padding-inline-start: 14px;
+    margin-top: 5;
+    margin-bottom: 0;
 
 }
 

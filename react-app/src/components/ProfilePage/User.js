@@ -61,7 +61,7 @@ function User() {
 
 
     return (
-        <>
+
         <body>
             <div className="profile-header">
                 <img className="profile-picture" src={user.profile_picture} alt="profile"></img>
@@ -91,7 +91,7 @@ function User() {
                 })}
             </div>
             </body>
-        </>
+        
     );
 }
 export default User;

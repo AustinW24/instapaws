@@ -69,11 +69,15 @@ export default function HomePage() {
         setClicked(!clicked)
     }
 
-
+    const handleClicked = () => {
+        if(clicked) {
+            setClicked(false)
+        }
+    }
 
     return (
         <>
-            <div className='home-container'>
+            <div className='home-container' onClick={() => handleClicked()}>
                 <ul className='post-list'>
                     {posts?.slice(0).reverse().map((post, idx) => {
 
@@ -98,7 +102,7 @@ export default function HomePage() {
                                                     <EditModal post={post} setShowEditModal={setShowEditModal} setClicked={setClicked}/>
                                                 </Modal>
                                             )}
-                                            <a className="delete-button" onClick={() => setShowDeleteModal(true)}>delete</a>
+                                            <a style={{"color": "red"}} className="delete-button" onClick={() => setShowDeleteModal(true)}>delete</a>
                                             {showDeleteModal && (
                                                 <Modal onClose={() => setShowDeleteModal(false)}>
                                                     <DeleteModal post={post} setShowDeleteModal={setShowDeleteModal} setClicked={setClicked}/>
