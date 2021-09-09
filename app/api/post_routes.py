@@ -14,7 +14,7 @@ post_routes = Blueprint('posts', __name__)
 @post_routes.route('/')
 def get_all_posts():
     posts = Post.query.all()
-    print("@@@@@@@@@@@@@@@@@")
+
     return {"posts": [post.to_dict() for post in posts]}
 
 
@@ -26,6 +26,8 @@ def get_all_posts():
 @login_required
 def postOne(id):
   post = Post.query.get(id)
+  print("@@@@@@@@@@@@@@@@@")
+
   print(post)
   return {post.id: post.to_dict() }
 

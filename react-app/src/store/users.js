@@ -2,6 +2,7 @@ const GET_USERS = "users/GET_USERS";
 const SET_USERS = "users/SET_USER"
 
 
+
 const getUsers = (users) => ({
     type: GET_USERS,
     payload: users,
@@ -12,16 +13,6 @@ const getUsers = (users) => ({
       payload: user,
   })
 
-
-export const setAUser = (id) => async (dispatch) => {
-    const response = await fetch(`api/users/${id}`);
-
-    if (response.ok) {
-      const { user } = await response.json();
-    //   console.log(users)
-      dispatch(setUser(user));
-    }
-  };
 
 
   export const getAllUsers = () => async (dispatch) => {

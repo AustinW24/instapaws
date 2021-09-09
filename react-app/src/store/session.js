@@ -1,5 +1,3 @@
-// constants
-import { useHistory } from 'react-router'
 
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
@@ -103,6 +101,36 @@ export const signUp = (username, email, password) => async (dispatch) => {
     return ['An error occurred. Please try again.']
   }
 }
+
+
+export const update = (user_id, profile_picture, biography) => async (dispatch) => {
+  
+
+    const response = await fetch(`/api/auth/update/${user_id}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+        profile_picture,
+        biography
+    }),
+  });
+  console.log("AFTER FETCH IN UPDATE")
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(setUser(data))
+    return null;
+  } else if (response.status < 500) {
+    const data = await response.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ['An error occurred. Please try again.']
+  }
+}
+
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {

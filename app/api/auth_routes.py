@@ -97,7 +97,6 @@ def unauthorized():
 def update(id):
     user = User.query.get(id)
     data = request.get_json()
-    user.username = data['username']
     user.biography = data['biography']
     user.profile_picture = data['profile_picture']
     db.session.commit()

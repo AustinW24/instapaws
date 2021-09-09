@@ -3,14 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useHistory} from "react-router-dom"
 import { getAllPosts, editPost } from '../../store/posts';
-import { createComment, getComments, deleteComment } from '../../store/comments';
-import { getAllUsers } from '../../store/users'
-import EditModal from '../EditModal.js'
-import DeleteModal from '../DeleteModal.js'
-import CommentModal from '../CommentModal.js'
-import Modal from '../../context/Modal'
+import { createComment, getComments } from '../../store/comments';
+import { getAllUsers } from '../../store/users';
+import EditModal from '../EditModal.js';
+import DeleteModal from '../DeleteModal.js';
+import CommentModal from '../CommentModal.js';
+import Modal from '../../context/Modal';
 import { BiDotsHorizontalRounded } from "react-icons/bi";
-import './HomePage.css'
+import './HomePage.css';
 
 export default function HomePage() {
     const history = useHistory();
