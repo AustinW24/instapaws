@@ -25,7 +25,7 @@ interactions with your UI as a function of your state, and updates this and the 
 The backend serves the frontend, responds to frontend requests, acts as an intermediary to serve the apps data to the frontend, 
 and fetches it from the Postgresql database.
 
-![image](https://user-images.githubusercontent.com/67086515/131863524-09d29bcc-138b-4cd1-9128-b2642e7a8807.png)
+![image](https://user-images.githubusercontent.com/67086515/133691300-52404b95-ff56-4ece-a5a5-7878db20d875.png)
 
 
 ### Frontend Overview
