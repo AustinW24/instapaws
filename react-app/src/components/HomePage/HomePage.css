@@ -1,5 +1,6 @@
 * {
 	font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
 }
 
 
@@ -10,19 +11,28 @@
     margin-top: 75px;
 }
 
-.indv-photo {
-	height: 455px;
-	width: 100%;
-    margin-left: 0px;
-    margin-left: 0px;
+.photo-container {
+    height: 480px;
+    width: 518px;
+
 
 }
+
+.indv-photo {
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+
+}
+
 
 
 .indv-post {
     padding: 0;
 	border: 1px solid lightgray;
-	height: 665px;
+	height: 690px;
 	width: 520px;
     /* margin-left: 680px;
     margin-right: 0; */
@@ -42,15 +52,17 @@
 }
 
 
-.indv-comment-home {
+.home-indv-comment {
     font-size: 12px;
-    padding-top: 0px;
     display: flex;
-    width: 100%;
+    width: 95%;
     word-wrap: break-word;
     overflow-y: scroll;
     padding-right: 4px;
     justify-items: center;
+    align-items: center;
+
+
 }
 
 .post-header {
@@ -97,6 +109,7 @@
 
 edit-button delete-button {
 	text-align: center;
+    width: 100%;
 }
 
 edit-button:hover delete-button:hover {
@@ -113,31 +126,45 @@ edit-button:hover delete-button:hover {
 }
 
 .profile-pic {
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     border-radius: 20px;
     margin-top: 12px;
     margin-right: 4px;
     margin-left: 15px;
 }
 
-.post-profile-pic {
+.home-profile-pic {
     width: 25px;
     height: 25px;
-    border-radius: 25px;
-    margin-left: 15px;
+    margin-left: 8px;
+    border-radius: 16px;
+    float: left;
 }
 
+.home-post-profile-pic {
+    width: 25px;
+    height: 25px;
+    margin-left: 14px;
+    border-radius: 16px;
+    float: left;
+}
+
+
+.home-user-comment {
+    display: flex;
+    flex-direction: row;
+}
 
 
 .bottom-homepage-username {
     margin-top: 13px;
-    margin-left: 5px;
+    margin-left: 14px;
     font-weight: bold;
     font-size: 13px;
     padding-right: 5px;
-    margin-bottom: 10px;
     font-family: Arial;
+
 }
 
 .bottom-profile-pic {
@@ -146,7 +173,6 @@ edit-button:hover delete-button:hover {
     border-radius: 25px;
     margin-left: 15px;
     margin-top: 8px;
-    margin-right: 5px;
 }
 
 .post-caption {
@@ -167,7 +193,7 @@ edit-button:hover delete-button:hover {
 .postt-button {
     position: absolute;
     bottom: 0;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     font-weight: bold;
     background-color: Transparent;
     background-repeat: no-repeat;
@@ -199,24 +225,26 @@ edit-button:hover delete-button:hover {
      outline: none;
      width: 100%;
      resize: none;
-     padding-top: 8px;
+     padding-top: 12px;
      padding-left: 15px;
      margin-bottom: 10px;
 }
 
 .home-comment-form {
     width: 100%;
+
 }
 
 .post-footer-head {
     display: flex;
     justify-items: center;
+    flex-direction: column;
 }
 
 .viewall {
     display: inline-block;
     width: 100%;
-    padding-top: 0;
+    padding: 10px 0px 10px 0px;
     font-size: 12px;
     margin-left: 14px;
     padding-bottom: 10px;
@@ -230,9 +258,28 @@ edit-button:hover delete-button:hover {
 .span-username {
     margin-left: 4px;
     font-weight: bold;
+    margin-top: 0px;
+    color: rgb(0, 0, 0);
 }
 
 .comment-row {
-    display: flex;
+    position: relative;
+    margin-left: 8px;
+    margin-top: 5px;
+    overflow: scroll;
+    max-height: 30px;
+}
+.homepage-heart-bttn {
+    cursor: pointer;
+}
 
+.homepage-heart {
+    cursor: pointer;
+    color: #FAFAFA;
+    stroke: black;
+    stroke-width: 40;
+    font-size: 22px;
+    height: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }

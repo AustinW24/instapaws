@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createComment getComments } from '../store/comments';
+import { createComment, getComments } from '../store/comments';
 import "./Comment.css"
 
 

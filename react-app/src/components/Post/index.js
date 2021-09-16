@@ -23,9 +23,9 @@ function Post() {
     const [showCommentModal, setShowCommentModal] = useState(false);
     const [comments, setComments] = useState('');
     const [postUserId, setPostUserId] = useState(0);
-    const [commentId, setCommentId] = useState(0)
+    const [commentId, setCommentId] = useState(0);
     const [clicked, setClicked] = useState(false);
-    const [removeDiv, setRemoveDiv] = useState({ display: 'none' })
+    const [removeDiv, setRemoveDiv] = useState({ display: 'none' });
 
 
     const [postsId, setPostsId] = useState(0);
@@ -64,12 +64,6 @@ function Post() {
         await dispatch(createComment(payload))
     }
 
-    // const handleDelete =  async e => {
-    //      setCommentId(e.target.id)
-    //     await deleteComment(commentId)
-    //     // setCommentId(comm?.id)
-    // }
-
     const show = (post) => {
         setPostsId(postObj?.id);
         setClicked(!clicked)
@@ -93,7 +87,11 @@ function Post() {
         } else {
             setShowCommentModal(false)
         }
-        console.log(commentId)
+    }
+
+    const handleMouseEnter = (e) => {
+        setRemoveDiv({ display: 'block' })
+        setCommentId(e.target.id)
     }
 
 
@@ -105,8 +103,8 @@ function Post() {
                 </div>
                 <div className="comments-container">
                     <div className="comments-header">
-                        {postObj && <img className="bottom-profile-pic" src={postObj?.user.profile_picture}></img>}
-                        <div className="bottom-homepage-username">{postObj?.user.username}</div>
+                        {postObj && <img className="post-profile-pic" src={postObj?.user.profile_picture}></img>}
+                        <div className="post-username">{postObj?.user.username}</div>
                         {postObj?.user_id == user.id &&
                             <button className='post-dropdown' onClick={() => show(post)}><BiDotsHorizontalRounded /></button>
                         }
@@ -133,7 +131,7 @@ function Post() {
                     </div>
                     <div className="comment-scroll">
                         <div>{postObj?.post_comments.map((comm, id) =>
-                            <div className={'indv-comment'} key={comm?.id}>
+                            <div className='indv-comment' key={comm?.id}>
                                 <ul className="comments-list">
                                     <li className="comment-row2">
                                         <img className="post-profile-av" src={comm?.user_pic}></img>
@@ -145,16 +143,17 @@ function Post() {
                                         }
                                         {user.username === comm?.user &&
                                             <div className="post-user-comment">
-                                                <span onMouseEnter={e => { setRemoveDiv({ display: 'block' }) }}
+                                                <span onMouseEnter={e => { handleMouseEnter(e) }}
                                                     onMouseLeave={e => { setRemoveDiv({ display: 'none' }) }} className="post-comment">
                                                     <strong className="post-username">{comm?.user} </strong>
                                                     <span className="post-comm">{comm?.comment}</span>
                                                 </span>
 
-                                                <button onMouseEnter={e => { setRemoveDiv({ display: 'block' }) }} onMouseLeave={e => { setRemoveDiv({ display: 'none' }) }}
+                                                <button onMouseEnter={e => { handleMouseEnter(e) }} onMouseLeave={e => { setRemoveDiv({ display: 'none' }) }}
                                                     className="comment-dot" style={removeDiv} onClick={(e) => {
                                                         handleCommentClick(comm)
-                                                    }}><BiDotsHorizontalRounded />
+                                                    }}>
+                                                        <BiDotsHorizontalRounded />
                                                 </button>
                                                 {showCommentModal && (
                                                     <Modal onClose={() => setShowCommentModal(false)}>

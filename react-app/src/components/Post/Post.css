@@ -23,11 +23,10 @@
 }
 
 .post-container {
-    display: flex;
+
     justify-content: center;
     align-items: center;
-    width: 600px;
-
+    /* width: 600px; */
 }
 
 .postid-pic {
@@ -55,10 +54,6 @@
     border-top: none;
 }
 
-.indv-comment {
-    flex-direction: row;
-    box-sizing: border-box;
-}
 
 .comments-list {
     display: flex;
@@ -131,6 +126,7 @@
     overflow: hidden;
     outline: none;
     margin-right: 6px;
+    margin-bottom: 4px;
 }
 .post-button:hover {
     color: #08A3F1
@@ -170,27 +166,25 @@
     word-wrap: break-word;
     display: inline-block;
     align-items: center;
-    margin-left: 3px;
     font-size: 12px;
-    margin-top: 1px;
     max-width: 220px;
 }
 
 .post-comm {
-    margin-left: 3px;
     word-wrap: break-word;
 
 }
 
 
-.post-user-comment {
+/* .post-user-comment {
     display: flex;
     margin-right: 3px;
     margin-left: 3px;
-}
+} */
 
 .caption-span {
     margin-top: 4px;
+    margin-left: 4px;
 
 }
 
@@ -203,20 +197,19 @@
 
 }
 
+.post-username {
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 10px;
+    font-family: Arial;
+}
 
-/* <div className="post-user-comment">
-
-                        <span onMouseEnter={e => {setRemoveDiv({display: 'block'}) }}
-                    onMouseLeave={e => { setRemoveDiv({display: 'none'}) }} className="post-comment">
-                        <strong className="post-username">{comm?.user} </strong><span className="post-comm">{comm?.comment}
-                        </span>
-                    </span>
-
-                         <button onMouseEnter={e => {setRemoveDiv({display: 'block'})}} onMouseLeave={e => { setRemoveDiv({display: 'none'}) }} className="comment-dot" style={removeDiv} onClick={handleDelete}><BiDotsHorizontalRounded/>
-                         </button>
-                         {showCommentModal && (
-                        <Modal onClose={() => setShowCommentModal(false)}>
-                              <CommentModal comm={commentId}  setShowCommentModal={setShowCommentModal} setClicked={setClicked}/>
-                        </Modal>
-                         )}
-                         </div> */
+.post-profile-pic {
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    margin-left: 15px;
+    margin-top: 12px;
+    margin-right: 5px;
+}
