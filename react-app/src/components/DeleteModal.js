@@ -26,13 +26,11 @@ export default function DeleteModal({ post, setShowDeleteModal, setClicked }) {
     return (
         <>
             <form className="deletemodal-form" type="form" onSubmit={handleDelete}>
-                {/* <img src={posts.picture_url}></img> */}
                 <div className="delete-content">
-                    <span className="delete-message">Are you sure?</span>
-                    <div className="checkmark"><FcCheckmark /></div>
+                    <span  type="submit" className='delete-button' >Delete</span>
+                   <hr style={{'width': '215px'}}/>
                     <div className="delete-buttons">
-                        <button type="submit" className='confirm' > {'   '}confirm</button>
-                        <button onClick={exitModal}>cancel</button>
+                        <button className="cancel-button" onClick={exitModal}>cancel</button>
                     </div>
                 </div>
             </form>

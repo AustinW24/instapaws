@@ -26,8 +26,8 @@ export default function CommentModal({ commentId, setShowCommentModal, setClicke
                      < hr/>
                     <div className="comment-cancel">
                         <button className='cancel' onClick={handleModal}>Cancel</button>
-                </div>
                     </div>
+                 </div>
             </form>
         </>
     )

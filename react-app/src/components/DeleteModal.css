@@ -10,29 +10,21 @@
     border-radius: 4px;
 }
 
-.delete-content {
-    margin-top: 15px;
+.delete-button {
+    color: rgb(231, 20, 20);
+    cursor: pointer;
+}
+.delete-button:hover {
+    font-weight: bold;
 }
 
-/* .delete {
-    margin-top: 15px;
-    text-align: center;
+
+.cancel-button {
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    cursor:pointer;
 }
-
-
-.delete-message {
-    margin-top: 20px;
-} */
-
-/* .post-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-} */
-
-.checkmark {
-    text-align: center;
-    margin-top: 15px;
+.cancel-button:hover {
+    font-weight: bold;
 }

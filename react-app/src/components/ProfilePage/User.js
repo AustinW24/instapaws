@@ -18,7 +18,6 @@ function User() {
 
     const [user, setUser] = useState({});
 
-    console.log(currentUser.biography)
     useEffect(() => {
         if(!userId) {
             return;
@@ -56,13 +55,15 @@ function User() {
         return count;
     }
 
-
+    const handleProfilePicture = () => {
+        return
+    }
 
 
 
     return (
 
-        <body>
+        <div className="body">
             <div className="profile-header">
                 <img className="profile-picture" src={user.profile_picture} alt="profile"></img>
                 <div className="user-Info">
@@ -90,8 +91,8 @@ function User() {
                     )
                 })}
             </div>
-            </body>
-        
+            </div>
+
     );
 }
 export default User;

@@ -1,16 +1,14 @@
-import React, { useState } from "react";
-import {useHistory, Redirect} from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { useHistory } from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import { editPost } from "../store/posts"
 import './EditModal.css'
-import editlogo from '.././edit.png'
 
 
 export default function EditModal({ post, setShowEditModal, setClicked }) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [caption, setCaption] = useState("");
-
+    const [caption, setCaption] = useState(post.caption);
 
     const handleSubmit = async (e) => {
 
@@ -21,7 +19,6 @@ export default function EditModal({ post, setShowEditModal, setClicked }) {
             user_id: post.user_id
         }
         await dispatch(editPost(editedCaption))
-        history.push("/home")
         setShowEditModal(false);
 
     }
@@ -32,18 +29,17 @@ export default function EditModal({ post, setShowEditModal, setClicked }) {
     }
 
 
-
     return (
         <>
             <form className="editmodal-form" type="form" onSubmit={handleSubmit}>
-                <img className="editlogo" src={editlogo}></img>
-                <input
+
+                <textarea
                     placeholder='change caption...'
                     type="text"
                     value={caption}
                     onChange={(e) => setCaption(e.target.value)}
                     className="postmodal-caption"
-                    required
+
                 />
 
                 <div className="edit-buttons">

@@ -9,6 +9,7 @@ const SignUpForm = () => {
     const [errors, setErrors] = useState([]);
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
+    const [profile_picture, setprofile_picture] = useState("https://play-lh.googleusercontent.com/nvtaQLo-tMgQXFwys-hGiK3ibM6vCMpYl8iwEWiTI33sb5QZ6yXUVC4-jPZJ0f8ByBs");
     const [password, setPassword] = useState('');
     const [repeatPassword, setRepeatPassword] = useState('');
     const user = useSelector(state => state.session.user);
@@ -19,7 +20,7 @@ const SignUpForm = () => {
     const onSignUp = async (e) => {
         e.preventDefault();
         if (password === repeatPassword) {
-            const data = await dispatch(signUp(username, email, password));
+            const data = await dispatch(signUp(username, email, password, profile_picture));
             if (data) {
                 console.log(data)
                 setErrors(data)
