@@ -3,7 +3,7 @@
 
 ## Instapaw
 
-Instapaw is a fullstack PERN app that lets the user create, view, and share content dedicated to their beloved pets.
+Instapaw is a fullstack Flask app with user authentication along with CRUD of users' posts, comments, and likes.
 ***
 
 ## Brief look at Instapaw
