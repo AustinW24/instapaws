@@ -9,7 +9,7 @@ Instapaw is a fullstack Flask app with user authentication along with CRUD of us
 ## Brief look at Instapaw
 
 Users are able to upload images with a made caption, and set it in the feed/home page of their account for other users
-to view and comment on.
+to view, comment, and like.
 ***
 ![image](https://user-images.githubusercontent.com/67086515/131862103-152784b7-f653-4913-b4f6-71ceb0ec3d90.png)
 ***
@@ -19,7 +19,7 @@ to view and comment on.
 ### Application Architecture
 
 As mentioned, Instapaw is a fullstack React / Flask application. Most of the logic occurs within the react-redux store and it's 
-interactions with your UI as a function of your state, and updates this and the database in response to actions.
+interactions with your UI as a function of your state, and updates this and the database in response to the users actions.
 
 The backend serves the frontend, responds to frontend requests, acts as an intermediary to serve the apps data to the frontend, 
 and fetches it from the Postgresql database.
