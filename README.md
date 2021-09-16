@@ -48,7 +48,7 @@ data and share between components so you dont have to keep track of multiple sta
 
 ### Backend Overview
 
-RappaMappa uses a Flask server with Postgresql as the database. Much like the frontend, the backend of Instapaw is fairly simple, with the server sending
+Instapaw uses a Flask server with Postgresql as the database. Much like the frontend, the backend of Instapaw is fairly simple, with the server sending
 data to the front end for the client, receiving requests, and sending it back to the frontend. Below are the backend technologies used wiwith an overview
 of how they all are utilized.
 
