@@ -64,8 +64,9 @@ function User() {
     return (
 
         <div className="body">
+            <div className="profile-banner">
             <div className="profile-header">
-                <img className="profile-picture" src={user.profile_picture} alt="profile"></img>
+                <div className="profile-picture" style={{ backgroundImage: `url(${user.profile_picture})` }}></div>
                 <div className="user-Info">
                     <div style={{"display": "flex"}}>
                     <h1 className="profile-username">{user.username}</h1>
@@ -80,13 +81,14 @@ function User() {
                     <strong>{numOfPosts(posts)}</strong>{"  "}posts</div>
                     <span className="bio">{user.biography}</span></div>
             </div>
-            <hr className="hr-tag" style={{ 'border': '1px solid lightgray', width: '62%', 'margin-bottom': '60px'}}/>
+            </div>
+            <hr className="hr-tag" style={{ 'border': '1px solid lightgray', width: '840px', 'margin-bottom': '60px'}}/>
             <div className="profile-body">
                 {posts?.reverse().map((post, idx) => {
 
                     return (post?.user.id == +userId.id) && (
                         <div className="picture-block" key={idx}>
-                           <Link to={`/posts/${post.id}`}><img alt="pictures of dogs and cats" className="profile-images" src={post.picture_url}></img></Link>
+                           <Link to={`/posts/${post.id}`}><div className="profile-images" style={{ backgroundImage: `url(${post?.picture_url})` }}></div></Link>
                         </div>
                     )
                 })}

@@ -3,7 +3,7 @@
     height: 100vw;
 }
 
-.post-comments {
+.container {
     display: flex;
     flex-wrap: wrap;
     width: 620px;
@@ -22,16 +22,13 @@
     height: 433px;
 }
 
-.post-container {
-
-    justify-content: center;
-    align-items: center;
-    /* width: 600px; */
-}
 
 .postid-pic {
-    width: 100%;
+    background-size: cover;
+    background-position: center;
     height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
 }
 
 .comments-container {

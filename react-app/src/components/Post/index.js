@@ -97,9 +97,9 @@ function Post() {
 
     return (
         <div className="body" onClick={handleClicked}>
-            <div className="post-comments">
+            <div className="container">
                 <div className="post-container">
-                    {postObj && <img className="postid-pic" src={postObj?.picture_url}></img>}
+                    {postObj && <div className="postid-pic" style={{ backgroundImage: `url(${postObj?.picture_url})` }}></div>}
                 </div>
                 <div className="comments-container">
                     <div className="comments-header">
