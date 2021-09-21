@@ -32,7 +32,6 @@ function EditProfileModal({setShowProfileModal, currentUser}) {
         } else if (biography.length < 1) {
             setBiography(currentUser.biography)
         }
-
     }
 
 
@@ -45,8 +44,7 @@ function EditProfileModal({setShowProfileModal, currentUser}) {
                     ))}
                 </div>
                 <div className='post-image'>
-                    <img  className="upload-logo" src={uploadlogo}></img>
-                <label className="profilephoto-label" >Profile Photo</label>
+                    <img  className="users-profile-photo" src={currentUser.profile_picture}></img>
                     <input
                         placeholder='Profile Photo'
                         type="text"
@@ -56,20 +54,21 @@ function EditProfileModal({setShowProfileModal, currentUser}) {
                         required
                     />
 
-                <label className="bio-label" >Bio</label>
-                    <input
+
+                    <textarea
                         placeholder='Bio'
                         type="text"
                         value={biography}
                         onChange={(e) => setBiography(e.target.value)}
                         required
+                        className="bio-input"
                         />
 
                         </div>
-                <div className="post-buttons">
+                <div className="editprofile-buttons" style={{display: 'flex', gap: '10px'}}>
                     {profile_picture.value < 10 ? setProfilePic(currentUser.profile_picture) : null}
-                    <button onClick={handleEmptyInput} type="submit" className='submit' >{'   '}Submit</button>
-                    <button onClick={() => setShowProfileModal(false)}>Cancel</button>
+                    <button onClick={handleEmptyInput} type="submit" className='edit-submit' style={{backgroundColor: '#fff', 'border': '1px solid black', 'border-radius': '0.2rem', 'padding': '2px'}}>{'   '}Submit</button>
+                    <button onClick={() => setShowProfileModal(false)} className='edit-cancel' style={{backgroundColor: '#fff', 'border': '1px solid black', 'border-radius': '0.2rem', 'padding': '2px'}}>Cancel</button>
                 </div>
             </form>
         </>

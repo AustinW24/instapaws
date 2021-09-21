@@ -2,26 +2,24 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom"
-import { getAllPosts } from '../../store/posts';
+import { getAllPosts, likePost } from '../../store/posts';
+import { getAllUsers} from '../../store/users';
 import { createComment, getComments } from '../../store/comments';
 import EditModal from '../EditModal.js';
 import DeleteModal from '../DeleteModal.js';
 import CommentModal from '../CommentModal.js';
 import Modal from '../../context/Modal';
-import Likes from '../Likes'
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import 'font-awesome/css/font-awesome.min.css';
-
 import './HomePage.css';
+
 
 export default function HomePage() {
     const history = useHistory();
     const dispatch = useDispatch();
     const posts = useSelector((state) => state.posts?.posts);
     const user = useSelector(state => state.session.user);
-    const comment = useSelector(state => state.comments);
     const [clicked, setClicked] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -36,6 +34,8 @@ export default function HomePage() {
 
 
 
+    // console.log(users, "useee")
+
     useEffect(() => {
         if (postsId) {
             dispatch(getComments(postsId))
@@ -44,9 +44,11 @@ export default function HomePage() {
 
     useEffect(() => {
         if (!posts) {
-            dispatch((getAllPosts()))
+            dispatch(getAllPosts())
+        } else {
+            dispatch(getAllPosts())
         }
-    }, [dispatch])
+    }, [dispatch, heartColor])
 
 
     const handleNewSubmit = async e => {
@@ -60,18 +62,6 @@ export default function HomePage() {
         history.push("/home")
     }
 
-
-    const postDetails = (pId, uId) => {
-        setPostsId(pId)
-        setPostUserId(uId)
-    }
-
-
-    const show = (post) => {
-        setPostsId(post.id);
-        setClicked(!clicked)
-    }
-
     const handleCommentClick = (comment) => {
         setCommentId(comment.id);
         if (showCommentModal === false) {
@@ -81,7 +71,19 @@ export default function HomePage() {
         }
     }
 
-    const changeColor = (post) => {
+
+    const postDetails = (pId, uId) => {
+        setPostsId(pId)
+        setPostUserId(uId)
+    }
+    const show = (post) => {
+        setPostsId(post.id);
+        setClicked(!clicked)
+    }
+
+
+    const postLikes = async (post) => {
+        await dispatch(likePost(post))
         setHeartId(post.id)
         if (heartColor === 'transparent') {
             setHeartColor('red')
@@ -134,9 +136,14 @@ export default function HomePage() {
 
                                 <div className="post-footer">
                                     <div className="post-footer-head">
-                                        <button onClick={() => changeColor(post)} className="homepage-heart-btn" style={{ 'backgroundColor': 'transparent', width: '35px', 'marginLeft': '8px', 'border': 'none', 'padding': '0px' }}>
-                                            <FontAwesomeIcon style={{ 'color': heartId === post.id ? heartColor : null }} className="homepage-heart" icon={faHeart}>
-                                            </FontAwesomeIcon>
+                                        <button onClick={() => postLikes(post)} className="homepage-heart-btn" style={{ 'backgroundColor': 'transparent', width: '20px', 'marginLeft': '14px', 'border': 'none', 'padding': '0px' }}>
+                                            {post?.postLikes.includes(user.id) ? (
+                                                <FontAwesomeIcon style={{ 'color': 'red' }} className="homepage-heart" icon={faHeart}>
+                                                </FontAwesomeIcon>
+                                            ) : (
+                                                <FontAwesomeIcon style={{ 'color': 'transparent' }} className="homepage-heart" icon={faHeart}>
+                                                </FontAwesomeIcon>
+                                            )}
                                         </button>
                                         <div>
 

@@ -1,25 +1,34 @@
 body {
     background-color: #FAFAFA;
+    margin: 0px
+}
+
+.profile-banner {
+    width: 850px;
+    margin: 0 auto;
+    padding-left: 50px;
+    padding-right: 50px;
+
 }
 
 .profile-header {
     position: relative;
     margin-top: 80px;
     display: flex;
+    width: 700px;
     margin-bottom: 70px;
-    justify-content: center;
-    /* margin-right: 650px; */
-    margin-left: 25%;
-    margin-right: 75%;
+    align-items: center;
+
 }
 
+
 .profile-username {
-    font-size: 40px;
+    font-size: 30px;
     margin-top: 0px;
+    margin-bottom: 12px;
     font-weight: 300;
     color: rgb(68, 68, 68);
-    margin-left: 70px;
-    height: 40px;
+
 
 }
 
@@ -30,14 +39,18 @@ body {
     min-height: 180px;
     max-height: 200px;
     border-radius: 50%;
-
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-right: 65px;
 }
 
+
 .user-details {
-    margin-left: 70px;
     vertical-align: top;
     margin-bottom: 20px;
 }
+
 
 .profile-body {
     display: grid;
@@ -45,13 +58,19 @@ body {
     row-gap: 1em;
     place-items: center;
     margin-top: 100px;
-    width: 70%;
+    width: 850px;
     margin: 0 auto;
 }
 
+
 .profile-images {
+
     width: 265px;
-    height: 260px;
+    height: 265px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
 
 }
 
@@ -61,7 +80,8 @@ body {
 }
 
 .bio {
-    margin-left: 70px;
+    margin: 0 auto;
+    width: 100px;
 }
 
 .edit-profile-button {
