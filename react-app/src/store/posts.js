@@ -5,7 +5,7 @@ const GET_POST = 'posts/GET_POST'
 // const GET_ALL_POSTS = 'posts/GET_ALL_POSTS'
 const REMOVE_POST = 'posts/REMOVE_POST'
 const EDIT_POST = 'posts/EDIT_POST'
-// const LIKE_POST = 'posts/LIKE_POST'
+const LIKE_POST = 'posts/LIKE_POST'
 const CREATE_POST = 'posts/CREATE_POST'
 
 const setPosts = (posts) => ({
@@ -33,23 +33,13 @@ const actionCreatePost = (post) => ({
     payload: post
 })
 
-// const actionLikePost = (post) => ({
-//     type: LIKE_POST,
-//     post,
-// });
+const actionLikePost = (post) => ({
+    type: LIKE_POST,
+    post,
+});
 
 
 
-
-
-// export const getPosts = () => async dispatch => {
-//     const req = await fetch('/api/posts');
-//     if (req.ok) {
-//         const posts = await req.json();
-//         dispatch(actionGetPosts(posts));
-//     }
-//     return req;
-// }
 
 export const getAllPosts = () => {
     return async (dispatch) => {
@@ -142,21 +132,21 @@ export const createPost = (picture_url, caption) => async dispatch => {
 };
 
 
-// export const likePost = (post) => async dispatch => {
-//     const { id } = post;
+export const likePost = (post) => async dispatch => {
+    const { id } = post;
 
-//     let res = await fetch(`/api/posts/${id}/like`, {
-//         method: 'PUT',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify(post)
-//     });
+    let res = await fetch(`/api/posts/${id}/like`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(post)
+    });
 
-//     if (res.ok) {
-//         const response = await res.json();
-//         dispatch(actionLikePost(res))
-//         return response
-//     };
-// };
+    if (res.ok) {
+        const response = await res.json();
+        dispatch(actionLikePost(res))
+        return response
+    };
+};
 
 
 
@@ -170,7 +160,7 @@ export default function posts(state = initialState, action) {
         }
         case GET_POST: {
 
-            return { ...state, ... action.payload };
+            return { ...state, ...action.payload };
         }
         // case GET_ALL_POSTS:
 
@@ -191,6 +181,10 @@ export default function posts(state = initialState, action) {
             const removedState = { ...state }
             delete removedState[action.id]
             return removedState
+        }
+        case LIKE_POST: {
+            const newState = { ...state, [action.post.id]: action.post };
+            return newState;
         }
         default:
             return state

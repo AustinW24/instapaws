@@ -1,14 +1,16 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
-import { getPost } from '../../store/posts'
-import { getComments, deleteComment, createComment } from '../../store/comments'
+import { getPost, likePost } from '../../store/posts'
 import { getAllUsers } from '../../store/users'
+import { createComment } from '../../store/comments'
 import CommentModal from '../CommentModal.js'
 import EditModal from '../EditModal.js'
 import DeleteModal from '../DeleteModal.js'
 import Modal from '../../context/Modal'
 import { BiDotsHorizontalRounded } from "react-icons/bi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import './Post.css'
 
 
@@ -17,7 +19,6 @@ function Post() {
     const { id } = useParams()
     const post = useSelector((state) => state.posts);
     const user = useSelector(state => state.session.user);
-
     const [showEditModal, setShowEditModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [showCommentModal, setShowCommentModal] = useState(false);
@@ -26,8 +27,8 @@ function Post() {
     const [commentId, setCommentId] = useState(0);
     const [clicked, setClicked] = useState(false);
     const [removeDiv, setRemoveDiv] = useState({ display: 'none' });
-
-
+    const [heartColor, setHeartColor] = useState(('transparent'));
+    const [heartId, setHeartId] = useState(0);
     const [postsId, setPostsId] = useState(0);
     const dispatch = useDispatch();
     const [postObj, setPostObj] = useState(null);
@@ -37,18 +38,12 @@ function Post() {
             const newPost = post[id];
             setPostObj(newPost);
         }
-    }, [post, id]);
+    }, [post, id, postsId, postObj?.post_comments]);
 
-
-
-
-    useEffect(() => {
-        dispatch(getAllUsers())
-    }, [dispatch])
 
     useEffect(() => {
         dispatch(getPost(id))
-    }, [dispatch, comments])
+    }, [comments, heartColor])
 
 
 
@@ -74,6 +69,17 @@ function Post() {
         setPostUserId(uId)
     }
 
+
+    const postLikes = async (post) => {
+        await dispatch(likePost(postObj))
+        setHeartId(post.id)
+        if (heartColor === 'transparent') {
+            setHeartColor('red')
+        } else {
+            setHeartColor('transparent')
+        }
+    }
+
     const handleClicked = () => {
         if (clicked) {
             setClicked(false)
@@ -91,10 +97,9 @@ function Post() {
 
     const handleMouseEnter = (e) => {
         setRemoveDiv({ display: 'block' })
-        setCommentId(e.target.id)
     }
 
-
+    console.log('POST LIKES', postObj?.postLikes)
     return (
         <div className="body" onClick={handleClicked}>
             <div className="container">
@@ -127,7 +132,9 @@ function Post() {
                         }
                     </div>
 
-                    <div className="user-caption"><img className="bottom-profile-pic" src={postObj?.user.profile_picture}></img><span className="caption-span">{postObj?.caption}</span>
+                    <div className="user-caption"><img className="bottom-profile-pic" src={postObj?.user.profile_picture}></img>
+
+                    <span className="caption-span">{postObj?.user.username}{"      "}{postObj?.caption}</span>
                     </div>
                     <div className="comment-scroll">
                         <div>{postObj?.post_comments.map((comm, id) =>
@@ -153,7 +160,7 @@ function Post() {
                                                     className="comment-dot" style={removeDiv} onClick={(e) => {
                                                         handleCommentClick(comm)
                                                     }}>
-                                                        <BiDotsHorizontalRounded />
+                                                    <BiDotsHorizontalRounded />
                                                 </button>
                                                 {showCommentModal && (
                                                     <Modal onClose={() => setShowCommentModal(false)}>
@@ -166,11 +173,28 @@ function Post() {
                                 </ul>
                             </div>)}
                         </div>
+                            <div className="icon-bar">
+                            <button onClick={() => postLikes(postObj)} className="post-heart-btn" style={{ 'backgroundColor': 'transparent', width: '20px', 'marginLeft': '8px', 'border': 'none', 'padding': '0px' }}>
+                                {postObj?.postLikes.includes(user.id) ? (
+                                <FontAwesomeIcon style={{ 'color': 'red' }} className="post-heart" icon={faHeart}>
+                                </FontAwesomeIcon>
+                                ) : (
+                                    <FontAwesomeIcon style={{ 'color': 'transparent' }} className="post-heart" icon={faHeart}>
+                                </FontAwesomeIcon>
+                                )}
+                            </button>
+                             <div className="numOfLikes">
+                            {postObj?.postLikes.length < 2 &&
+                                <span>{postObj?.postLikes.length} likes</span>
+                            }
+                            </div>
+                        </div>
 
                         <form className='comment-form' onSubmit={handleNewSubmit}>
                             <textarea className="text-box" placeholder="Add a comment..." value={comments} onChange={e => setComments(e.target.value)}></textarea>
                             <button className="post-button" onClick={() => postDetails(postObj?.id, postObj?.user.id)} type="submit">Post</button>
                         </form>
+
                     </div>
                 </div>
             </div >

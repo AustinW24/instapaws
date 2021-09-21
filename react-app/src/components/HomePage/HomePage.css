@@ -32,7 +32,7 @@
 .indv-post {
     padding: 0;
 	border: 1px solid lightgray;
-	height: 690px;
+	height: 695px;
 	width: 520px;
     position: relative;
     margin-top: 30px;
@@ -87,6 +87,11 @@
 	cursor: pointer;
 }
 
+.post-dropdown + .dot-dropdown {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .dot-dropdown {
 	position: absolute;
 	background-color: #ffffff;
@@ -96,13 +101,16 @@
 	padding: 10px;
 	margin-top: 35px;
 	width: 60px;
-	height: 50px;
+	height: 55px;
 	border-radius: 3px;
 	z-index: 100;
 	justify-content: center;
 	align-items: center;
-	border: 1.5px solid rgb(131, 132, 133);
+	border-radius: 0 2px 5px 0 rgba(0, 0, 0, .1);
 	text-align: center;
+    transform: translateY(-10px);
+    transition: opacity 160ms ease-in-out, transform 160ms ease-in-out;
+
 }
 
 edit-button delete-button {
@@ -218,7 +226,7 @@ edit-button:hover delete-button:hover {
 
 .text-box-home {
      border: none;
-     height: 25px;
+     height: 30px;
      background-color: transparent;
      outline: none;
      width: 100%;
@@ -234,6 +242,7 @@ edit-button:hover delete-button:hover {
 }
 
 .post-footer-head {
+    margin-top: 4px;
     display: flex;
     justify-items: center;
     flex-direction: column;
@@ -267,9 +276,10 @@ edit-button:hover delete-button:hover {
     overflow: scroll;
     max-height: 30px;
 }
-.homepage-heart-bttn {
+/* .homepage-heart-bttn {
     cursor: pointer;
-}
+
+} */
 
 .homepage-heart {
     cursor: pointer;
@@ -277,7 +287,9 @@ edit-button:hover delete-button:hover {
     stroke: black;
     stroke-width: 40;
     font-size: 22px;
-    height: 20px;
+    height: 22px;
     margin-top: 5px;
     margin-bottom: 5px;
+    border: 1.5px solid rgba(241, 241, 241, 0.2);
+
 }

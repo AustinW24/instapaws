@@ -3,8 +3,6 @@ from ..models.post import Post
 from ..forms.post_form import PostForm
 from ..forms.edit_form import EditForm
 from ..models.db import db
-import json
-# from app.forms import PostForm, CommentForm
 from datetime import datetime
 from flask_login import login_required, current_user
 
@@ -18,26 +16,15 @@ def get_all_posts():
     return {"posts": [post.to_dict() for post in posts]}
 
 
-    # return {"posts": {post.id: post.to_dict() for post in posts}}
-    # return "HELLO WORLDDDDDDDDD"
-
-
 @post_routes.route('/<id>')
 @login_required
 def postOne(id):
-  post = Post.query.get(id)
-  print("@@@@@@@@@@@@@@@@@")
+    post = Post.query.get(id)
+    print("@@@@@@@@@@@@@@@@@")
 
-  print(post)
-  return {post.id: post.to_dict() }
+    print(post)
+    return {post.id: post.to_dict()}
 
-
-
-# @post_routes.route('/all')
-# def get_posts():
-#     posts = Post.query.all()
-#     print('THE POSTS--------------', posts)
-#     return {post.id: post.to_dict() for post in posts}
 
 @post_routes.route('/', methods=['POST'])
 @login_required
@@ -64,7 +51,6 @@ def createPost():
     return {'posts': [new_post.to_dict()]}
 
 
-
 @post_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def editPost(id):
@@ -89,3 +75,19 @@ def deletePost(id):
     db.session.delete(post)
     db.session.commit()
     return jsonify("DELETE SUCESSFUL")
+
+
+@post_routes.route('/<int:id>/like', methods=['PUT'])
+@login_required
+def likePost(id):
+    user = current_user
+    post = Post.query.get(id)
+
+    allUsersId = [user.id for user in post.postLikes]
+
+    if user.id in allUsersId:
+        post.postLikes.remove(user)
+    else:
+        post.postLikes.append(user)
+    db.session.commit()
+    return post.to_dict()

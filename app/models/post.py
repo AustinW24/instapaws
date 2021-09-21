@@ -19,6 +19,7 @@ class Post(db.Model):
     users = db.relationship("User", back_populates="posts")
     comments = db.relationship("Comment", back_populates="posts")
     postLikes = db.relationship("User", secondary=likes, back_populates="userLikes")
+
     def to_dict(self):
         user = User.query.filter(User.id == self.user_id).first()
 
@@ -30,14 +31,14 @@ class Post(db.Model):
             "timestamp": self.timestamp,
             "user": user.to_dict(),
             "post_comments": [comment.to_dict() for comment in self.comments],
-            "post_likes": [user.id for user in self.postLikes],
+            "postLikes": [user.id for user in self.postLikes],
             "likes_count": len(self.postLikes),
             "comments_count": len(self.comments)
         }
 
     def to_dict_post_stats(self):
         return {
-            "post_likes": self.postLikes,
+            "postLikes": self.postLikes,
             "likes_count": len(self.postLikes),
             "comments": self.comments,
             "comments_count": len(self.comments)
