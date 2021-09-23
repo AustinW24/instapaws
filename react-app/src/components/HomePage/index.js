@@ -9,8 +9,8 @@ import DeleteModal from '../DeleteModal.js';
 import CommentModal from '../CommentModal.js';
 import Modal from '../../context/Modal';
 import { BiDotsHorizontalRounded } from "react-icons/bi";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import './HomePage.css';
 
 
@@ -131,13 +131,13 @@ export default function HomePage() {
                                 <div className="post-footer" >
                                     <div className="post-footer-head">
                                         <button onClick={() => postLikes(post)} className="homepage-heart-btn" style={{ 'backgroundColor': 'transparent', width: '20px', 'marginLeft': '14px', 'border': 'none', 'padding': '0px' }}>
-                                            {/* {post?.postLikes.includes(user.id) ? (
+                                            {post?.postLikes.includes(user.id) ? (
                                                 <FontAwesomeIcon style={{ 'color': 'red' }} className="homepage-heart" icon={faHeart}>
                                                 </FontAwesomeIcon>
                                             ) : (
                                                 <FontAwesomeIcon style={{ 'color': 'transparent' }} className="homepage-heart" icon={faHeart}>
                                                 </FontAwesomeIcon>
-                                            )} */}
+                                            )}
                                         </button>
                                         <div className="home-likes-span">
                                             {post?.postLikes.length < 2 && post?.postLikes.length > 0 &&
