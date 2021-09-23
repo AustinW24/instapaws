@@ -1,5 +1,5 @@
 const GET_USERS = "users/GET_USERS";
-const SET_USERS = "users/SET_USER"
+const SET_USER = "users/SET_USER"
 
 
 
@@ -8,11 +8,10 @@ const getUsers = (users) => ({
     payload: users,
   });
 
-  const setUser = (user) => ({
-      type: SET_USERS,
-      payload: user,
-  })
-
+const setUsers = (users) => ({
+    type: SET_USER,
+    payload: users,
+  });
 
 
   export const getAllUsers = () => async (dispatch) => {
@@ -26,13 +25,34 @@ const getUsers = (users) => ({
   };
 
   export const getAUser = (id) => async (dispatch) => {
+      console.log("inside thunk for getuser@@@@")
     const response = await fetch(`api/users/${id}/`);
 
     if (response.ok) {
-      const { users } = await response.json();
-      dispatch(getUsers(users));
+      console.log("inside thunk AFTER getuser@@@@")
+
+      const { user } = await response.json();
+      dispatch(getUsers(user));
     }
   };
+
+
+//   export const userSearch = ({username}) => async dispatch => {
+//       const res = await fetch('api/users/search', {
+//           method: "POST",
+//           headers: {
+//               "Content-Type": "application/json"
+//           },
+//           body: JSON.stringify({
+//               username
+//             })
+//       })
+//       if (res.ok) {
+//         const users = await res.json();
+//         dispatch(getUsers(users))
+//       }
+//   }
+
 
   const initialState = {};
 
@@ -44,7 +64,7 @@ const getUsers = (users) => ({
         return { ...state, ...action.payload };
       }
 
-      case SET_USERS: {
+      case SET_USER: {
 
       return { user: action.payload }
       }

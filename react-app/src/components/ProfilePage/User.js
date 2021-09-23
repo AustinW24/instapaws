@@ -79,11 +79,11 @@ function User() {
                         <span className="bio">{user.biography}</span></div>
                 </div>
             </div>
-            <hr className="hr-tag" style={{ 'border': '1px solid lightgray', width: '840px', 'margin-bottom': '60px' }} />
+            <hr className="hr-tag" style={{ 'border': '1px solid lightgray', width: '840px', 'marginBottom': '60px' }} />
             <div className="profile-body">
                 {posts?.reverse().map((post, idx) => {
 
-                    return (post?.user.id == +userId.id) && (
+                    return (post?.user.id === +userId.id) && (
                         <div className="picture-block" key={idx}>
                             <Link to={`/posts/${post.id}`}><div className="profile-images" style={{ backgroundImage: `url(${post?.picture_url})` }}></div></Link>
                         </div>

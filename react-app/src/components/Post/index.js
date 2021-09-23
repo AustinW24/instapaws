@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
 import { getPost, likePost } from '../../store/posts'
-import { getAllUsers } from '../../store/users'
 import { createComment } from '../../store/comments'
 import CommentModal from '../CommentModal.js'
 import EditModal from '../EditModal.js'
@@ -43,7 +42,7 @@ function Post() {
 
     useEffect(() => {
         dispatch(getPost(id))
-    }, [comments, heartColor])
+    }, [dispatch,  comments, heartColor])
 
 
 
@@ -108,9 +107,9 @@ function Post() {
                 </div>
                 <div className="comments-container">
                     <div className="comments-header">
-                        {postObj && <img className="post-profile-pic" src={postObj?.user.profile_picture}></img>}
+                        {postObj && <img className="post-profile-pic" src={postObj?.user.profile_picture} alt="cool person"></img>}
                         <div className="post-username">{postObj?.user.username}</div>
-                        {postObj?.user_id == user.id &&
+                        {postObj?.user_id === user.id &&
                             <button className='post-dropdown' onClick={() => show(post)}><BiDotsHorizontalRounded /></button>
                         }
                         {clicked &&
@@ -132,7 +131,7 @@ function Post() {
                         }
                     </div>
 
-                    <div className="user-caption"><img className="bottom-profile-pic" src={postObj?.user.profile_picture}></img>
+                    <div className="user-caption"><img className="bottom-profile-pic" src={postObj?.user.profile_picture} alt="cool person"></img>
 
                     <span className="caption-span">{postObj?.user.username}{"      "}{postObj?.caption}</span>
                     </div>
@@ -141,7 +140,7 @@ function Post() {
                             <div className='indv-comment' key={comm?.id}>
                                 <ul className="comments-list">
                                     <li className="comment-row2">
-                                        <img className="post-profile-av" src={comm?.user_pic}></img>
+                                        <img className="post-profile-av" src={comm?.user_pic} alt="avatar"></img>
                                         {user.username !== comm?.user &&
                                             <div className="post-comment">
                                                 <strong className="post-username">{comm?.user}</strong>
@@ -183,9 +182,9 @@ function Post() {
                                 </FontAwesomeIcon>
                                 )}
                             </button>
-                             <div className="numOfLikes">
-                            {postObj?.postLikes.length < 2 &&
-                                <span>{postObj?.postLikes.length} likes</span>
+                             <div className="post-likes-span">
+                            {postObj?.postLikes.length < 2 && postObj?.postLikes.length > 0 &&
+                                <span>{postObj?.postLikes.length} liked</span>
                             }
                             </div>
                         </div>

@@ -1,7 +1,7 @@
 .profile-modal {
     position: absolute;
     top:0;
-    left:35%;
+    left:65%;
     border: 1.5px solid lightgray;
     background-color: #fff;
     display: flex;
@@ -29,6 +29,7 @@
     width: 15rem;
     height: 10rem;
     padding-top: 1.4rem;
+    border-radius: 4px;
 }
 
 .profilepic-input {

@@ -6,8 +6,8 @@ from app.models import User
 user_routes = Blueprint('users', __name__)
 
 
-# @login_required
 @user_routes.route('/')
+@login_required
 def users():
     users = User.query.all()
     return {"users": {user.id: user.to_dict() for user in users}}
@@ -20,6 +20,7 @@ def user(id):
     user = User.query.get(id)
     return user.to_dict()
 
+
 @user_routes.route('/<int:id>', methods=['POST'])
 @login_required
 def update(id):
@@ -31,3 +32,12 @@ def update(id):
     db.session.commit()
 
     return user.to_dict()
+
+
+# @user_routes.route('/search', methods=['POST'])
+# def userSearch():
+#     data = request.get_json()
+#     username = data['username']
+#     print("INSIDE DATA FOR SEARCHHHH")
+#     users = User.query.filter(User.username.ilike(f'%{username}%'))
+#     print('USERSSSS!!!', [user.to_dict()['username'] for user in users])

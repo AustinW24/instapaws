@@ -117,7 +117,7 @@ export const update = (user_id, profile_picture, biography) => async (dispatch) 
         biography
     }),
   });
-  console.log("AFTER FETCH IN UPDATE")
+
   if (response.ok) {
     const data = await response.json();
     dispatch(setUser(data))
