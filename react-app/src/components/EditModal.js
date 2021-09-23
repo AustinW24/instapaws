@@ -29,7 +29,7 @@ export default function EditModal({ post, setShowEditModal, setClicked }) {
 
     return (
         <>
-            <form className="editmodal-form" type="form" onSubmit={handleSubmit}>
+            <form className="edit-form" type="form" onSubmit={handleSubmit}>
 
                 <textarea
                     placeholder='change caption...'

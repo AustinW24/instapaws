@@ -4,20 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import './Search.css'
 
 export default function Search() {
-    const dispatch = useDispatch();
+
     const [name, setName] = useState("");
     const [clicked, setClicked] = useState(false)
 
     const posts = useSelector((state) => state.posts?.posts);
-    // console.log(posts, "POSTS OR USERS")
-
-    // function users() {
-    //     posts?.map((p) => {
-    //         users.push(p.user.username)
-    //     })
-    //     return users
-    // }
-
 
 
     // useEffect(() => {
@@ -41,11 +32,13 @@ export default function Search() {
                 {clicked &&
                     <div className="search-results">
                         <div className="search-list">
-                        {posts.map((post, id) => {
+                        {posts?.map((post, id) => {
                             let unique = [];
                             return (
                                 post?.user.username.toLowerCase().includes(name) && unique.indexOf(post?.user.username.toLowerCase()) < 0 ?
-                                <span key={id}>{post?.user.username}</span> : null
+                                <>
+                                <div><img className="searchbar-photo" src={post?.user.profile_picture}></img></div>
+                                <span key={id}>{post?.user.username}</span></> : null
                                 )
 
                          })}

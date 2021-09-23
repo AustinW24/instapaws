@@ -39,7 +39,7 @@ function EditProfileModal({setShowProfileModal, currentUser}) {
                     ))}
                 </div>
                 <div className='post-image'>
-                    <img  className="users-profile-photo" src={currentUser.profile_picture} alt="cool person"></img>
+                <div className="users-profile-photo" style={{ backgroundImage: `url(${currentUser.profile_picture})` }}></div>
                     <input
                         placeholder='Profile Photo'
                         type="text"

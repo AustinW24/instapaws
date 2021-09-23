@@ -22,12 +22,19 @@
     position: absolute;
     display: flex;
     justify-content: center;
-
 }
 
 .search-list {
     border: 1px solid green;
     width: 14rem;
     flex-direction: column;
+    background-color: white;
+    border-radius: 4px;
+    overflow: scroll;
+    display: flex;
+}
 
+.searchbar-photo {
+    width: 1.5rem;
+    height: 1.5rem;
 }

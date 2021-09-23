@@ -1,7 +1,7 @@
 .deletemodal-form {
 	position: fixed;
-	top: 50%;
-	left: 50%;
+	top: 100%;
+	right: 50%;
 	transform: translate(-50%, -50%);
     width: 350px;
     height: 110px;
