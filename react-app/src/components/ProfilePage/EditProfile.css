@@ -1,13 +1,13 @@
 .profile-modal {
     position: absolute;
-    top:0;
+    top:-6%;
     left:65%;
     border: 1.5px solid lightgray;
     background-color: #fff;
     display: flex;
     align-items: center;
-    height: 18rem;
-    width: 18rem;
+    height: 19rem;
+    width: 17.5rem;
     flex-direction: column;
     border: 1px solid rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
@@ -28,8 +28,11 @@
 .users-profile-photo {
     width: 15rem;
     height: 10rem;
-    padding-top: 1.4rem;
     border-radius: 4px;
+    margin-top: 1.2rem;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .profilepic-input {
@@ -48,6 +51,7 @@
     font-family: 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial;
     cursor: pointer;
     width: 7.2rem;
+    margin-top: 1rem;
 }
 
 .edit-submit:hover, .edit-cancel:hover {

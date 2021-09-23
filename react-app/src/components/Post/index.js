@@ -113,7 +113,6 @@ function Post() {
                             <button className='post-dropdown' onClick={() => show(post)}><BiDotsHorizontalRounded /></button>
                         }
                         {clicked &&
-
                             <div className="dot-dropdown">
                                 <a className="edit-button" onClick={() => setShowEditModal(true)}>edit</a>
                                 {showEditModal && (

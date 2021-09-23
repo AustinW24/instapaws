@@ -1,7 +1,7 @@
-.editmodal-form {
+.edit-form {
 	position: fixed;
-	top: 50%;
-	left: 50%;
+	top: 100%;
+    right: -150%;
 	transform: translate(-50%, -50%);
 	width: 350px;
 	height: 180px;
