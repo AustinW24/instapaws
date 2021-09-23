@@ -8,8 +8,8 @@ import EditModal from '../EditModal.js'
 import DeleteModal from '../DeleteModal.js'
 import Modal from '../../context/Modal'
 import { BiDotsHorizontalRounded } from "react-icons/bi";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import './Post.css'
 
 
@@ -174,13 +174,13 @@ function Post() {
                         </div>
                             <div className="icon-bar">
                             <button onClick={() => postLikes(postObj)} className="post-heart-btn" style={{ 'backgroundColor': 'transparent', width: '20px', 'marginLeft': '8px', 'border': 'none', 'padding': '0px' }}>
-                                {postObj?.postLikes.includes(user.id) ? (
+                                {/* {postObj?.postLikes.includes(user.id) ? (
                                 <FontAwesomeIcon style={{ 'color': 'red' }} className="post-heart" icon={faHeart}>
                                 </FontAwesomeIcon>
                                 ) : (
                                     <FontAwesomeIcon style={{ 'color': 'transparent' }} className="post-heart" icon={faHeart}>
                                 </FontAwesomeIcon>
-                                )}
+                                )} */}
                             </button>
                              <div className="post-likes-span">
                             {postObj?.postLikes.length < 2 && postObj?.postLikes.length > 0 &&
