@@ -1,13 +1,14 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { NavLink, Link, useHistory, useParams } from 'react-router-dom';
+import { NavLink, Link, useParams } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import LoginForm from './auth/LoginForm';
 import Modal from '.././context/Modal'
 import PostModal from './PostModal'
-import {FiPlusSquare} from "react-icons/fi"
-import {AiFillHome} from "react-icons/ai"
+import Search from './Search'
+import { FiPlusSquare } from "react-icons/fi"
+import { AiFillHome } from "react-icons/ai"
 import './NavBar.css'
 import './PostModal.css'
 import logo from '../instapaw.png'
@@ -16,7 +17,6 @@ const NavBar = () => {
     const current_user = useSelector(state => state.session.user);
     const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch();
-    // const username = current_user.username
     const [user, setUser] = useState({});
     const { userId } = useParams();
 
@@ -31,9 +31,6 @@ const NavBar = () => {
         })();
     }, [userId]);
 
-    // if (!user) {
-    //     return null;
-    // }
 
     useEffect(() => {
         setShowModal()
@@ -77,18 +74,19 @@ const NavBar = () => {
                     }
                     {current_user &&
                         <>
-                                <li><a  href="/home" className="home-button"><AiFillHome size={35}/></a></li>
-                                <li>
-                                    <button onClick={() => setShowModal(true)} className="plus-button"><FiPlusSquare  size={35}/></button>
-                                    {showModal && (
-                                        <Modal onClose={() => setShowModal(false)}>
-                                            <PostModal setShowModal={setShowModal} />
-                                        </Modal>
-                                    )}
-                                </li>
-                                <li>
-                                    <LogoutButton  />
-                                </li>
+                            <Search />
+                            <li><a href="/home" className="home-button"><AiFillHome size={35} /></a></li>
+                            <li>
+                                <button onClick={() => setShowModal(true)} className="plus-button"><FiPlusSquare size={35} /></button>
+                                {showModal && (
+                                    <Modal onClose={() => setShowModal(false)}>
+                                        <PostModal setShowModal={setShowModal} />
+                                    </Modal>
+                                )}
+                            </li>
+                            <li>
+                                <LogoutButton />
+                            </li>
 
                         </>
                     }

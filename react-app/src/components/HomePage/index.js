@@ -1,9 +1,8 @@
 
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom"
+// import { useHistory } from "react-router-dom"
 import { getAllPosts, likePost } from '../../store/posts';
-import { getAllUsers} from '../../store/users';
 import { createComment, getComments } from '../../store/comments';
 import EditModal from '../EditModal.js';
 import DeleteModal from '../DeleteModal.js';
@@ -16,7 +15,6 @@ import './HomePage.css';
 
 
 export default function HomePage() {
-    const history = useHistory();
     const dispatch = useDispatch();
     const posts = useSelector((state) => state.posts?.posts);
     const user = useSelector(state => state.session.user);
@@ -28,19 +26,15 @@ export default function HomePage() {
     const [commentId, setCommentId] = useState(0);
     const [postsId, setPostsId] = useState(0);
     const [postUserId, setPostUserId] = useState(0);
-    const [removeDiv, setRemoveDiv] = useState({ display: 'none' })
-    const [heartColor, setHeartColor] = useState(('transparent'))
-    const [heartId, setHeartId] = useState(0)
+    const [removeDiv, setRemoveDiv] = useState({ display: 'none' });
+    const [heartColor, setHeartColor] = useState(('transparent'));
+    const [heartId, setHeartId] = useState(0);
 
-
-
-    // console.log(users, "useee")
 
     useEffect(() => {
-        if (postsId) {
-            dispatch(getComments(postsId))
-        }
-    }, [dispatch])
+        if (!comments)
+            dispatch(getAllPosts())
+    }, [dispatch, comments])
 
     useEffect(() => {
         if (!posts) {
@@ -52,6 +46,7 @@ export default function HomePage() {
 
 
     const handleNewSubmit = async e => {
+        e.preventDefault();
         let payload = {
             comments,
             post_id: Number.parseInt(postsId),
@@ -59,8 +54,8 @@ export default function HomePage() {
         }
         setComments('')
         await dispatch(createComment(payload))
-        history.push("/home")
     }
+
 
     const handleCommentClick = (comment) => {
         setCommentId(comment.id);
@@ -76,6 +71,7 @@ export default function HomePage() {
         setPostsId(pId)
         setPostUserId(uId)
     }
+
     const show = (post) => {
         setPostsId(post.id);
         setClicked(!clicked)
@@ -92,8 +88,6 @@ export default function HomePage() {
         }
     }
 
-
-    console.log("heartId", heartId)
 
     return (
         <>
@@ -134,7 +128,7 @@ export default function HomePage() {
                                 <div className="photo-container"><div className="indv-photo" style={{ backgroundImage: `url(${post.picture_url})` }}></div></div>
 
 
-                                <div className="post-footer">
+                                <div className="post-footer" >
                                     <div className="post-footer-head">
                                         <button onClick={() => postLikes(post)} className="homepage-heart-btn" style={{ 'backgroundColor': 'transparent', width: '20px', 'marginLeft': '14px', 'border': 'none', 'padding': '0px' }}>
                                             {post?.postLikes.includes(user.id) ? (
@@ -145,8 +139,12 @@ export default function HomePage() {
                                                 </FontAwesomeIcon>
                                             )}
                                         </button>
+                                        <div className="home-likes-span">
+                                            {post?.postLikes.length < 2 && post?.postLikes.length > 0 &&
+                                                <span style={{ "font-weight": "bold" }}>{post?.postLikes.length} liked</span>
+                                            }
+                                        </div>
                                         <div>
-
                                             <a href={`/users/${post.user.id}`} className="bottom-homepage-username">{post.user.username}</a>
                                             <span className="post-caption">{post.caption}</span>
                                         </div>
@@ -156,7 +154,7 @@ export default function HomePage() {
                                         {post?.post_comments.length < 2 &&
                                             <div className="comment-row">{post?.post_comments.map((comm, idx) => <div className='home-indv-comment' key={idx}>
                                                 <div className="home-pic-comment">
-                                                    <img className="home-profile-pic" src={comm?.user_pic}></img>
+                                                    <img className="home-profile-pic" src={comm?.user_pic} alt="cool person"></img>
                                                 </div>
                                                 <div className="home-user-comment">
                                                     <a href={`/users/${comm?.user_id}`} className="span-username">{comm.user}</a></div>
@@ -187,7 +185,7 @@ export default function HomePage() {
                                             <div>
                                                 <a href={`/posts/${post?.id}`} className="viewall">view all comments</a>
                                                 <div className="home-indv-comment">
-                                                    <img className="home-post-profile-pic" src={post?.post_comments[post?.post_comments.length - 1].user_pic}></img>
+                                                    <img className="home-post-profile-pic" src={post?.post_comments[post?.post_comments.length - 1].user_pic} alt="list of comments"></img>
                                                     <a href={`/users/${post?.post_comments['0'].user_id}`} className="span-username" ><strong>{post?.post_comments[post?.post_comments.length - 1].user}</strong></a>
                                                     <div className="shown-comment" >{"  "}{post?.post_comments[post?.post_comments.length - 1].comment}</div>
 
@@ -198,7 +196,7 @@ export default function HomePage() {
                                     </div>
                                     <div className="footer-comment">
                                         <form className='home-comment-form' onSubmit={handleNewSubmit}>
-                                            <textarea className="text-box-home" placeholder="Add a comment..." value={comments} onChange={e => setComments(e.target.value)}></textarea>
+                                            <textarea className="text-box-home" placeholder="Add a comment..." onClick={() => setPostsId(post?.id)} value={postsId === post?.id ? comments : ""} onChange={e => setComments(e.target.value)}></textarea>
                                             <button onClick={() => postDetails(post?.id, post?.user.id)} className="postt-button" type="submit">Post</button>
                                         </form>
                                     </div>

@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { update } from '../../store/session'
 import './EditProfile.css'
-import uploadlogo from "../../upload.png"
 
 
 function EditProfileModal({setShowProfileModal, currentUser}) {
-    const history = useHistory();
     const dispatch = useDispatch();
     const [biography, setBiography] = useState('');
     const [profile_picture, setProfilePic] = useState('');
@@ -21,8 +18,6 @@ function EditProfileModal({setShowProfileModal, currentUser}) {
        if(data ) {
            setErrors(data)
        }
-       console.log(data)
-        // history.push(`/users/${+id}`)
         setShowProfileModal(false);
     }
 
@@ -44,7 +39,7 @@ function EditProfileModal({setShowProfileModal, currentUser}) {
                     ))}
                 </div>
                 <div className='post-image'>
-                    <img  className="users-profile-photo" src={currentUser.profile_picture}></img>
+                    <img  className="users-profile-photo" src={currentUser.profile_picture} alt="cool person"></img>
                     <input
                         placeholder='Profile Photo'
                         type="text"

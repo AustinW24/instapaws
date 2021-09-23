@@ -20,21 +20,16 @@ def get_all_posts():
 @login_required
 def postOne(id):
     post = Post.query.get(id)
-    print("@@@@@@@@@@@@@@@@@")
-
-    print(post)
     return {post.id: post.to_dict()}
 
 
 @post_routes.route('/', methods=['POST'])
 @login_required
 def createPost():
-    # print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
     form = PostForm()
     user = current_user
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    print('before validate', form.data)
     if form.validate_on_submit():
         new_post = Post(
             user_id=user.id,
@@ -47,7 +42,7 @@ def createPost():
 
     db.session.add(new_post)
     db.session.commit()
-    print('inside validation p', new_post.to_dict())
+
     return {'posts': [new_post.to_dict()]}
 
 
@@ -57,7 +52,6 @@ def editPost(id):
     form = EditForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    print('before validate', form.data)
     if form.validate_on_submit():
         post = Post.query.filter(Post.id == id).first()
         data = form.data
@@ -70,7 +64,6 @@ def editPost(id):
 @post_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def deletePost(id):
-    print("DELETE ROUTE ENTERED", id)
     post = Post.query.get(id)
     db.session.delete(post)
     db.session.commit()

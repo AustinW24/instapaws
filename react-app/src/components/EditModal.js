@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from 'react-router-dom'
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { editPost } from "../store/posts"
 import './EditModal.css'
@@ -7,7 +6,6 @@ import './EditModal.css'
 
 export default function EditModal({ post, setShowEditModal, setClicked }) {
     const dispatch = useDispatch();
-    const history = useHistory();
     const [caption, setCaption] = useState(post.caption);
 
     const handleSubmit = async (e) => {

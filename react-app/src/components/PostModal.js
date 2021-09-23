@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { createPost } from "../store/posts"
 import './PostModal.css'
 import uploadlogo from ".././upload.png"
-// import { createPost } from '.././store/posts'
+
 
 function PostModal({setShowModal }) {
     const dispatch = useDispatch();
@@ -28,7 +28,7 @@ function PostModal({setShowModal }) {
                     ))}
                 </div>
                 <div className='post-image'>
-                    <img  className="upload-logo" src={uploadlogo}></img>
+                    <img  className="upload-logo" src={uploadlogo} alt="upload"></img>
                     <input
                         placeholder='caption...'
                         type="text"

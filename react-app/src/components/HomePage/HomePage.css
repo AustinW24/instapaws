@@ -276,10 +276,7 @@ edit-button:hover delete-button:hover {
     overflow: scroll;
     max-height: 30px;
 }
-/* .homepage-heart-bttn {
-    cursor: pointer;
 
-} */
 
 .homepage-heart {
     cursor: pointer;
@@ -291,5 +288,11 @@ edit-button:hover delete-button:hover {
     margin-top: 5px;
     margin-bottom: 5px;
     border: 1.5px solid rgba(241, 241, 241, 0.2);
+}
 
+.home-likes-span {
+    position: absolute;
+    margin-left: 2.5rem;
+    font-size: 13px;
+    margin-top: 8px;
 }
