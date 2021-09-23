@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllPosts } from '../../store/posts'
+import { getAUser } from '../../store/users'
 import EditProfileModal from './EditProfile.js'
 import Modal from '../../context/Modal'
 
@@ -29,11 +30,6 @@ function User() {
         })();
     }, [userId])
 
-    useEffect(() => {
-        if (!posts) {
-            dispatch((getAllPosts()))
-        }
-    }, [dispatch])
 
     useEffect(() => {
         (async () => {
@@ -43,6 +39,14 @@ function User() {
         })();
         setUpdate(false)
     }, [currentUser, userId])
+
+
+    useEffect(() => {
+        if (!posts) {
+            dispatch((getAllPosts()))
+        }
+    }, [dispatch])
+
 
     const numOfPosts = (posts) => {
         let count = 0;
