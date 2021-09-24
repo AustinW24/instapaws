@@ -15,19 +15,18 @@ export default function Search() {
     const allUsers = useSelector((state) => Object.values(state.users));
     useEffect(() => {
         dispatch(getAllUsers());
-    }, [dispatch]);
+    }, [dispatch, name]);
 
 
     const handleInput = (e) => {
-        if (name !== "") {
-            setEyeGlass({ display: 'none' })
-        }
-        setIsOpen(!isOpen)
         setName(e.target.value.toLowerCase())
+        setIsOpen(!isOpen)
         if (e.target.value === "") {
             setClicked(false)
+            setEyeGlass({ display: 'block' })
         } else {
             setClicked(true)
+            setEyeGlass({ display: 'none' })
         }
     }
 

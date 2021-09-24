@@ -83,6 +83,14 @@
     margin-right: 10px;
 }
 
+.dot-edit-button:hover {
+    color: lightgray;
+}
+
+.dot-delete-button:hover {
+    color: blue;
+}
+
 .post-dropdown:hover {
 	cursor: pointer;
 }
@@ -109,6 +117,8 @@
 	border-radius: 0 2px 5px 0 rgba(0, 0, 0, .1);
 	text-align: center;
     transform: translateY(-10px);
+    border: 0.5px solid lightgray;
+    box-shadow: px 1px 1px 1px;
     transition: opacity 160ms ease-in-out, transform 160ms ease-in-out;
 
 }
@@ -118,8 +128,8 @@ edit-button delete-button {
     width: 100%;
 }
 
-edit-button:hover delete-button:hover {
-    filter: brightness(50%);
+edit-button:hover, delete-button:hover {
+    background-color: #fafafa;
 }
 
 .homepage-username {
@@ -185,7 +195,7 @@ edit-button:hover delete-button:hover {
     margin-left: 8px;
     margin-top: 18px;
     font-size: 13px;
-    font-family: "Helvetica Neue", Helvetica
+    font-family: Montserrat, Helvetica
 }
 
 .footer-comment {

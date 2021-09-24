@@ -10,12 +10,39 @@
 	border-radius: 5px;
 }
 
+.postmodal-caption:focus{
+    outline: none;
+}
+
 
 .edit-buttons {
     margin-top: 15px;
 	text-align: center;
     height: 20px;
 
+}
+
+.confirm {
+    border: 1px solid rgb(235, 235, 235);
+    width: 70px;
+}
+
+.confirm:hover {
+    background-color: rgb(163, 232, 255);
+}
+
+.edit-cancel-btn {
+    border: 1px solid rgb(110, 110, 110);
+    cursor: pointer;
+    width: 70px;
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+
+}
+
+.edit-cancel-btn:hover {
+    color: lightgray;
 }
 
 .post-list {
