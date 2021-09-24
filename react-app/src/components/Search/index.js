@@ -1,51 +1,80 @@
-import { useEffect, useState } from "react"
-// import { userSearch } from "../../store/users"
+import { useEffect, useState, useRef } from "react"
+import { getAllUsers } from "../../store/users"
 import { useDispatch, useSelector } from "react-redux";
+import { FiSearch } from 'react-icons/fi'
 import './Search.css'
 
 export default function Search() {
-
+    const dispatch = useDispatch()
     const [name, setName] = useState("");
-    const [clicked, setClicked] = useState(false)
+    const [clicked, setClicked] = useState(false);
+    const [eyeglass, setEyeGlass] = useState({ display: 'block' });
+    const [isOpen, setIsOpen] = useState(false)
 
-    const posts = useSelector((state) => state.posts?.posts);
 
+    const allUsers = useSelector((state) => Object.values(state.users));
+    useEffect(() => {
+        dispatch(getAllUsers());
+    }, [dispatch]);
 
-    // useEffect(() => {
-    //     dispatch(userSearch(name))
-    // }, [dispatch, name])
 
     const handleInput = (e) => {
+        if (name !== "") {
+            setEyeGlass({ display: 'none' })
+        }
+        setIsOpen(!isOpen)
         setName(e.target.value.toLowerCase())
-        if(e.target.value === "") {
+        if (e.target.value === "") {
             setClicked(false)
         } else {
             setClicked(true)
         }
     }
 
+    let searchRef = useRef();
+
+    useEffect(() => {
+        let handler = (event) => {
+            if (!searchRef.current.contains(event.target)) {
+                setIsOpen(false)
+            }
+        }
+        document.addEventListener("mousedown", handler)
+
+        return () => {
+            document.removeEventListener("mousedown", handler)
+        }
+    });
+
+
 
     return (
         <>
             <form className="search-form">
-                <input className="search-bar" type="text" value={name} onChange={e => handleInput(e)} placeholder="Search"></input>
+                <div ref={searchRef} className="search-bar-container">
+                    <input className="search-bar" type="text" value={name} onChange={e => handleInput(e)} placeholder="Search"></input>
+                    <FiSearch style={eyeglass} size={11} className="search-icon" />
+                </div>
+
                 {clicked &&
                     <div className="search-results">
                         <div className="search-list">
-                        {posts?.map((post, id) => {
-                            let unique = [];
-                            return (
-                                post?.user.username.toLowerCase().includes(name) && unique.indexOf(post?.user.username.toLowerCase()) < 0 ?
-                                <>
-                                <div><img className="searchbar-photo" src={post?.user.profile_picture}></img></div>
-                                <span key={id}>{post?.user.username}</span></> : null
+                            {allUsers.map((user, id) => {
+                                return (
+                                    user?.username.toLowerCase().includes(name) ?
+
+                                        <a href={`/users/${user?.id}`} key={id} className="search-row">
+                                            <img className="searchbar-photo" src={user?.profile_picture}></img>
+                                            <span className="search-username">{user?.username}</span>
+                                        </a>
+                                        : null
                                 )
 
-                         })}
+                            })}
                         </div>
                     </div>
-            }
-                </form>
+                }
+            </form>
         </>
     )
 }
