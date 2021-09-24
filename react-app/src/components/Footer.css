@@ -9,7 +9,8 @@
     text-align: center;
     height: 120px;
     bottom: 0;
-    margin-bottom: -60px;
+    margin-bottom: -70px;
+
 }
 
 .footer-content p {
@@ -58,6 +59,7 @@ footer {
     font-family: open sans;
     /* padding-top: 10px; */
     color: #fff;
+    
 }
 
 .footer-bottom {
