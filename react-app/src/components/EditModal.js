@@ -42,7 +42,7 @@ export default function EditModal({ post, setShowEditModal, setClicked }) {
 
                 <div className="edit-buttons">
                     <button type="submit" className='confirm' onChange={(e) => setCaption(e.target.value)}> {'   '}confirm</button>
-                    <button onClick={exitModal}>cancel</button>
+                    <button className="edit-cancel-btn" onClick={exitModal}>cancel</button>
                 </div>
             </form>
         </>
