@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { removePost } from "../store/posts"
@@ -8,9 +8,9 @@ import './DeleteModal.css'
 export default function DeleteModal({ post, setShowDeleteModal, setClicked }) {
     const dispatch = useDispatch();
     const history = useHistory();
+    const [isOpen, setIsOpen] = useState({})
 
-    const handleDelete = async (e) => {
-
+    const handleDelete = async () => {
         await dispatch(removePost(post.id))
         setShowDeleteModal(false);
         history.push("/home")
@@ -21,15 +21,14 @@ export default function DeleteModal({ post, setShowDeleteModal, setClicked }) {
         setClicked(false)
     }
 
-
     return (
         <>
             <form className="deletemodal-form" type="form" onSubmit={handleDelete}>
                 <div className="delete-content">
-                    <span  type="submit" className='delete-button' >Delete</span>
-                   <hr className="hr-delete" style={{'width': '215px'}}/>
+                    <button type="submit" className='delete-button'>Delete</button>
+                    <hr className="hr-delete" style={{ 'width': '215px', 'opacity': '0.4' }} />
                     <div className="delete-buttons">
-                        <button className="cancel-button" onClick={exitModal}>cancel</button>
+                        <button className="cancel-button" onClick={exitModal}>Cancel</button>
                     </div>
                 </div>
             </form>

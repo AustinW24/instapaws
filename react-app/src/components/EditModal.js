@@ -10,7 +10,6 @@ export default function EditModal({ post, setShowEditModal, setClicked }) {
 
     const handleSubmit = async (e) => {
 
-
         const editedCaption = {
             id: post.id,
             caption: caption,
