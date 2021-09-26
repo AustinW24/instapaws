@@ -67,7 +67,7 @@ def deletePost(id):
     post = Post.query.get(id)
     db.session.delete(post)
     db.session.commit()
-    return jsonify("DELETE SUCESSFUL")
+    return jsonify("DELETE SUCCESSFUL")
 
 
 @post_routes.route('/<int:id>/like', methods=['PUT'])

@@ -50,8 +50,7 @@ export const login = (email, password) => async (dispatch) => {
   } else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {
-      console.log(data.errors)
-      data.errors.push("Invalid username or password")
+      data.errors.push("Invalid email or password")
       return data.errors;
     }
   } else {

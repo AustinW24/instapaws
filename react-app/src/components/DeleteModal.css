@@ -1,18 +1,23 @@
 .deletemodal-form {
 	position: fixed;
-	top: 100%;
-	right: 0%;
+	top: 50%;
+	left: 50%;
 	transform: translate(-50%, -50%);
-    width: 350px;
-    height: 110px;
+    width: 14rem;
+    height: 8rem;
     border: 1px solid lightgray;
     background-color: white;
-    border-radius: 4px;
+    border-radius: 14px;
 }
 
 .delete-button {
     color: rgb(231, 20, 20);
     cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    margin-left: 5rem;
+
 }
 .cancel-button:hover {
     font-weight: bold;
@@ -28,8 +33,11 @@
     background-color: transparent;
     font-size: 16px;
     cursor:pointer;
+    margin-left: 5rem;
+
 }
 
-hr {
-    border-top: 1px solid rgba(0, 0, 0, 0.02);
+hr-delete {
+    position: fixed;
+    top: 0;
 }

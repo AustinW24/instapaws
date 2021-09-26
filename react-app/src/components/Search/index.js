@@ -52,7 +52,7 @@ export default function Search() {
             <form className="search-form">
                 <div ref={searchRef} className="search-bar-container">
                     <input className="search-bar" type="text" value={name} onChange={e => handleInput(e)} placeholder="Search"></input>
-                    <FiSearch style={eyeglass} size={11} className="search-icon" />
+                    <FiSearch style={eyeglass} size={10.5} className="search-icon" />
                 </div>
 
                 {clicked &&

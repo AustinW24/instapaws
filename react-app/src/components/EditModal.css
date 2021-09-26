@@ -1,13 +1,15 @@
 .edit-form {
 	position: fixed;
-	top: 100%;
-    right: -150%;
+	top: 50%;
+	left: 50%;
 	transform: translate(-50%, -50%);
-	width: 350px;
-	height: 180px;
+	width: 20rem;
+	height: 10rem;
 	border: 1.5px solid lightgray;
 	background: white;
-	border-radius: 5px;
+	border-radius: 6px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+
 }
 
 .postmodal-caption:focus{
@@ -54,12 +56,14 @@
 }
 
 .postmodal-caption {
+    margin-left: 2rem;
     margin-top: 25px;
     width: 80%;
     height: 50%;
     resize: none;
     padding-top: 5px;
     padding-left: 5px;
+    border-radius: 6px;
 
 }
 

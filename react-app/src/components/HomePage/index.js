@@ -32,8 +32,8 @@ export default function HomePage() {
 
 
     useEffect(() => {
-        if(!comments)
-        dispatch(getAllPosts())
+        if (!comments)
+            dispatch(getAllPosts())
     }, [dispatch, comments])
 
     useEffect(() => {
@@ -87,6 +87,7 @@ export default function HomePage() {
             setHeartColor('transparent')
         }
     }
+    console.log(showEditModal)
 
 
     return (
@@ -108,22 +109,29 @@ export default function HomePage() {
 
                                     }
                                     {clicked && postsId === post.id &&
-
                                         <div className="dot-dropdown">
                                             <a className="dot-edit-button" onClick={() => setShowEditModal(true)}>edit</a>
-                                            {showEditModal && (
-                                                <Modal onClose={() => setShowEditModal(false)}>
-                                                    <EditModal post={post} setShowEditModal={setShowEditModal} setClicked={setClicked} />
-                                                </Modal>
-                                            )}
                                             <a style={{ "color": "red" }} className="dot-delete-button" onClick={() => setShowDeleteModal(true)}>delete</a>
-                                            {showDeleteModal && (
-                                                <Modal onClose={() => setShowDeleteModal(false)}>
-                                                    <DeleteModal post={post} setShowDeleteModal={setShowDeleteModal} setClicked={setClicked} />
-                                                </Modal>
-                                            )}
                                         </div>
+
                                     }
+
+                                    {clicked && postsId === post.id && showEditModal && (
+                                            <Modal onClose={() => setShowEditModal(false)}>
+                                                <EditModal post={post} setShowEditModal={setShowEditModal} setClicked={setClicked} />
+                                            </Modal>
+                                        )
+                                    }
+
+                                    {clicked && postsId === post.id && showDeleteModal && (
+                                            <Modal onClose={() => setShowDeleteModal(false)}>
+                                                <DeleteModal post={post} setShowDeleteModal={setShowDeleteModal} setClicked={setClicked} />
+                                            </Modal>
+                                        )
+                                    }
+
+
+
                                 </div>
                                 <div className="photo-container"><div className="indv-photo" style={{ backgroundImage: `url(${post.picture_url})` }}></div></div>
 
@@ -140,10 +148,10 @@ export default function HomePage() {
                                             )}
                                         </button>
                                         <div className="home-likes-span">
-                            {post?.postLikes.length < 2 && post?.postLikes.length > 0 &&
-                                <span style={{"font-weight": "bold"}}>{post?.postLikes.length} liked</span>
-                            }
-                            </div>
+                                            {post?.postLikes.length < 2 && post?.postLikes.length > 0 &&
+                                                <span style={{ "font-weight": "bold" }}>{post?.postLikes.length} liked</span>
+                                            }
+                                        </div>
                                         <div>
                                             <a href={`/users/${post.user.id}`} className="bottom-homepage-username">{post.user.username}</a>
                                             <span className="post-caption">{post.caption}</span>

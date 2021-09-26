@@ -73,6 +73,7 @@ export const getPost = (id) => async dispatch => {
 }
 
 export const removePost = (id) => async dispatch => {
+    console.log("INSIDE REMOVE POST")
     const res = await fetch(`/api/posts/${id}`, {
         method: "DELETE",
     })
