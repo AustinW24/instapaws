@@ -112,7 +112,7 @@ export default function HomePage() {
                                     {clicked && postsId === post.id &&
                                         <div className="dot-dropdown">
                                             <a className="dot-edit-button" onClick={() => setShowEditModal(true)}>edit</a>
-                                            <a style={{ "color": "red" }} className="dot-delete-button" onClick={() => setShowDeleteModal(true)}>delete</a>
+                                            <a  className="dot-delete-button" onClick={() => setShowDeleteModal(true)}>delete</a>
                                         </div>
 
                                     }

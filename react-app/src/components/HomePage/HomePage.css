@@ -2,6 +2,7 @@
 	font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
 }
+
 .post-list {
     top: 50%;
     left: 50%;
@@ -64,11 +65,14 @@
 	margin-left: auto;
     margin-right: 10px;
 }
+.dot-delete-button {
+    color: red;
+}
 .dot-edit-button:hover {
     color: lightgray;
 }
 .dot-delete-button:hover {
-    color: blue;
+    color: rgb(255, 205, 205);
 }
 .post-dropdown:hover {
 	cursor: pointer;
