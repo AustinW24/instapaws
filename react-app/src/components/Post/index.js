@@ -110,8 +110,6 @@ function Post() {
     }
 
 
-    console.log('COMMENTID', commentId)
-
 
     return (
         <div className="body" onClick={handleClicked}>

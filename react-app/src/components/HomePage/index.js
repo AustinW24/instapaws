@@ -58,14 +58,19 @@ export default function HomePage() {
     }
 
 
-    // const handleCommentClick = (comment) => {
-    //     setCommentId(comment);
-    //     if (showCommentModal === false) {
-    //         setShowCommentModal(true)
-    //     } else {
-    //         setShowCommentModal(false)
-    //     }
-    // }
+    const handleCommentClick = (comment) => {
+        setCommentId(comment.id);
+        if (showCommentModal === false) {
+            setShowCommentModal(true)
+        } else {
+            setShowCommentModal(false)
+        }
+    }
+
+    const handleMouseEnter = (comm) => {
+        setCommentId(comm?.id)
+        setRemoveDiv({ display: 'block' })
+    }
 
 
     const postDetails = (pId, uId) => {
@@ -88,12 +93,12 @@ export default function HomePage() {
             setHeartColor('transparent')
         }
     }
-console.log(commentId)
+    console.log(commentId)
 
 
     return (
         <>
-            <div className='home-container' style={{height: showEditModal || showDeleteModal ? "100vh" : null, "overflowY": showEditModal || showDeleteModal ? "hidden" : null}}>
+            <div className='home-container' style={{ height: showEditModal || showDeleteModal ? "100vh" : null, "overflowY": showEditModal || showDeleteModal ? "hidden" : null }}>
                 <ul value={body} className='post-list' >
                     {posts?.slice(0).reverse().map((post, idx) => {
 
@@ -112,23 +117,23 @@ console.log(commentId)
                                     {clicked && postsId === post.id &&
                                         <div className="dot-dropdown">
                                             <a className="dot-edit-button" onClick={() => setShowEditModal(true)}>edit</a>
-                                            <a  className="dot-delete-button" onClick={() => setShowDeleteModal(true)}>delete</a>
+                                            <a className="dot-delete-button" onClick={() => setShowDeleteModal(true)}>delete</a>
                                         </div>
 
                                     }
 
                                     {clicked && postsId === post.id && showEditModal && (
-                                            <Modal onClose={() => setShowEditModal(false)}>
-                                                <EditModal post={post} setShowEditModal={setShowEditModal} setClicked={setClicked} />
-                                            </Modal>
-                                        )
+                                        <Modal onClose={() => setShowEditModal(false)}>
+                                            <EditModal post={post} setShowEditModal={setShowEditModal} setClicked={setClicked} />
+                                        </Modal>
+                                    )
                                     }
 
                                     {clicked && postsId === post.id && showDeleteModal && (
-                                            <Modal onClose={() => setShowDeleteModal(false)}>
-                                                <DeleteModal post={post} setShowDeleteModal={setShowDeleteModal} setClicked={setClicked} />
-                                            </Modal>
-                                        )
+                                        <Modal onClose={() => setShowDeleteModal(false)}>
+                                            <DeleteModal post={post} setShowDeleteModal={setShowDeleteModal} setClicked={setClicked} />
+                                        </Modal>
+                                    )
                                     }
 
 
@@ -163,7 +168,7 @@ console.log(commentId)
 
                                     </div>
                                     <div className="homepage-comments">
-                                        {post?.post_comments.length < 2 &&
+                                        {post?.post_comments.length < 2 && user &&
                                             <div className="comment-row">{post?.post_comments.map((comm, idx) => <div className='home-indv-comment' key={idx}>
                                                 <div className="home-pic-comment">
                                                     <img className="home-profile-pic" src={comm?.user_pic} alt="cool person"></img>
@@ -174,16 +179,16 @@ console.log(commentId)
                                                     <div style={{ "paddingRight": '3px' }}
                                                         onMouseEnter={e => {
                                                             setRemoveDiv({ display: 'block', top: 0 });
-                                                            setCommentId(e.target.id)
+                                                            setCommentId(comm.id)
                                                         }}
                                                         onMouseLeave={e => {
                                                             setRemoveDiv({ display: 'none' })
                                                         }} className="comment-row"
                                                     >
                                                         {comm?.comment}
-
-                                                        {/* <button className="comment-dot" style={removeDiv} onClick={(e) => handleCommentClick(commentId)}><BiDotsHorizontalRounded /></button> */}
-
+                                                        {commentId === comm.id &&
+                                                        <button className="comment-dot" onClick={() => handleCommentClick(comm)} style={removeDiv}  onMouseEnter={() => {handleMouseEnter(comm) }} onMouseLeave={() => { setRemoveDiv({ display: 'none' }) }}><BiDotsHorizontalRounded /></button>
+                                                   }
                                                         {showCommentModal && (
                                                             <Modal onClose={() => setShowCommentModal(false)}>
                                                                 <CommentModal commentId={commentId} setShowCommentModal={setShowCommentModal} setClicked={setClicked} />
@@ -193,17 +198,26 @@ console.log(commentId)
                                             </div>)}
                                             </div>
                                         }
-                                        {post?.post_comments.length > 1 && user &&
+                                        {post?.post_comments.length > 1 && user && (
                                             <div>
                                                 <a href={`/posts/${post?.id}`} className="viewall">view all comments</a>
                                                 <div className="home-indv-comment">
                                                     <img className="home-post-profile-pic" src={post?.post_comments[post?.post_comments.length - 1].user_pic} alt="list of comments"></img>
                                                     <a href={`/users/${post?.post_comments['0'].user_id}`} className="span-username" ><strong>{post?.post_comments[post?.post_comments.length - 1].user}</strong></a>
-                                                    <div className="shown-comment" >{"  "}{post?.post_comments[post?.post_comments.length - 1].comment}</div>
+                                                    <div className="shown-comment" onMouseEnter={() => { handleMouseEnter(post?.post_comments[[post?.post_comments.length - 1]]) }} onMouseLeave={e => { setRemoveDiv({ display: 'none' }) }}>{"  "}{post?.post_comments[post?.post_comments.length - 1].comment}</div>
+                                                    { commentId === post?.post_comments[[post?.post_comments.length - 1]].id &&
+                                                        <button className="comment-dot" onClick={() => handleCommentClick(post?.post_comments[[post?.post_comments.length - 1]])} style={removeDiv}  onMouseEnter={() => { handleMouseEnter(post?.post_comments[[post?.post_comments.length - 1]]) }} onMouseLeave={() => { setRemoveDiv({ display: 'none' }) }}><BiDotsHorizontalRounded /></button>
+                                                   }
+                                                   {showCommentModal && (
+                                                            <Modal onClose={() => setShowCommentModal(false)}>
+                                                                <CommentModal commentId={commentId} setShowCommentModal={setShowCommentModal} setClicked={setClicked} />
+                                                            </Modal>
+                                                        )}
 
                                                 </div>
-                                            </div>
+                                            </div> )
                                         }
+                                        {}
 
                                     </div>
                                     <div className="footer-comment">
@@ -218,7 +232,7 @@ console.log(commentId)
                     })}
                 </ul>
             </div>
-            </>
+        </>
     )
 
 }
