@@ -58,14 +58,14 @@ export default function HomePage() {
     }
 
 
-    const handleCommentClick = (comment) => {
-        setCommentId(comment.id);
-        if (showCommentModal === false) {
-            setShowCommentModal(true)
-        } else {
-            setShowCommentModal(false)
-        }
-    }
+    // const handleCommentClick = (comment) => {
+    //     setCommentId(comment);
+    //     if (showCommentModal === false) {
+    //         setShowCommentModal(true)
+    //     } else {
+    //         setShowCommentModal(false)
+    //     }
+    // }
 
 
     const postDetails = (pId, uId) => {
@@ -88,7 +88,7 @@ export default function HomePage() {
             setHeartColor('transparent')
         }
     }
-
+console.log(commentId)
 
 
     return (
@@ -182,7 +182,7 @@ export default function HomePage() {
                                                     >
                                                         {comm?.comment}
 
-                                                        <button className="comment-dot" style={removeDiv} onClick={() => handleCommentClick(comm)}><BiDotsHorizontalRounded /></button>
+                                                        {/* <button className="comment-dot" style={removeDiv} onClick={(e) => handleCommentClick(commentId)}><BiDotsHorizontalRounded /></button> */}
 
                                                         {showCommentModal && (
                                                             <Modal onClose={() => setShowCommentModal(false)}>

@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
-import { getPost, likePost } from '../../store/posts'
+import { getPost, likePost, getAllPosts } from '../../store/posts'
 import { createComment } from '../../store/comments'
 import CommentModal from '../CommentModal.js'
 import EditModal from '../EditModal.js'
@@ -32,17 +32,27 @@ function Post() {
     const dispatch = useDispatch();
     const [postObj, setPostObj] = useState(null);
 
+
+
     useEffect(() => {
         if (post) {
             const newPost = post[id];
             setPostObj(newPost);
         }
-    }, [post, id, postsId, postObj?.post_comments]);
+    }, [post, id, postsId]);
 
 
     useEffect(() => {
         dispatch(getPost(id))
-    }, [dispatch,  comments, heartColor])
+    }, [dispatch, heartColor, comments])
+
+    useEffect(() => {
+        if(!comments) {
+            dispatch(getPost(id))
+        } else {
+            dispatch(getPost(id))
+        }
+    }, [dispatch, comments])
 
 
 
@@ -54,7 +64,7 @@ function Post() {
             post_id: Number.parseInt(postObj?.id),
             user_id: user.id,
         }
-        setComments('')
+        setComments("")
         await dispatch(createComment(payload))
     }
 
@@ -94,11 +104,15 @@ function Post() {
         }
     }
 
-    const handleMouseEnter = (e) => {
+    const handleMouseEnter = (comm) => {
         setRemoveDiv({ display: 'block' })
+        setCommentId(comm?.id)
     }
 
-    console.log('POST LIKES', postObj?.postLikes)
+
+    console.log('COMMENTID', commentId)
+
+
     return (
         <div className="body" onClick={handleClicked}>
             <div className="container">
@@ -115,27 +129,28 @@ function Post() {
                         {clicked &&
                             <div className="post-dot-dropdown">
                                 <a className="edit-button" onClick={() => setShowEditModal(true)}>edit</a>
-                                {showEditModal && (
-                                    <Modal onClose={() => setShowEditModal(false)}>
-                                        <EditModal post={postObj} setShowEditModal={setShowEditModal} setClicked={setClicked} />
-                                    </Modal>
-                                )}
                                 <a className="post-delete-button" style={{ "color": "red" }} onClick={() => setShowDeleteModal(true)}>delete</a>
-                                {showDeleteModal && (
-                                    <Modal onClose={() => setShowDeleteModal(false)}>
-                                        <DeleteModal post={postObj} setShowDeleteModal={setShowDeleteModal} setClicked={setClicked} />
-                                    </Modal>
-                                )}
                             </div>
                         }
+
+                        {showEditModal && (
+                            <Modal onClose={() => setShowEditModal(false)}>
+                                <EditModal post={postObj} setShowEditModal={setShowEditModal} setClicked={setClicked} />
+                            </Modal>
+                        )}
+                        {showDeleteModal && (
+                            <Modal onClose={() => setShowDeleteModal(false)}>
+                                <DeleteModal post={postObj} setShowDeleteModal={setShowDeleteModal} setClicked={setClicked} />
+                            </Modal>
+                        )}
                     </div>
 
                     <div className="user-caption"><img className="bottom-profile-pic" src={postObj?.user.profile_picture} alt="cool person"></img>
 
-                    <span className="caption-span">{postObj?.user.username}{"      "}{postObj?.caption}</span>
+                        <span className="caption-span">{postObj?.user.username}{"      "}{postObj?.caption}</span>
                     </div>
                     <div className="comment-scroll">
-                        <div>{postObj?.post_comments.map((comm, id) =>
+                        <div>{postObj?.post_comments.map((comm, idx) =>
                             <div className='indv-comment' key={comm?.id}>
                                 <ul className="comments-list">
                                     <li className="comment-row2">
@@ -148,17 +163,18 @@ function Post() {
                                         }
                                         {user.username === comm?.user &&
                                             <div className="post-user-comment">
-                                                <span onMouseEnter={e => { handleMouseEnter(e) }}
-                                                    onMouseLeave={e => { setRemoveDiv({ display: 'none' }) }} className="post-comment">
+                                                <span  className="post-comment">
                                                     <strong className="post-username">{comm?.user} </strong>
-                                                    <span className="post-comm">{comm?.comment}</span>
+                                                    <span className="post-comm" onMouseEnter={() => { handleMouseEnter(comm) }}>{comm?.comment}</span>
                                                 </span>
 
-                                                <button onMouseEnter={e => { handleMouseEnter(e) }} onMouseLeave={e => { setRemoveDiv({ display: 'none' }) }}
+                                                <button onMouseEnter={() => { handleMouseEnter(comm) }} onMouseLeave={e => { setRemoveDiv({ display: 'none' }) }}
                                                     className="comment-dot" style={removeDiv} onClick={(e) => {
                                                         handleCommentClick(comm)
                                                     }}>
+                                                        {commentId === comm?.id &&
                                                     <BiDotsHorizontalRounded />
+                                                        }
                                                 </button>
                                                 {showCommentModal && (
                                                     <Modal onClose={() => setShowCommentModal(false)}>
@@ -171,23 +187,23 @@ function Post() {
                                 </ul>
                             </div>)}
                         </div>
-                            <div className="icon-bar">
+                        <div className="icon-bar">
                             <button onClick={() => postLikes(postObj)} className="post-heart-btn" style={{ 'backgroundColor': 'transparent', width: '20px', 'marginLeft': '8px', 'border': 'none', 'padding': '0px' }}>
                                 {postObj?.postLikes.includes(user.id) ? (
-                                <FontAwesomeIcon style={{ 'color': 'red' }} className="post-heart" icon={faHeart}>
-                                </FontAwesomeIcon>
+                                    <FontAwesomeIcon style={{ 'color': 'red' }} className="post-heart" icon={faHeart}>
+                                    </FontAwesomeIcon>
                                 ) : (
                                     <FontAwesomeIcon style={{ 'color': 'transparent' }} className="post-heart" icon={faHeart}>
-                                </FontAwesomeIcon>
+                                    </FontAwesomeIcon>
                                 )}
                             </button>
-                             <div className="post-likes-span">
-                            {postObj?.postLikes.length !== 0 ? (
-                                <span>{postObj?.postLikes.length} liked</span>
-                            ) : (
-                                ""
-                            )
-                            }
+                            <div className="post-likes-span">
+                                {postObj?.postLikes.length !== 0 ? (
+                                    <span>{postObj?.postLikes.length} liked</span>
+                                ) : (
+                                    ""
+                                )
+                                }
                             </div>
                         </div>
 
