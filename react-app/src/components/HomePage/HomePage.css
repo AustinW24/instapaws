@@ -2,22 +2,15 @@
 	font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
 }
-
-
-
 .post-list {
     top: 50%;
     left: 50%;
     margin-top: 75px;
 }
-
 .photo-container {
     height: 480px;
     width: 518px;
-
-
 }
-
 .indv-photo {
     background-size: cover;
     background-position: center;
@@ -26,9 +19,6 @@
     background-repeat: no-repeat;
 
 }
-
-
-
 .indv-post {
     padding: 0;
 	border: 1px solid lightgray;
@@ -38,7 +28,6 @@
     margin-top: 30px;
     border-radius: 3.5px;
 }
-
 .indv-comment {
     font-size: 13px;
     display: inline-block;
@@ -48,8 +37,6 @@
     /* padding-left: 14px; */
     padding-right: 4px;
 }
-
-
 .home-indv-comment {
     font-size: 12px;
     display: flex;
@@ -59,10 +46,7 @@
     padding-right: 4px;
     justify-items: center;
     align-items: center;
-
-
 }
-
 .post-header {
 	display: flex;
 	position: relative;
@@ -70,10 +54,8 @@
     margin-right: 8px;
     background-color: #FFFFFF;
     margin-bottom: 0px;
-    /* margin-top: 12px; */
     height: 55px;
 }
-
 .post-dropdown {
 	border: none;
 	padding: 0;
@@ -82,24 +64,19 @@
 	margin-left: auto;
     margin-right: 10px;
 }
-
 .dot-edit-button:hover {
     color: lightgray;
 }
-
 .dot-delete-button:hover {
     color: blue;
 }
-
 .post-dropdown:hover {
 	cursor: pointer;
 }
-
 .post-dropdown + .dot-dropdown {
     opacity: 1;
     transform: translateY(0);
 }
-
 .dot-dropdown {
 	position: absolute;
 	background-color: #ffffff;
@@ -118,11 +95,10 @@
 	text-align: center;
     transform: translateY(-10px);
     border: 0.5px solid lightgray;
-    box-shadow: px 1px 1px 1px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px;
     transition: opacity 160ms ease-in-out, transform 160ms ease-in-out;
 
 }
-
 edit-button delete-button {
 	text-align: center;
     width: 100%;
