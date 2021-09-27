@@ -93,7 +93,7 @@ export default function HomePage() {
             setHeartColor('transparent')
         }
     }
-    console.log(commentId)
+
 
 
     return (
@@ -168,7 +168,7 @@ export default function HomePage() {
 
                                     </div>
                                     <div className="homepage-comments">
-                                        {post?.post_comments.length < 2 && user &&
+                                        {post?.post_comments.length < 2 &&
                                             <div className="comment-row">{post?.post_comments.map((comm, idx) => <div className='home-indv-comment' key={idx}>
                                                 <div className="home-pic-comment" style={{"marginTop": "5px"}}>
                                                     <img className="home-profile-pic" src={comm?.user_pic} alt="cool person"></img>
@@ -186,7 +186,7 @@ export default function HomePage() {
                                                         }} className="comment-row"
                                                     >
                                                         {comm?.comment}
-                                                        {commentId === comm.id &&
+                                                        {commentId === comm.id && user.id === comm?.user_id &&
                                                         <button className="comment-dot" onClick={() => handleCommentClick(comm)} style={removeDiv}  onMouseEnter={() => {handleMouseEnter(comm) }} onMouseLeave={() => { setRemoveDiv({ display: 'none' }) }}><BiDotsHorizontalRounded /></button>
                                                    }
                                                         {showCommentModal && (
@@ -198,14 +198,14 @@ export default function HomePage() {
                                             </div>)}
                                             </div>
                                         }
-                                        {post?.post_comments.length > 1 && user && (
+                                        {post?.post_comments.length > 1 &&(
                                             <div>
                                                 <a href={`/posts/${post?.id}`} className="viewall">view all comments</a>
                                                 <div className="home-indv-comment">
                                                     <img className="home-post-profile-pic" src={post?.post_comments[post?.post_comments.length - 1].user_pic} alt="list of comments"></img>
                                                     <a href={`/users/${post?.post_comments['0'].user_id}`} className="span-username" ><strong>{post?.post_comments[post?.post_comments.length - 1].user}</strong></a>
                                                     <div className="shown-comment" onMouseEnter={() => { handleMouseEnter(post?.post_comments[[post?.post_comments.length - 1]]) }} onMouseLeave={e => { setRemoveDiv({ display: 'none' }) }}>{"  "}{post?.post_comments[post?.post_comments.length - 1].comment}</div>
-                                                    { commentId === post?.post_comments[[post?.post_comments.length - 1]].id &&
+                                                    { commentId === post?.post_comments[[post?.post_comments.length - 1]].id && user.id ===  post?.post_comments[post?.post_comments.length - 1].user_id &&
                                                         <button className="comment-dot" onClick={() => handleCommentClick(post?.post_comments[[post?.post_comments.length - 1]])} style={removeDiv}  onMouseEnter={() => { handleMouseEnter(post?.post_comments[[post?.post_comments.length - 1]]) }} onMouseLeave={() => { setRemoveDiv({ display: 'none' }) }}><BiDotsHorizontalRounded /></button>
                                                    }
                                                    {showCommentModal && (

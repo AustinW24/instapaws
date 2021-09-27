@@ -12,7 +12,7 @@ comment_routes = Blueprint('comments', __name__)
 @comment_routes.route('/<id>', methods=['POST'])
 @login_required
 def createComment(id):
-    # print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    
     form = CommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
