@@ -29,6 +29,7 @@ export default function HomePage() {
     const [removeDiv, setRemoveDiv] = useState({ display: 'none' });
     const [heartColor, setHeartColor] = useState(('transparent'));
     const [heartId, setHeartId] = useState(0);
+    const [body, setBody] = useState({})
 
 
     useEffect(() => {
@@ -87,13 +88,13 @@ export default function HomePage() {
             setHeartColor('transparent')
         }
     }
-    console.log(showEditModal)
+
 
 
     return (
         <>
-            <div className='home-container' >
-                <ul className='post-list' >
+            <div className='home-container' style={{height: showEditModal || showDeleteModal ? "100vh" : null, "overflowY": showEditModal || showDeleteModal ? "hidden" : null}}>
+                <ul value={body} className='post-list' >
                     {posts?.slice(0).reverse().map((post, idx) => {
 
                         return (
@@ -148,8 +149,11 @@ export default function HomePage() {
                                             )}
                                         </button>
                                         <div className="home-likes-span">
-                                            {post?.postLikes.length < 2 && post?.postLikes.length > 0 &&
-                                                <span style={{ "font-weight": "bold" }}>{post?.postLikes.length} liked</span>
+                                            {post?.postLikes.length !== 0 ? (
+                                                <span style={{ "fontWeight": "bold" }}>{post?.postLikes.length} liked</span>
+                                            ) : (
+                                                ""
+                                            )
                                             }
                                         </div>
                                         <div>
@@ -214,7 +218,7 @@ export default function HomePage() {
                     })}
                 </ul>
             </div>
-        </>
+            </>
     )
 
 }
