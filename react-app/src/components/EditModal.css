@@ -1,6 +1,6 @@
 .edit-form {
 	position: fixed;
-	top: 50%;
+	top: 40%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 20rem;
@@ -24,13 +24,17 @@
 
 }
 
-.confirm {
+.edit-confirm {
     border: 1px solid rgb(235, 235, 235);
     width: 70px;
+    background: #0095F6;
+    color: white;
+    padding: 3px;
 }
 
-.confirm:hover {
+.edit-confirm:hover {
     background-color: rgb(163, 232, 255);
+    cursor: pointer;
 }
 
 .edit-cancel-btn {
@@ -40,6 +44,7 @@
     border: none;
     background-color: transparent;
     font-weight: bold;
+    padding: 3px;
 
 }
 

@@ -5,7 +5,7 @@ import './PostModal.css'
 import uploadlogo from ".././upload.png"
 
 
-function PostModal({setShowModal }) {
+function PostModal({ setShowModal }) {
     const dispatch = useDispatch();
 
     const [caption, setCaption] = useState('');
@@ -27,30 +27,29 @@ function PostModal({setShowModal }) {
                         <li>{error}</li>
                     ))}
                 </div>
-                <div className='post-image'>
-                    <img  className="upload-logo" src={uploadlogo} alt="upload"></img>
-                    <input
-                        placeholder='caption...'
-                        type="text"
-                        value={picture_url}
-                        className="caption-input"
-                        onChange={(e) => setPictureUrl(e.target.value)}
-                        required
-                    />
+                <div className="upload-span">Upload New Post</div>
+                <hr className="upload-hr" />
+                <textarea
+                    placeholder='caption...'
+                    type="text"
+                    value={picture_url}
+                    className="caption-input"
+                    onChange={(e) => setPictureUrl(e.target.value)}
+                    required
+                />
                 <label >
-
                     <input
+                        className="image-input"
                         placeholder='img address...'
                         type="text"
                         value={caption}
                         onChange={(e) => setCaption(e.target.value)}
                         required
-                        />
+                    />
                 </label>
-                        </div>
                 <div className="post-buttons">
-                    <button type="submit" className='confirm' >{'   '}Create</button>
-                    <button onClick={() => setShowModal(false)}>Cancel</button>
+                    <button style={{width: "50%"}} type="submit" className='post-confirm' >{'   '}Create</button>
+                    <button style={{width: "50%"}} className="post-cancel" onClick={() => setShowModal(false)}>Cancel</button>
                 </div>
             </form>
         </>
