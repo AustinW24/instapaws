@@ -170,7 +170,7 @@ export default function HomePage() {
                                     <div className="homepage-comments">
                                         {post?.post_comments.length < 2 && user &&
                                             <div className="comment-row">{post?.post_comments.map((comm, idx) => <div className='home-indv-comment' key={idx}>
-                                                <div className="home-pic-comment">
+                                                <div className="home-pic-comment" style={{"marginTop": "5px"}}>
                                                     <img className="home-profile-pic" src={comm?.user_pic} alt="cool person"></img>
                                                 </div>
                                                 <div className="home-user-comment">

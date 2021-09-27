@@ -47,6 +47,7 @@
     padding-right: 4px;
     justify-items: center;
     align-items: center;
+
 }
 .post-header {
 	display: flex;
@@ -254,6 +255,8 @@ edit-button:hover, delete-button:hover {
 .shown-comment {
     margin-top: 5px;
     margin-left: 8px;
+    overflow-y: scroll;
+    max-height: 20px;
 
 }
 
