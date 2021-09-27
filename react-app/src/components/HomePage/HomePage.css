@@ -231,6 +231,10 @@ edit-button:hover, delete-button:hover {
 
 }
 
+.comment-dot {
+    width: 40px;
+}
+
 .post-footer-head {
     margin-top: 4px;
     display: flex;
@@ -250,6 +254,7 @@ edit-button:hover, delete-button:hover {
 .shown-comment {
     margin-top: 5px;
     margin-left: 8px;
+
 }
 
 .span-username {
