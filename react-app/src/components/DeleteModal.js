@@ -27,9 +27,7 @@ export default function DeleteModal({ post, setShowDeleteModal, setClicked }) {
                 <div className="delete-content">
                     <button type="submit" className='delete-button'>Delete</button>
                     <hr className="hr-delete" style={{ 'width': '215px', 'opacity': '0.4' }} />
-                    <div className="delete-buttons">
                         <button className="cancel-button" onClick={exitModal}>Cancel</button>
-                    </div>
                 </div>
             </form>
         </>

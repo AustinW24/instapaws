@@ -81,7 +81,7 @@ function Post() {
 
     const handleClicked = () => {
         if (clicked) {
-            setClicked(false)
+            setClicked(!clicked)
         }
     }
 
@@ -113,14 +113,14 @@ function Post() {
                             <button className='post-dropdown' onClick={() => show(post)}><BiDotsHorizontalRounded /></button>
                         }
                         {clicked &&
-                            <div className="dot-dropdown">
+                            <div className="post-dot-dropdown">
                                 <a className="edit-button" onClick={() => setShowEditModal(true)}>edit</a>
                                 {showEditModal && (
                                     <Modal onClose={() => setShowEditModal(false)}>
                                         <EditModal post={postObj} setShowEditModal={setShowEditModal} setClicked={setClicked} />
                                     </Modal>
                                 )}
-                                <a className="delete-button" style={{ "color": "red" }} onClick={() => setShowDeleteModal(true)}>delete</a>
+                                <a className="post-delete-button" style={{ "color": "red" }} onClick={() => setShowDeleteModal(true)}>delete</a>
                                 {showDeleteModal && (
                                     <Modal onClose={() => setShowDeleteModal(false)}>
                                         <DeleteModal post={postObj} setShowDeleteModal={setShowDeleteModal} setClicked={setClicked} />
@@ -182,8 +182,11 @@ function Post() {
                                 )}
                             </button>
                              <div className="post-likes-span">
-                            {postObj?.postLikes.length < 2 && postObj?.postLikes.length > 0 &&
+                            {postObj?.postLikes.length !== 0 ? (
                                 <span>{postObj?.postLikes.length} liked</span>
+                            ) : (
+                                ""
+                            )
                             }
                             </div>
                         </div>
