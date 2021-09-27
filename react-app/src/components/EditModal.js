@@ -36,11 +36,9 @@ export default function EditModal({ post, setShowEditModal, setClicked }) {
                     value={caption}
                     onChange={(e) => setCaption(e.target.value)}
                     className="postmodal-caption"
-
                 />
-
                 <div className="edit-buttons">
-                    <button type="submit" className='confirm' onChange={(e) => setCaption(e.target.value)}> {'   '}confirm</button>
+                    <button type="submit" className='edit-confirm' onChange={(e) => setCaption(e.target.value)}> {'   '}confirm</button>
                     <button className="edit-cancel-btn" onClick={exitModal}>cancel</button>
                 </div>
             </form>
