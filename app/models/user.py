@@ -4,19 +4,11 @@ from flask_login import UserMixin
 from .like import likes
 
 
-# Followers = db.Table(
-#     "followers",
-#     db.Column("followerId", db.Integer, db.ForeignKey("users.id")),
-#     db.Column("followingId", db.Integer, db.ForeignKey("users.id"))
-# )
-# follows = db.relationship(
-#     'User',
-#     secondary=Followers,
-#     primaryjoin=(Followers.c.followerId == id),
-#     secondaryjoin=(Followers.c.followingId == id),
-#     backref=db.backref('followers', lazy='dynamic'),
-#     lazy='dynamic'
-# )
+Followers = db.Table(
+    "followers",
+    db.Column("followerId", db.Integer, db.ForeignKey("users.id")),
+    db.Column("followingId", db.Integer, db.ForeignKey("users.id"))
+)
 
 
 class User(db.Model, UserMixin):
@@ -29,6 +21,14 @@ class User(db.Model, UserMixin):
     profile_picture = db.Column(db.String(255))
     hashed_password = db.Column(db.String(255), nullable=False)
 
+    follows = db.relationship(
+        'User',
+        secondary=Followers,
+        primaryjoin=(Followers.c.followerId == id),
+        secondaryjoin=(Followers.c.followingId == id),
+        backref=db.backref('followers', lazy='dynamic'),
+        lazy='dynamic'
+    )
     @property
     def password(self):
         return self.hashed_password
@@ -47,8 +47,9 @@ class User(db.Model, UserMixin):
             'email': self.email,
             "biography": self.biography,
             "profile_picture": self.profile_picture,
-            # "follows": [{'id': user.id, 'username': user.username} for user in self.follows],
-            # "followers": [{'id': user.id, 'username': user.username} for user in self.followers]
+            "follows": [{'id': user.id, 'username': user.username} for user in self.follows],
+            "followers": [{'id': user.id, 'username': user.username} for user in self.followers]
+
         }
 
     posts = db.relationship(

@@ -1,6 +1,8 @@
 from flask import Blueprint
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import User
+from app.models.db import db
+
 
 
 user_routes = Blueprint('users', __name__)
@@ -33,11 +35,33 @@ def update(id):
 
     return user.to_dict()
 
+@user_routes.route('/<int:id>/followers')
+@login_required
+def followers(id):
+    user = User.query.get(id)
+    return user.to_dict()
 
-# @user_routes.route('/search', methods=['POST'])
-# def userSearch():
-#     data = request.get_json()
-#     username = data['username']
-#     print("INSIDE DATA FOR SEARCHHHH")
-#     users = User.query.filter(User.username.ilike(f'%{username}%'))
-#     print('USERSSSS!!!', [user.to_dict()['username'] for user in users])
+@user_routes.route('/<int:id>/following')
+@login_required
+def following(id):
+    user = User.query.get(id)
+    return user.to_dict()
+
+@user_routes.route('/<int:id>/follow')
+@login_required
+def track_follows(id):
+    loggedUser = current_user
+    otherUser = User.query.get(id)
+
+    allUsersId = [user.id for user in loggedUser.follows]
+
+    if otherUser.id in allUsersId:
+
+        loggedUser.follows.remove(otherUser)
+    else:
+
+        loggedUser.follows.append(otherUser)
+
+    db.session.commit()
+
+    return {'loggedUser': loggedUser.to_dict(), 'otherUser': otherUser.to_dict()}
