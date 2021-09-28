@@ -95,6 +95,20 @@ body {
     color: rgb(88, 88, 88);
     height: 27px;
     width: 90px;
-    margin-top: 10.5px;
 
+}
+
+.follow-button {
+    margin-left: 1rem;
+    width: 86px;
+    height: 27px;
+    color: white;
+    background:  #0389ff;
+    border-radius: 4px;
+    border: white;
+    cursor: pointer;
+}
+
+.follow-button:active {
+    background:  #5fb4ff;
 }
