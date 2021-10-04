@@ -54,8 +54,6 @@
     margin-top: 1rem;
 }
 
-.edit-submit:hover, .edit-cancel:hover {
-    background-color: blue;
-    cursor: pointer;
-
+.edit-cancel:active, .edit-submit:active {
+    background:  #ffffff;
 }

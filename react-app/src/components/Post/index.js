@@ -39,15 +39,15 @@ function Post() {
             const newPost = post[id];
             setPostObj(newPost);
         }
-    }, [post, id, postsId]);
+    }, [post, id, postsId, comments]);
 
 
     useEffect(() => {
         dispatch(getPost(id))
-    }, [dispatch, heartColor, comments])
+    }, [dispatch, heartColor, comments, showDeleteModal])
 
     useEffect(() => {
-        if(!comments) {
+        if(!comments.length) {
             dispatch(getPost(id))
         } else {
             dispatch(getPost(id))
@@ -145,7 +145,7 @@ function Post() {
 
                     <div className="user-caption"><img className="bottom-profile-pic" src={postObj?.user.profile_picture} alt="cool person"></img>
 
-                        <span className="caption-span">{postObj?.user.username}{"      "}{postObj?.caption}</span>
+                        <span  className="caption-span"><span style={{"font-weight": "bold"}}>{postObj?.user.username}</span>{"      "}{postObj?.caption}</span>
                     </div>
                     <div className="comment-scroll">
                         <div>{postObj?.post_comments.map((comm, idx) =>
@@ -155,8 +155,8 @@ function Post() {
                                         <img className="post-profile-av" src={comm?.user_pic} alt="avatar"></img>
                                         {user.username !== comm?.user &&
                                             <div className="post-comment">
-                                                <strong className="post-username">{comm?.user}</strong>
-                                                <span>{comm?.comment}</span>
+                                                <strong className="post-username">{comm?.user}{"      "}</strong>
+                                                <span className="post-comm">{comm?.comment}</span>
                                             </div>
                                         }
                                         {user.username === comm?.user &&
