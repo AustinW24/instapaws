@@ -3,12 +3,12 @@
 
 ## Instapaw
 
-Instapaw is a fullstack Flask app with user authentication along with CRUD of users' posts, comments, and likes.
+Instapaw is a fullstack Flask app with user authentication along with CRUD functionality of users' posts, comments, and the option  to like users' posts aswell as follow them.
 ***
 
 ## Brief look at Instapaw
 
-Users are able to upload images with a made caption, and set it in the feed/home page of their account for other users
+Users are able to upload images with an editable caption, and set it in the feed/home page of their account for other users
 to view, comment, and like.
 ***
 ![image](https://user-images.githubusercontent.com/67086515/131862103-152784b7-f653-4913-b4f6-71ceb0ec3d90.png)
@@ -67,11 +67,9 @@ the posts'/content they create.
 ###Future plans for Instapaw
 
 Instapaw was a fun application to build to really drive home the fundamentals of serving a full-stack application.  As an animal lover who see's
-regularly people enamoured with creating instagram pages for their dogs, this seemed like something I can work at and enjoy the process.  This was
+regularly people who are enamoured with creating instagram pages for their dogs, this seemed like something I can work at and enjoy the process.  This was
 my first React-Flask app and great learning experience.
 
-While building Instapaw, I wanted to make it as close to Instagram as possible, first the Users, Second the posts, and third the comments.  As time
-goes by, I would like to be able to add a follow feature so users can keep track of posts/users they are interested in.  Adding to that, I would like
-to be able to share a liking system, and lastly, a search bar to be able to find specific users.
+While building Instapaw, I wanted to make it as close to Instagram as possible, first the Users, Second the posts, and third the comments.  I've been able to hit my stretch goals of creating a liking system, implementing a search for to be able to search for users, and involve a follow feature.
 
 Thank you for your time!
