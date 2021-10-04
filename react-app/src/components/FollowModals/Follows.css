@@ -1,0 +1,70 @@
+.follow-modals {
+    position: fixed;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+    width: 20rem;
+    max-height: 20rem;
+    border: 1px solid lightgray;
+    background-color: white;
+    border-radius: 14px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    overflow-y: scroll;
+    display: flex;
+    z-index: 1000;
+
+    flex-direction: column;
+
+
+
+}
+
+.follow-header {
+    margin-bottom: 0rem;
+    margin-left: 0;
+    margin-right: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    position: absolute;
+    top: 10px;
+}
+
+.follow-x {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.follow-picture {
+    width: 30px;
+    height: 30px;
+    border-radius: 18px;
+
+}
+.follow-list {
+    max-width: 17rem;
+    margin-top: 2.8rem;
+    padding-bottom: 0.5rem;
+    margin-right: 2rem;
+
+}
+.follow-row {
+    display: flex;
+    margin-right: 16rem;
+    font-size: 12px;
+    padding: 3px;
+    position: relative;
+    padding-bottom: 6px;
+}
+
+.follow-username {
+    margin-left: 8px;
+    max-width: 12rem;
+    margin-top: 6px;
+    font-weight: bold;
+    font-size: 12px;
+}

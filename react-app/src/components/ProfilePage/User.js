@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllPosts } from '../../store/posts'
-import { getAUser, getFollowers } from '../../store/users'
+import { getAUser } from '../../store/users'
 import EditProfileModal from './EditProfile.js'
+import FollowerModal from '../FollowModals/Followers'
+import FollowingModal from '../FollowModals/Following'
 import Modal from '../../context/Modal'
 
 import "./ProfilePage.css"
@@ -13,14 +15,15 @@ function User() {
     const currentUser = useSelector(state => state.session.user)
     const posts = useSelector((state) => state.posts?.posts);
     const userId = useParams();
-    const id = Number(userId.id)
+    const id = Number(userId.id);
     const [update, setUpdate] = useState(false);
     const [showProfileModal, setShowProfileModal] = useState(false);
+    const [showFollowerModal, setShowFollowerModal] = useState(false);
+    const [showFollowingModal, setShowFollowingModal] = useState(false);
     const [clicked, setClicked] = useState(false);
     const [isFollowing, setIsFollowing] = useState(
         currentUser.follows.map((u) => +u.id).includes(id)
     );
-    const [followbtn, setFollowBtn] = useState('Follow')
 
     const [user, setUser] = useState({});
 
@@ -33,7 +36,7 @@ function User() {
             const user = await response.json();
             setUser(user)
         })();
-    }, [id, followbtn])
+    }, [id])
 
 
     useEffect(() => {
@@ -43,25 +46,14 @@ function User() {
             setUser(user);
         })();
         setUpdate(false)
-        if (user.id !== currentUser.id && !isFollowing) {
-            setFollowBtn("Follow")
-        } else {
-            setFollowBtn("Unfollow")
-        }
-    }, [currentUser, id, followbtn])
 
-    useEffect(() => {
-        if(followbtn){
-            getAUser(id)
-        }
-    }, [dispatch, followbtn])
-
+    }, [currentUser, id, isFollowing])
 
     useEffect(() => {
         if (!posts) {
             dispatch((getAllPosts()))
         }
-    }, [dispatch, followbtn])
+    }, [dispatch])
 
 
 
@@ -77,14 +69,11 @@ function User() {
     }
 
     const handleFollow = async () => {
-        if (followbtn === "Unfollow") {
-            setFollowBtn("Follow")
-        } else {
-            setFollowBtn("Unfollow")
-        }
+
         const response = await fetch(`/api/users/${id}/follow`)
         const userObj = await response.json();
         getAUser({ ...userObj.otherUser });
+        setIsFollowing(!isFollowing)
     }
 
 
@@ -101,7 +90,11 @@ function User() {
                             {user.id === currentUser.id &&
                                 <button className="edit-profile-button" onClick={() => setShowProfileModal(true)}>Edit Profile</button>
                             }
-                                <button className="follow-button" onClick={handleFollow}>{followbtn}</button>
+                            {+id !== +currentUser.id && (isFollowing ? (
+                                <button className='follow-button' onClick={handleFollow}><strong>Unfollow</strong></button>
+                            ) : (
+                                <button className='follow-button' onClick={handleFollow}><strong>Follow</strong></button>
+                            ))}
                         </div>
                         {showProfileModal && (
                             <Modal style={{ overlay: { background: 'black' } }} onClose={() => setShowProfileModal(false)}>
@@ -110,13 +103,24 @@ function User() {
                         )}
                         <div className="user-details">
                             <strong>{numOfPosts(posts)}</strong>{"  "}<span style={{ "fontSize": "16px" }}>posts</span>
-                            <strong style={{ "marginLeft": "2.3rem" }}>{user.followers?.length}</strong>{"  "}<span style={{ "fontSize": "16px" }}>followers</span>
-                            <strong style={{ "marginLeft": "2.3rem" }}>{user.follows?.length}</strong>{"  "}<span style={{ "fontSize": "16px" }}>following</span>
+                            <strong style={{ "marginLeft": "2.3rem" }}>{user.followers?.length}</strong>{"  "}<span onClick={() => setShowFollowerModal(!showFollowerModal)} style={{ "fontSize": "16px", "cursor": "pointer" }}>followers</span>
+                            <strong style={{ "marginLeft": "2.3rem" }}>{user.follows?.length}</strong>{"  "}<span onClick={() => setShowFollowingModal(!showFollowingModal)} style={{ "fontSize": "16px", "cursor": "pointer" }}>following</span>
                         </div>
+                        {showFollowerModal && (
+                            <Modal onClose={() => setShowFollowerModal(false)}>
+                                <FollowerModal  userId={userId} setShowFollowerModal={setShowFollowerModal} setClicked={setClicked} />
+                            </Modal>
+                        )}
+                        {showFollowingModal && (
+                            <Modal onClose={() => setShowFollowingModal(false)}>
+                                <FollowingModal userId={userId} setShowFollowingModal={setShowFollowingModal} setClicked={setClicked} />
+                            </Modal>
+                        )}
 
                         <span className="bio">{user.biography}</span></div>
                 </div>
             </div>
+
             <hr className="hr-tag" style={{ 'border': '1px solid lightgray', width: '840px', 'marginBottom': '60px' }} />
             <div className="profile-body">
                 {posts?.slice(0).reverse().map((post, idx) => {
@@ -129,7 +133,6 @@ function User() {
                 })}
             </div>
         </div>
-
     );
 }
 export default User;

@@ -62,8 +62,8 @@ function EditProfileModal({setShowProfileModal, currentUser}) {
                         </div>
                 <div className="editprofile-buttons" style={{display: 'flex', gap: '10px'}}>
                     {profile_picture.value < 10 ? setProfilePic(currentUser.profile_picture) : null}
-                    <button onClick={handleEmptyInput} type="submit" className='edit-submit' style={{backgroundColor: '#fff', 'border': '1px solid black', 'border-radius': '0.2rem', 'padding': '2px'}}>{'   '}Submit</button>
-                    <button onClick={() => setShowProfileModal(false)} className='edit-cancel' style={{backgroundColor: '#fff', 'border': '1px solid black', 'border-radius': '0.2rem', 'padding': '2px'}}>Cancel</button>
+                    <button onClick={handleEmptyInput} type="submit" className='edit-submit' style={{backgroundColor: '#fff', 'border': '1px solid black', 'borderRadius': '0.2rem', 'padding': '2px'}}>{'   '}Submit</button>
+                    <button onClick={() => setShowProfileModal(false)} className='edit-cancel' style={{backgroundColor: '#fff', 'border': '1px solid black', 'borderRadius': '0.2rem', 'padding': '2px'}}>Cancel</button>
                 </div>
             </form>
         </>

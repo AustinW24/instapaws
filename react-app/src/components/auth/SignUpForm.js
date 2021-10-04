@@ -56,60 +56,60 @@ const SignUpForm = () => {
 
 
     return (
-<div>
-        <form onSubmit={onSignUp} className='signup-form'>
-            <h1 className="create-account">Create an account</h1>
-            <div className="signup-errors">
-                {errors.map((error, ind) => (
-                    <div key={ind}>{error}</div>
-                ))}
-            </div>
-            <div>
-                <label className="signup-label">Username</label>
-                <input
-                    type='text'
-                    name='username'
-                    onChange={updateUsername}
-                    value={username}
-                    className="signup-input"
-                ></input>
-            </div>
-            <div>
-                <label className="signup-label">Email</label>
-                <input
-                    type='text'
-                    name='email'
-                    onChange={updateEmail}
-                    value={email}
-                    className="signup-input"
+        <div>
+            <form onSubmit={onSignUp} className='signup-form'>
+                <h1 className="create-account">Create an account</h1>
+                <div className="signup-errors">
+                    {errors.map((error, ind) => (
+                        <div key={ind}>{error}</div>
+                    ))}
+                </div>
+                <div>
+                    <label className="signup-label">Username</label>
+                    <input
+                        type='text'
+                        name='username'
+                        onChange={updateUsername}
+                        value={username}
+                        className="signup-input"
+                    ></input>
+                </div>
+                <div>
+                    <label className="signup-label">Email</label>
+                    <input
+                        type='text'
+                        name='email'
+                        onChange={updateEmail}
+                        value={email}
+                        className="signup-input"
 
-                ></input>
-            </div>
-            <div className="passwords">
-                <label className="signup-label">Password</label>
-                <input
-                    type='password'
-                    name='password'
-                    onChange={updatePassword}
-                    value={password}
-                    className="signup-input"
+                    ></input>
+                </div>
+                <div className="passwords">
+                    <label className="signup-label">Password</label>
+                    <input
+                        type='password'
+                        name='password'
+                        onChange={updatePassword}
+                        value={password}
+                        className="signup-input"
 
-                ></input>
+                    ></input>
 
-                <label className="signup-label">Confirm Password</label>
-                <input
-                    type='password'
-                    name='repeat_password'
-                    onChange={updateRepeatPassword}
-                    value={repeatPassword}
-                    required={true}
-                    className="signup-input"
+                    <label className="signup-label">Confirm Password</label>
+                    <input
+                        type='password'
+                        name='repeat_password'
+                        onChange={updateRepeatPassword}
+                        value={repeatPassword}
+                        required={true}
+                        className="signup-input"
 
-                ></input>
-            </div>
-            <button className="signup-button" type='submit'>Sign Up</button>
-        </form>
-        <Footer/>
+                    ></input>
+                </div>
+                <button className="signup-button" type='submit'>Sign Up</button>
+            </form>
+            <Footer />
         </div>
     );
 };
