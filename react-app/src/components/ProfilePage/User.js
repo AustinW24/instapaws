@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllPosts } from '../../store/posts'
@@ -26,6 +26,8 @@ function User() {
     );
 
     const [user, setUser] = useState({});
+    const ref = useRef();
+
 
     useEffect(() => {
         if (!userId) {

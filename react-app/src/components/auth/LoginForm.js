@@ -72,7 +72,7 @@ const LoginForm = () => {
                     />
                 </div>
                     <button className='login-button' type='submit'>Login</button>
-                    <p>Don't have an account? <a href="/sign-up">Sign up</a></p>
+                    <p>Don't have an account? <a href="/sign-up" style={{"text-decoration": "underline"}}>Sign up</a></p>
                     <div className="demo-button">
                     <a  onClick={demoLogin}>Sign in as Demo</a>
                     </div>

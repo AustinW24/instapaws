@@ -63,6 +63,7 @@ input {
     color: white;
     padding-top: 2px;
     padding-bottom: 2px;
+    border: 1px solid lightgray;
 }
 
 .login-button:hover {
@@ -121,6 +122,9 @@ a:hover {
 }
 
 .demo-button {
-	text-align:center
-
+	text-align:center;
+    color: rgb(61, 61, 255);
+}
+.demo-button:hover {
+    color: rgb(173, 193, 230);
 }

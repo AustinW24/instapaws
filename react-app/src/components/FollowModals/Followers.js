@@ -46,7 +46,7 @@ export default function FollowersModal({userId, setShowFollowerModal, setClicked
         setShowFollowerModal(false)
         setClicked(false)
     }
-    // console.log(currentUser)
+
 
 
     const handleFollow = async (f) => {
