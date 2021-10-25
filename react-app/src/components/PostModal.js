@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createPost } from "../store/posts"
-import './PostModal.css'
 import FileUploader from './FileUploader'
+import './PostModal.css'
 import './FileUploader/FileUploader.css'
 
 
@@ -28,6 +28,7 @@ function PostModal({ setShowModal }) {
 
     return (
         <>
+
             <form action="#" id="#" className='postmodal-form' onSubmit={handleSubmit}>
                 <div className="post-errors">
                     {errors.map(error => (

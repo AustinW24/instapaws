@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useEffect, useState, useRef } from 'react'
+import { useParams, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import OutsideClickHandler from 'react-outside-click-handler'
 import { getAllPosts } from '../../store/posts'
 import { getAUser } from '../../store/users'
 import EditProfileModal from './EditProfile.js'
 import FollowerModal from '../FollowModals/Followers'
 import FollowingModal from '../FollowModals/Following'
 import Modal from '../../context/Modal'
-
 import "./ProfilePage.css"
 
 function User() {
@@ -21,6 +21,7 @@ function User() {
     const [showFollowerModal, setShowFollowerModal] = useState(false);
     const [showFollowingModal, setShowFollowingModal] = useState(false);
     const [clicked, setClicked] = useState(false);
+    const [hidden, setHidden] = useState(false);
     const [isFollowing, setIsFollowing] = useState(
         currentUser.follows.map((u) => +u.id).includes(id)
     );
@@ -94,15 +95,20 @@ function User() {
                             }
                             {+id !== +currentUser.id && (isFollowing ? (
                                 <button className='follow-button' onClick={handleFollow}><strong>Unfollow</strong></button>
-                            ) : (
-                                <button className='follow-button' onClick={handleFollow}><strong>Follow</strong></button>
-                            ))}
+                                ) : (
+                                    <button className='follow-button' onClick={handleFollow}><strong>Follow</strong></button>
+                                    ))}
                         </div>
-                        {showProfileModal && (
+                            <OutsideClickHandler onOutsideClick={() => {
+                              setShowProfileModal(false)
+                                }}>
+                        {showProfileModal  && (
                             <Modal style={{ overlay: { background: 'black' } }} onClose={() => setShowProfileModal(false)}>
                                 <EditProfileModal currentUser={currentUser} setShowProfileModal={setShowProfileModal} setClicked={setClicked} />
                             </Modal>
                         )}
+                        </OutsideClickHandler>
+
                         <div className="user-details">
                             <strong>{numOfPosts(posts)}</strong>{"  "}<span style={{ "fontSize": "16px" }}>posts</span>
                             <strong style={{ "marginLeft": "2.3rem" }}>{user.followers?.length}</strong>{"  "}<span onClick={() => setShowFollowerModal(!showFollowerModal)} style={{ "fontSize": "16px", "cursor": "pointer" }}>followers</span>

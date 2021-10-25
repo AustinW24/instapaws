@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect} from "react";
+
 import { useDispatch} from "react-redux";
 import { update } from '../../store/session'
 import './EditProfile.css'
@@ -10,8 +11,6 @@ function EditProfileModal({setShowProfileModal, currentUser}) {
     const [profile_picture, setProfilePic] = useState('');
     const [errors, setErrors] = useState([]);
     const user_id = currentUser.id;
-    const wrapperRef = useRef(null);
-    const [isVisible, setIsVisible] = useState(true);
 
 
     const handleSubmit = async (e) => {
@@ -33,25 +32,14 @@ function EditProfileModal({setShowProfileModal, currentUser}) {
     }
 
 
-  // below is the same as componentDidMount and componentDidUnmount
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside, false);
-    return () => {
-      document.removeEventListener("click", handleClickOutside, false);
-    };
-  }, []);
 
-  const handleClickOutside = event => {
-    if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-      setIsVisible(false);
-    }
-  };
+
 
 
     return (
         <>
-        isVisable && (
-            <form className='profile-modal' onSubmit={handleSubmit} ref={wrapperRef}>
+
+            <form className='profile-modal' onSubmit={handleSubmit} >
                 <div className="post-errors">
                     {errors.map(error => (
                         <li>{error}</li>
@@ -85,7 +73,7 @@ function EditProfileModal({setShowProfileModal, currentUser}) {
                     <button onClick={() => setShowProfileModal(false)} className='edit-cancel' style={{backgroundColor: '#fff', 'border': '1px solid black', 'borderRadius': '0.2rem', 'padding': '2px'}}>Cancel</button>
                 </div>
             </form>
-        )
+
         </>
     )
 
