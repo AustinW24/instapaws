@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react"
 import { getAllUsers } from "../../store/users"
 import { useDispatch, useSelector } from "react-redux";
 import { FiSearch } from 'react-icons/fi'
+import OutsideClickHandler from 'react-outside-click-handler'
 import './Search.css'
 
 export default function Search() {
@@ -54,25 +55,25 @@ export default function Search() {
                     <input className="search-bar" type="text" value={name} onChange={e => handleInput(e)} placeholder="Search"></input>
                     <FiSearch style={eyeglass} size={10.5} className="search-icon" />
                 </div>
+                <OutsideClickHandler onOutsideClick={() => {setClicked(false)}}>
+                    {clicked &&
+                        <div className="search-results">
+                            <div className="search-list">
+                                {allUsers.map((user, id) => {
+                                    return (
+                                        user?.username.toLowerCase().includes(name) ?
 
-                {clicked &&
-                    <div className="search-results">
-                        <div className="search-list">
-                            {allUsers.map((user, id) => {
-                                return (
-                                    user?.username.toLowerCase().includes(name) ?
-
-                                        <a href={`/users/${user?.id}`} key={id} className="search-row">
-                                            <img className="searchbar-photo" src={user?.profile_picture}></img>
-                                            <span className="search-username">{user?.username}</span>
-                                        </a>
-                                        : null
-                                )
-
-                            })}
+                                            <a href={`/users/${user?.id}`} key={id} className="search-row">
+                                                <img className="searchbar-photo" src={user?.profile_picture}></img>
+                                                <span className="search-username">{user?.username}</span>
+                                            </a>
+                                            : null
+                                    )
+                                })}
+                            </div>
                         </div>
-                    </div>
-                }
+                    }
+                </OutsideClickHandler>
             </form>
         </>
     )

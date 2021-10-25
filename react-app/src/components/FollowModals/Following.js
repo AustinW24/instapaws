@@ -46,7 +46,7 @@ export default function FollowingModal({userId, setShowFollowingModal, setClicke
         setShowFollowingModal(false)
         setClicked(false)
     }
-    // console.log(currentUser)
+
 
 
     const handleFollow = async (f) => {
@@ -57,7 +57,7 @@ export default function FollowingModal({userId, setShowFollowingModal, setClicke
         setToggle(!toggle)
         getAUser({ ...userObj.otherUser });
     }
-    console.log(isFollowing)
+
 
     return (
         <>

@@ -10,6 +10,7 @@ import CommentModal from '../CommentModal.js';
 import Modal from '../../context/Modal';
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import OutsideClickHandler from 'react-outside-click-handler'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import './HomePage.css';
 
@@ -94,6 +95,18 @@ export default function HomePage() {
         }
     }
 
+    const handleEditModal = (post) => {
+        setPostsId(post.id);
+
+        setShowEditModal(true)
+    }
+    const handleModal = (post) => {
+        setPostsId(post.id);
+        setClicked(false);
+        setShowDeleteModal(false);
+        setShowEditModal(false)
+    }
+
 
 
     return (
@@ -109,32 +122,38 @@ export default function HomePage() {
 
                                     <img className="profile-pic" src={post?.user.profile_picture} alt="user"></img>
                                     <a href={`users/${post?.user.id}`} className="homepage-username">{post?.user.username}{" "}</a>
-
                                     {post.user_id === user.id &&
                                         <button className='post-dropdown' onClick={() => show(post)}><BiDotsHorizontalRounded /></button>
-
                                     }
-                                    {clicked && postsId === post.id &&
-                                        <div className="dot-dropdown">
-                                            <a className="dot-edit-button" onClick={() => setShowEditModal(true)}>edit</a>
-                                            <a className="dot-delete-button" onClick={() => setShowDeleteModal(true)}>delete</a>
-                                        </div>
+                                        {clicked && postsId === post.id &&
+                                            <div className="dot-dropdown">
+                                                <a className="dot-edit-button" onClick={() => setShowEditModal(true)}>Edit</a>
+                                                <a className="dot-delete-button" onClick={() => setShowDeleteModal(true)}>Delete</a>
+                                            </div>
+                                        }
 
-                                    }
+                                        {clicked && postsId === post.id && showEditModal && (
+                                                <OutsideClickHandler onOutsideClick={() => {
+                                                    handleModal(post)
+                                                }}>
 
-                                    {clicked && postsId === post.id && showEditModal && (
-                                        <Modal onClose={() => setShowEditModal(false)}>
-                                            <EditModal post={post} setShowEditModal={setShowEditModal} setClicked={setClicked} />
-                                        </Modal>
-                                    )
-                                    }
+                                            <Modal onClose={() => setShowEditModal(false)}>
+                                                <EditModal post={post} setShowEditModal={setShowEditModal} setClicked={setClicked} />
+                                            </Modal>
+                                        </OutsideClickHandler>
+                                        )
+                                        }
+                                        {clicked && postsId === post.id && showDeleteModal && (
+                                             <OutsideClickHandler onOutsideClick={() => {
+                                                handleModal(post)
+                                            }}>
+                                            <Modal onClose={() => setShowDeleteModal(false)}>
+                                                <DeleteModal post={post} setShowDeleteModal={setShowDeleteModal} setClicked={setClicked} />
+                                            </Modal>
+                                        </OutsideClickHandler>
 
-                                    {clicked && postsId === post.id && showDeleteModal && (
-                                        <Modal onClose={() => setShowDeleteModal(false)}>
-                                            <DeleteModal post={post} setShowDeleteModal={setShowDeleteModal} setClicked={setClicked} />
-                                        </Modal>
-                                    )
-                                    }
+                                        )
+                                        }
 
 
 
@@ -170,7 +189,7 @@ export default function HomePage() {
                                     <div className="homepage-comments">
                                         {post?.post_comments.length < 2 &&
                                             <div className="comment-row">{post?.post_comments.map((comm, idx) => <div className='home-indv-comment' key={idx}>
-                                                <div className="home-pic-comment" style={{"marginTop": "5px"}}>
+                                                <div className="home-pic-comment" style={{ "marginTop": "5px" }}>
                                                     <img className="home-profile-pic" src={comm?.user_pic} alt="cool person"></img>
                                                 </div>
                                                 <div className="home-user-comment">
@@ -187,8 +206,8 @@ export default function HomePage() {
                                                     >
                                                         {comm?.comment}
                                                         {commentId === comm.id && user.id === comm?.user_id &&
-                                                        <button className="comment-dot" onClick={() => handleCommentClick(comm)} style={removeDiv}  onMouseEnter={() => {handleMouseEnter(comm) }} onMouseLeave={() => { setRemoveDiv({ display: 'none' }) }}><BiDotsHorizontalRounded /></button>
-                                                   }
+                                                            <button className="comment-dot" onClick={() => handleCommentClick(comm)} style={removeDiv} onMouseEnter={() => { handleMouseEnter(comm) }} onMouseLeave={() => { setRemoveDiv({ display: 'none' }) }}><BiDotsHorizontalRounded /></button>
+                                                        }
                                                         {showCommentModal && (
                                                             <Modal onClose={() => setShowCommentModal(false)}>
                                                                 <CommentModal commentId={commentId} setShowCommentModal={setShowCommentModal} setClicked={setClicked} />
@@ -198,26 +217,26 @@ export default function HomePage() {
                                             </div>)}
                                             </div>
                                         }
-                                        {post?.post_comments.length > 1 &&(
+                                        {post?.post_comments.length > 1 && (
                                             <div>
                                                 <a href={`/posts/${post?.id}`} className="viewall">view all comments</a>
                                                 <div className="home-indv-comment">
                                                     <img className="home-post-profile-pic" src={post?.post_comments[post?.post_comments.length - 1].user_pic} alt="list of comments"></img>
                                                     <a href={`/users/${post?.post_comments['0'].user_id}`} className="span-username" ><strong>{post?.post_comments[post?.post_comments.length - 1].user}</strong></a>
                                                     <div className="shown-comment" onMouseEnter={() => { handleMouseEnter(post?.post_comments[[post?.post_comments.length - 1]]) }} onMouseLeave={e => { setRemoveDiv({ display: 'none' }) }}>{"  "}{post?.post_comments[post?.post_comments.length - 1].comment}</div>
-                                                    { commentId === post?.post_comments[[post?.post_comments.length - 1]].id && user.id ===  post?.post_comments[post?.post_comments.length - 1].user_id &&
-                                                        <button className="comment-dot" onClick={() => handleCommentClick(post?.post_comments[[post?.post_comments.length - 1]])} style={removeDiv}  onMouseEnter={() => { handleMouseEnter(post?.post_comments[[post?.post_comments.length - 1]]) }} onMouseLeave={() => { setRemoveDiv({ display: 'none' }) }}><BiDotsHorizontalRounded /></button>
-                                                   }
-                                                   {showCommentModal && (
-                                                            <Modal onClose={() => setShowCommentModal(false)}>
-                                                                <CommentModal commentId={commentId} setShowCommentModal={setShowCommentModal} setClicked={setClicked} />
-                                                            </Modal>
-                                                        )}
+                                                    {commentId === post?.post_comments[[post?.post_comments.length - 1]].id && user.id === post?.post_comments[post?.post_comments.length - 1].user_id &&
+                                                        <button className="comment-dot" onClick={() => handleCommentClick(post?.post_comments[[post?.post_comments.length - 1]])} style={removeDiv} onMouseEnter={() => { handleMouseEnter(post?.post_comments[[post?.post_comments.length - 1]]) }} onMouseLeave={() => { setRemoveDiv({ display: 'none' }) }}><BiDotsHorizontalRounded /></button>
+                                                    }
+                                                    {showCommentModal && (
+                                                        <Modal onClose={() => setShowCommentModal(false)}>
+                                                            <CommentModal commentId={commentId} setShowCommentModal={setShowCommentModal} setClicked={setClicked} />
+                                                        </Modal>
+                                                    )}
 
                                                 </div>
-                                            </div> )
+                                            </div>)
                                         }
-                                        {}
+                                        { }
 
                                     </div>
                                     <div className="footer-comment">

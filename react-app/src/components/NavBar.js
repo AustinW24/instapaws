@@ -9,6 +9,7 @@ import PostModal from './PostModal'
 import Search from './Search'
 import { FiPlusSquare } from "react-icons/fi"
 import { AiFillHome } from "react-icons/ai"
+import OutsideClickHandler from 'react-outside-click-handler'
 import './NavBar.css'
 import './PostModal.css'
 import logo from '../instapaw.png'
@@ -79,9 +80,11 @@ const NavBar = () => {
                             <li>
                                 <button onClick={() => setShowModal(true)} className="plus-button"><FiPlusSquare size={35} /></button>
                                 {showModal && (
+                                    <OutsideClickHandler onOutsideClick={() => setShowModal(false)}>
                                     <Modal onClose={() => setShowModal(false)}>
                                         <PostModal setShowModal={setShowModal} />
                                     </Modal>
+                                    </OutsideClickHandler>
                                 )}
                             </li>
                             <li>
