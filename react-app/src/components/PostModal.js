@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react"
+import { useDispatch } from "react-redux"
 import { createPost } from "../store/posts"
 import FileUploader from './FileUploader'
+import { useForm } from 'react-hook-form'
 import './PostModal.css'
 import './FileUploader/FileUploader.css'
 
@@ -10,18 +11,15 @@ function PostModal({ setShowModal }) {
     const dispatch = useDispatch();
 
     const [caption, setCaption] = useState('');
-    const [picture_url, setPictureUrl] = useState(null);
+    const [picture_url, setPictureUrl] = useState("");
     const [errors, setErrors] = useState([]);
-    // const [file, setFile] = useState(null);
+    const { register, handleSubmit} = useForm()
 
 
-    const onInputChange = (e) => {
 
-        setPictureUrl(e.target.files)
-        console.log(e.target.files)
-    };
 
-    const handleSubmit = async (e) => {
+    const onSubmit = async (data) => {
+
         await dispatch(createPost(picture_url, caption))
         setShowModal(false);
     }
@@ -29,7 +27,7 @@ function PostModal({ setShowModal }) {
     return (
         <>
 
-            <form action="#" id="#" className='postmodal-form' onSubmit={handleSubmit}>
+            <form action="#" id="#" className='postmodal-form' onSubmit={onSubmit}>
                 <div className="post-errors">
                     {errors.map(error => (
                         <li>{error}</li>
@@ -46,20 +44,19 @@ function PostModal({ setShowModal }) {
                         onChange={(e) => setCaption(e.target.value)}
                         required
                     />
-                    {/* <label >
                         <input
                         className="image-input"
                         placeholder='img address...'
                         type="text"
-                        value={caption}
-                        onChange={(e) => setCaption(e.target.value)}
+                        value={picture_url}
+                        onChange={(e) => setPictureUrl(e.target.value)}
                         required
-                    /> */}
-                        <input
+                    />
+                        {/* <input
                             type="file"
-                            onChange={onInputChange}
+                            ref={register}
                             className="form-control"
-                            multiple="" />
+                            multiple="" /> */}
 
                     <div className="post-buttons">
                         <button style={{ width: "50%" }} type="submit" className='post-confirm' >{'   '}Create</button>
