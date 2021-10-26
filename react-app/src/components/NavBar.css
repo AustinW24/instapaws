@@ -23,8 +23,8 @@
     margin-top: 10px;
     margin-left: 50px;
     padding-left: 25px;
-    z-index: -1;
-    cursor: pointer;
+    z-index: 0;
+
 }
 
 ul {
