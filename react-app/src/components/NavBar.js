@@ -43,16 +43,9 @@ const NavBar = () => {
     return (
         <header>
             <nav className='navigation'>
-                {current_user &&
-                    <Link to='/home' onClick={() => setShowModal(false)}>
+
                         <img className='insta-logo' src={logo} alt='logo-main'></img>
-                    </Link>
-                }
-                {!current_user &&
-                    <Link to='/'>
-                        <img className='insta-logo' src={logo} alt='logo-main-alt'></img>
-                    </Link>
-                }
+
                 <ul>
                     {!current_user &&
                         <>

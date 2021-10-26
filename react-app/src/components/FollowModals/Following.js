@@ -18,6 +18,8 @@ export default function FollowingModal({userId, setShowFollowingModal, setClicke
         currentUsersFollowing.push(u.username)
     })
     const [isFollowing, setIsFollowing] = useState(currentUsersFollowing);
+    const [following, setFollowing] = useState(false)
+    const [modalChange, setModalChange] = useState(false)
     // const allUsers = useSelector((state) => Object.values(state.users));
 
     useEffect(() => {
@@ -30,7 +32,7 @@ export default function FollowingModal({userId, setShowFollowingModal, setClicke
             setUser(user)
             dispatch(getAllUsers())
         })();
-    }, [userId.id])
+    }, [userId.id, isFollowing, modalChange])
 
     useEffect(() => {
         (async () => {
@@ -40,7 +42,7 @@ export default function FollowingModal({userId, setShowFollowingModal, setClicke
         })();
         setUpdate(false)
 
-    }, [currentUser, userId.id])
+    }, [currentUser, userId.id, modalChange])
 
     const handleModal = () => {
         setShowFollowingModal(false)
@@ -55,6 +57,7 @@ export default function FollowingModal({userId, setShowFollowingModal, setClicke
         const response = await fetch(`/api/users/${f?.id}/follow`)
         const userObj = await response.json();
         setToggle(!toggle)
+        setModalChange(!modalChange)
         getAUser({ ...userObj.otherUser });
     }
 
@@ -69,14 +72,14 @@ export default function FollowingModal({userId, setShowFollowingModal, setClicke
                 <div className="follow-list">
                         {user.follows?.map((f, id) => (
                             <div key={id}>
-                                <div className="follow-row">
+                                <div className="follow-row" onChange={() => setModalChange(!modalChange)}>
                                     <img className="follow-picture" src={f?.profile_picture}></img>
                                     <a href={`/users/${f?.id}`} className="follow-username">{f?.username}</a>
-                                    {!currentUsersFollowing.includes(f?.username)  && currentUser.id !== f?.id &&
-                                        <button value={toggle} onClick={() => handleFollow(f)} style={{"position": "absolute", "paddingLeft": "18px", "paddingRight": "18px", "marginLeft": "13rem", "fontWeight": "bold"}} className="follow-button">Follow</button>
+                                    {!currentUsersFollowing.includes(f?.username)  && currentUser.id !== f?.id  &&
+                                        <button onClick={() => handleFollow(f)} style={{"position": "absolute", "paddingLeft": "18px", "paddingRight": "18px", "marginLeft": "13rem", "fontWeight": "bold"}} className="follow-button">Follow</button>
                                     }
                                     {currentUsersFollowing.includes(f?.username)  && currentUser.id !== f?.id &&
-                                        <button  value={toggle} onClick={() => handleFollow(f)} style={{"position": "absolute", "paddingLeft": "5px", "paddingRight": "5px", "marginLeft": "13rem", "background": "#fafafa", "color": "black", "border": "1px solid lightgray", "fontWeight": "bold"}} className="follow-button">Following</button>
+                                        <button  onClick={() => handleFollow(f)} style={{"position": "absolute", "paddingLeft": "5px", "paddingRight": "5px", "marginLeft": "13rem", "background": "#fafafa", "color": "black", "border": "1px solid lightgray", "fontWeight": "bold"}} className="follow-button">Following</button>
                                     }
                                 </div>
                             </div>
