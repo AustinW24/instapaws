@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import { createPost } from "../store/posts"
 import FileUploader from './FileUploader'
-import { useForm } from 'react-hook-form'
 import './PostModal.css'
 import './FileUploader/FileUploader.css'
 
