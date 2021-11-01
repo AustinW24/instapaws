@@ -32,7 +32,7 @@ const LoginForm = () => {
 
     const demoLogin = async () => {
         const data = await dispatch(login('demo@aa.io', 'password'));
-          if (data) {
+        if (data) {
             setErrors(data)
           }
       }

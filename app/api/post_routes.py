@@ -2,9 +2,15 @@ from flask import Blueprint, request, jsonify
 from ..models.post import Post
 from ..forms.post_form import PostForm
 from ..forms.edit_form import EditForm
+from app.config import Config
 from ..models.db import db
-from datetime import datetime
+
 from flask_login import login_required, current_user
+# from .aws_s3 import public_file_upload, upload_file_to_s3
+from .utils import validation_errors_to_error_messages
+# from werkzeug.utils import secure_filename
+import os
+
 
 post_routes = Blueprint('posts', __name__)
 
@@ -26,24 +32,38 @@ def postOne(id):
 @post_routes.route('/', methods=['POST'])
 @login_required
 def createPost():
+
     form = PostForm()
-    user = current_user
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
         new_post = Post(
-            user_id=user.id,
-            caption=form.data['caption'],
-            picture_url=form.data['picture_url'],
-            timestamp=datetime.now()
-        )
-    else:
-        return {'errors': [form.errors]}
+                picture_url = form.data['picture_url'],
+                caption = form.data['caption']
+            )
 
-    db.session.add(new_post)
-    db.session.commit()
+        # if "img_file" in request.files:
 
-    return {'posts': [new_post.to_dict()]}
+        #     img_file = request.files["img_file"]
+
+        # if img_file:
+        #     try:
+        #         temp_file_name = "app/api/tmp" + \
+        #             secure_filename(img_file.filename)
+        #         img_file.save(temp_file_name)
+        #         picture_url = public_file_upload(
+        #             temp_file_name, "instapaw")
+        #         os.remove(temp_file_name)
+        #     except KeyError:
+        #         pass
+
+        #   return {'errors': [form.errors], '4444444444444444': '666666666666666'}
+        db.session.add(new_post)
+        db.session.commit(new_post)
+
+        return {'posts': [new_post.to_dict()]}
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
 
 
 @post_routes.route('/<int:id>', methods=['PUT'])

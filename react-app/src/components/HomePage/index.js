@@ -95,11 +95,11 @@ export default function HomePage() {
         }
     }
 
-    const handleEditModal = (post) => {
-        setPostsId(post.id);
+    // const handleEditModal = (post) => {
+    //     setPostsId(post.id);
 
-        setShowEditModal(true)
-    }
+    //     setShowEditModal(true)
+    // }
     const handleModal = (post) => {
         setPostsId(post.id);
         setClicked(false);

@@ -109,23 +109,22 @@ export const editPost = (post) => async dispatch => {
 
 
 export const createPost = (picture_url, caption) => async dispatch => {
-    const req = await fetch('/api/posts/', {
+
+
+    const request = await fetch('/api/posts/', {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-            caption,
-            picture_url
-        })
+        body: JSON.stringify({picture_url, caption}),
     });
 
-    if (req.ok) {
-        const data = await req.json();
+    if (request.ok) {
+        const data = await request.json();
         await dispatch(actionCreatePost(data))
 
-    } else if (req.status < 500) {
-        const data = await req.json();
+    } else if (request.status < 500) {
+        const data = await request.json();
         return data.errors;
     } else {
         return ['An error occurred while creating post.']
