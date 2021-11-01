@@ -12,12 +12,9 @@ function PostModal({ setShowModal }) {
     const [caption, setCaption] = useState('');
     const [picture_url, setPictureUrl] = useState("");
     const [errors, setErrors] = useState([]);
-    const { register, handleSubmit} = useForm()
 
 
-
-
-    const onSubmit = async (data) => {
+    const onSubmit = async (e) => {
 
         await dispatch(createPost(picture_url, caption))
         setShowModal(false);
