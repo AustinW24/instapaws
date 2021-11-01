@@ -25,7 +25,7 @@ function User() {
     const [isFollowing, setIsFollowing] = useState(
         currentUser.follows.map((u) => +u.id).includes(id)
     );
-    console.log("ISFOLLOWING", isFollowing)
+
 
     const [user, setUser] = useState({});
     const ref = useRef();
