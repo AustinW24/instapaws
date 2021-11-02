@@ -17,6 +17,7 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.app.api.aws_s3.py
 
 npm-debug.log*
 yarn-debug.log*

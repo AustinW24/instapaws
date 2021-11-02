@@ -59,7 +59,7 @@ function PostModal({ setShowModal }) {
     return (
         <>
 
-            <form action="#" id="#" className='postmodal-form' onSubmit={postCreate}>
+            <form action="#" id="#" className='postmodal-form' >
                 <div className="post-errors">
                     {errors.map(error => (
                         <li>{error}</li>
