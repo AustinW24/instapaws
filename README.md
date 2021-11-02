@@ -1,5 +1,6 @@
 # Flask React Project
 
+[Link to Google](https://www.google.com)
 
 ## Instapaw
 
