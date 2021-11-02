@@ -57,6 +57,9 @@ export default function HomePage() {
         setComments('')
         await dispatch(createComment(payload))
     }
+    const bodyScroll = () => {
+        document.body.style.overflow = 'hidden'
+    }
 
 
     const handleCommentClick = (comment) => {
@@ -96,11 +99,13 @@ export default function HomePage() {
     }
 
     const handleEditModal = (post) => {
+        bodyScroll()
         setPostsId(post.id);
-
         setShowEditModal(true)
     }
-    const handleModal = (post) => {
+
+    const handleModal = (post, e) => {
+
         setPostsId(post.id);
         setClicked(false);
         setShowDeleteModal(false);
@@ -125,35 +130,35 @@ export default function HomePage() {
                                     {post.user_id === user.id &&
                                         <button className='post-dropdown' onClick={() => show(post)}><BiDotsHorizontalRounded /></button>
                                     }
-                                        {clicked && postsId === post.id &&
-                                            <div className="dot-dropdown">
-                                                <a className="dot-edit-button" onClick={() => setShowEditModal(true)}>Edit</a>
-                                                <a className="dot-delete-button" onClick={() => setShowDeleteModal(true)}>Delete</a>
-                                            </div>
-                                        }
+                                    {clicked && postsId === post.id &&
+                                        <div className="dot-dropdown">
+                                            <a className="dot-edit-button" onClick={(e) => setShowEditModal(true)}>Edit</a>
+                                            <a className="dot-delete-button" onClick={(e) => setShowDeleteModal(true)}>Delete</a>
+                                        </div>
+                                    }
 
-                                        {clicked && postsId === post.id && showEditModal && (
-                                                <OutsideClickHandler onOutsideClick={() => {
-                                                    handleModal(post)
-                                                }}>
+                                    {clicked && postsId === post.id && showEditModal && (
+                                        <OutsideClickHandler onOutsideClick={() => {
+                                            handleModal(post)
+                                        }}>
 
                                             <Modal onClose={() => setShowEditModal(false)}>
                                                 <EditModal post={post} setShowEditModal={setShowEditModal} setClicked={setClicked} />
                                             </Modal>
                                         </OutsideClickHandler>
-                                        )
-                                        }
-                                        {clicked && postsId === post.id && showDeleteModal && (
-                                             <OutsideClickHandler onOutsideClick={() => {
-                                                handleModal(post)
-                                            }}>
+                                    )
+                                    }
+                                    {clicked && postsId === post.id && showDeleteModal && (
+                                        <OutsideClickHandler onOutsideClick={() => {
+                                            handleModal(post)
+                                        }}>
                                             <Modal onClose={() => setShowDeleteModal(false)}>
                                                 <DeleteModal post={post} setShowDeleteModal={setShowDeleteModal} setClicked={setClicked} />
                                             </Modal>
                                         </OutsideClickHandler>
 
-                                        )
-                                        }
+                                    )
+                                    }
 
 
 

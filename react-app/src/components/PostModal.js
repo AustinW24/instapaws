@@ -82,13 +82,9 @@ function PostModal({ setShowModal }) {
                         type="file"
                         accept="image/png, image/gif, image/jpeg, image/pdf, image/jpg"
                         onChange={updateImage}
-                        placeholder={image}
+                        
                     />
-                    {/* <input
-                            type="file"
-                            ref={register}
-                            className="form-control"
-                            multiple="" /> */}
+
 
                     <div className="post-buttons">
                         <button style={{ width: "50%" }} type="submit" className='post-confirm' onClick={postCreate}>{'   '}Create</button>

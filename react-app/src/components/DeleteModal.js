@@ -8,7 +8,7 @@ import './DeleteModal.css'
 export default function DeleteModal({ post, setShowDeleteModal, setClicked }) {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [isOpen, setIsOpen] = useState({})
+   
 
     const handleDelete = async () => {
         await dispatch(removePost(post.id))

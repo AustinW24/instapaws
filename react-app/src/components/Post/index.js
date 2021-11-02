@@ -120,7 +120,7 @@ function Post() {
                 <div className="comments-container">
                     <div className="comments-header">
                         {postObj && <img className="post-profile-pic" src={postObj?.user.profile_picture} alt="cool person"></img>}
-                        <div className="post-username">{postObj?.user.username}</div>
+                        <div className="post-username"> <a href={`/users/${postObj?.user_id}`}>{postObj?.user.username}</a></div>
                         {postObj?.user_id === user.id &&
                             <button className='post-dropdown' onClick={() => show(post)}><BiDotsHorizontalRounded /></button>
                         }
@@ -145,7 +145,7 @@ function Post() {
 
                     <div className="user-caption"><img className="bottom-profile-pic" src={postObj?.user.profile_picture} alt="cool person"></img>
 
-                        <span  className="caption-span"><span style={{"font-weight": "bold"}}>{postObj?.user.username}</span>{"      "}{postObj?.caption}</span>
+                        <p ><span  className="caption-span" style={{"font-weight": "bold"}} ><a style={{"marginLeft": "12px"}} href={`/users/${postObj?.user_id}`} >{postObj?.user.username}{"      "}</a></span>{"      "}{postObj?.caption}</p>
                     </div>
                     <div className="comment-scroll">
                         <div>{postObj?.post_comments.map((comm, idx) =>
@@ -155,14 +155,14 @@ function Post() {
                                         <img className="post-profile-av" src={comm?.user_pic} alt="avatar"></img>
                                         {user.username !== comm?.user &&
                                             <div className="post-comment">
-                                                <strong className="post-username">{comm?.user}{"      "}</strong>
+                                                <strong> <a href={`/users/${comm?.user_id}`}  className="post-username">{comm?.user}</a></strong>
                                                 <span className="post-comm">{comm?.comment}</span>
                                             </div>
                                         }
                                         {user.username === comm?.user &&
                                             <div className="post-user-comment">
                                                 <span  className="post-comment">
-                                                    <strong className="post-username">{comm?.user} </strong>
+                                                    <strong> <a href={`/users/${user?.id}`}  className="post-username">{comm?.user}</a></strong>
                                                     <span className="post-comm" onMouseEnter={() => { handleMouseEnter(comm) }}>{comm?.comment}</span>
                                                 </span>
 
