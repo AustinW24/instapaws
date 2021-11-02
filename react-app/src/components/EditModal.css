@@ -8,9 +8,9 @@
 	height: 10rem;
 	border: 1.5px solid lightgray;
 	background: white;
-	border-radius: 6px;
+	border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
-
+    
 }
 
 .postmodal-caption:focus{

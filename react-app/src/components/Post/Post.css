@@ -55,6 +55,7 @@
     border-right: none;
     border-left: none;
     border-top: none;
+    z-index: 1;
 }
 
 
@@ -130,7 +131,7 @@
 }
 
 .user-caption {
-    margin-top: 60px;
+    margin-top: 50px;
     font-size: 12px;
     display: flex;
     align-items: center;
@@ -227,6 +228,7 @@ position: absolute;
 
 .post-comm {
     word-wrap: break-word;
+    font-size: 12px;
 
 }
 
@@ -238,8 +240,10 @@ position: absolute;
 } */
 
 .caption-span {
-    margin-top: 4px;
-    margin-left: 10px;
+    position: relative;
+    right: 5px;
+    font-size: 12px;
+
 
 }
 
@@ -254,7 +258,7 @@ position: absolute;
 .post-username {
     margin-top: 15px;
     font-weight: bold;
-    font-size: 13px;
+    font-size: 12px;
     margin-bottom: 10px;
     margin-left: 6px;
     font-family: Arial;

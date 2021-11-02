@@ -50,7 +50,7 @@ export const getAllPosts = () => {
         });
         if (response.ok) {
             const posts = await response.json();
-            console.log(posts)
+
             dispatch(setPosts(posts))
             return posts
         } else {
@@ -62,11 +62,11 @@ export const getAllPosts = () => {
 
 export const getPost = (id) => async dispatch => {
     const res = await fetch(`/api/posts/${id}`)
-    console.log('inside thunk for getPost')
+    // console.log('inside thunk for getPost')
     if (res.ok) {
-        console.log("RES IS OK for thunk getPost")
+        // console.log("RES IS OK for thunk getPost")
         const post = await res.json()
-        console.log(post)
+        // console.log(post)
         dispatch(setPost(post))
     }
     return res
