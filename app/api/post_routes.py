@@ -5,6 +5,7 @@ from ..forms.edit_form import EditForm
 from ..models.db import db
 from datetime import datetime
 from flask_login import login_required, current_user
+from .aws_s3 import *
 
 post_routes = Blueprint('posts', __name__)
 
@@ -31,10 +32,11 @@ def createPost():
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
+
         new_post = Post(
             user_id=user.id,
+            picture_url=form.data['image_url'],
             caption=form.data['caption'],
-            picture_url=form.data['picture_url'],
             timestamp=datetime.now()
         )
     else:
@@ -44,6 +46,10 @@ def createPost():
     db.session.commit()
 
     return {'posts': [new_post.to_dict()]}
+
+
+
+
 
 
 @post_routes.route('/<int:id>', methods=['PUT'])
