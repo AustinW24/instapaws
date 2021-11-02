@@ -1,6 +1,6 @@
 # Flask React Project
 
-[Link to Google](https://www.google.com)
+[Visit Instapaw](https://instapaw.herokuapp.com/)
 
 ## Instapaw
 
