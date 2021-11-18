@@ -105,7 +105,6 @@ export default function HomePage() {
     }
 
     const handleModal = (post, e) => {
-
         setPostsId(post.id);
         setClicked(false);
         setShowDeleteModal(false);

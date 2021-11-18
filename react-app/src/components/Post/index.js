@@ -3,13 +3,13 @@ import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
 import { getPost, likePost, getAllPosts } from '../../store/posts'
 import { createComment } from '../../store/comments'
+import { BiDotsHorizontalRounded } from "react-icons/bi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import CommentModal from '../CommentModal.js'
 import EditModal from '../EditModal.js'
 import DeleteModal from '../DeleteModal.js'
 import Modal from '../../context/Modal'
-import { BiDotsHorizontalRounded } from "react-icons/bi";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import './Post.css'
 
 

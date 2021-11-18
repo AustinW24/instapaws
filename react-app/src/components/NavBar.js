@@ -2,13 +2,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, Link, useParams } from 'react-router-dom';
+import { FiPlusSquare } from "react-icons/fi"
+import { AiFillHome } from "react-icons/ai"
 import LogoutButton from './auth/LogoutButton';
 import LoginForm from './auth/LoginForm';
 import Modal from '.././context/Modal'
 import PostModal from './PostModal'
 import Search from './Search'
-import { FiPlusSquare } from "react-icons/fi"
-import { AiFillHome } from "react-icons/ai"
 import OutsideClickHandler from 'react-outside-click-handler'
 import './NavBar.css'
 import './PostModal.css'

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createComment, getComments } from '../store/comments';
 import "./Comment.css"
@@ -10,7 +9,7 @@ function Comment({id, comment}) {
     const dispatch = useDispatch()
     const user = useSelector((state) => state.session.user)
     const [comment, setComment] = useState('')
-    const [editId, setEditId] = useState(false)
+    // const [editId, setEditId] = useState(false)
 
 
     useEffect(() => {

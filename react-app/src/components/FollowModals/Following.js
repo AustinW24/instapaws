@@ -20,7 +20,6 @@ export default function FollowingModal({userId, setShowFollowingModal, setClicke
     const [isFollowing, setIsFollowing] = useState(currentUsersFollowing);
     const [following, setFollowing] = useState(false)
     const [modalChange, setModalChange] = useState(false)
-    // const allUsers = useSelector((state) => Object.values(state.users));
 
     useEffect(() => {
         if (!userId) {
