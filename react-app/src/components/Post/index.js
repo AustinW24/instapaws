@@ -3,13 +3,13 @@ import { useEffect, useState } from "react"
 import { useParams } from 'react-router-dom'
 import { getPost, likePost, getAllPosts } from '../../store/posts'
 import { createComment } from '../../store/comments'
+import { BiDotsHorizontalRounded } from "react-icons/bi";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import CommentModal from '../CommentModal.js'
 import EditModal from '../EditModal.js'
 import DeleteModal from '../DeleteModal.js'
 import Modal from '../../context/Modal'
-import { BiDotsHorizontalRounded } from "react-icons/bi";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import './Post.css'
 
 
@@ -138,14 +138,14 @@ function Post() {
                         )}
                         {showDeleteModal && (
                             <Modal onClose={() => setShowDeleteModal(false)}>
-                                <DeleteModal post={postObj} setShowDeleteModal={setShowDeleteModal} setClicked={setClicked} />
+                                <DeleteModal post={postObj} setShowDeleteModal={setShowDeleteModal} user={user} setClicked={setClicked} />
                             </Modal>
                         )}
                     </div>
 
                     <div className="user-caption"><img className="bottom-profile-pic" src={postObj?.user.profile_picture} alt="cool person"></img>
 
-                        <p ><span  className="caption-span" style={{"font-weight": "bold"}} ><a style={{"marginLeft": "12px"}} href={`/users/${postObj?.user_id}`} >{postObj?.user.username}{"      "}</a></span>{"      "}{postObj?.caption}</p>
+                        <p ><span  className="caption-span" style={{"fontWeight": "bold"}} ><a style={{"marginLeft": "12px"}} href={`/users/${postObj?.user_id}`} >{postObj?.user.username}{"      "}</a></span>{"      "}{postObj?.caption}</p>
                     </div>
                     <div className="comment-scroll">
                         <div>{postObj?.post_comments.map((comm, idx) =>

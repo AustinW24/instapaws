@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState} from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import OutsideClickHandler from 'react-outside-click-handler'
@@ -13,7 +13,7 @@ import "./ProfilePage.css"
 function User() {
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.session.user)
-    const posts = useSelector((state) => state.posts?.posts);
+    const posts = useSelector((state) => state?.posts);
     const userId = useParams();
     const id = Number(userId.id);
     const [update, setUpdate] = useState(false);
@@ -21,14 +21,24 @@ function User() {
     const [showFollowerModal, setShowFollowerModal] = useState(false);
     const [showFollowingModal, setShowFollowingModal] = useState(false);
     const [clicked, setClicked] = useState(false);
-    const [hidden, setHidden] = useState(false);
     const [isFollowing, setIsFollowing] = useState(
         currentUser.follows.map((u) => +u.id).includes(id)
     );
-
+    const values = Object.values(posts)
 
     const [user, setUser] = useState({});
-    const ref = useRef();
+
+        console.log(posts)
+    // useEffect(() => {
+    //     if (!userId) {
+    //         return;
+    //     }
+    //     (async () => {
+    //         const response = await fetch(`/api/users/${id}`);
+    //         const user = await response.json();
+    //         setUser(user)
+    //     })();
+    // }, [id])
 
 
     useEffect(() => {
@@ -38,16 +48,8 @@ function User() {
         (async () => {
             const response = await fetch(`/api/users/${id}`);
             const user = await response.json();
-            setUser(user)
-        })();
-    }, [id])
-
-
-    useEffect(() => {
-        (async () => {
-            const response = await fetch(`/api/users/${id}`);
-            const user = await response.json();
             setUser(user);
+            getAUser(id)
         })();
         setUpdate(false)
 
@@ -56,6 +58,8 @@ function User() {
     useEffect(() => {
         if (!posts) {
             dispatch((getAllPosts()))
+        } else {
+            dispatch(getAllPosts())
         }
     }, [dispatch])
 
@@ -63,7 +67,7 @@ function User() {
 
     const numOfPosts = (posts) => {
         let count = 0;
-        posts?.map(post => {
+        values?.map(post => {
             if (+post.user_id === user.id) {
                 count += 1
             }
@@ -132,7 +136,7 @@ function User() {
 
             <hr className="hr-tag" style={{ 'border': '1px solid lightgray', width: '840px', 'marginBottom': '60px' }} />
             <div className="profile-body">
-                {posts?.slice(0).reverse().map((post, idx) => {
+                {values?.slice(0).reverse().map((post, idx) => {
 
                     return (post?.user.id === +userId.id) && (
                         <div className="picture-block" key={idx}>

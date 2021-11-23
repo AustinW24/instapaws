@@ -109,6 +109,7 @@ export const editPost = (post) => async dispatch => {
 
 
 export const createPost = ( image_url, caption) => async dispatch => {
+    console.log("INSIDE CREATE POST", image_url, caption)
     const req = await fetch('/api/posts/', {
         method: "POST",
         headers: {
@@ -121,10 +122,7 @@ export const createPost = ( image_url, caption) => async dispatch => {
 
         )
     });
-
     if (req.ok) {
-        console.log("REQ IS OKAY IN CREATEPOST THUNK")
-
         const data = await req.json();
         await dispatch(actionCreatePost(data))
 
@@ -161,24 +159,27 @@ export default function posts(state = initialState, action) {
     switch (action.type) {
         case GET_POSTS: {
 
-            return { ...state, ...action.payload };
+            const all = {...state};
+            action.payload.posts.forEach((onePost) => {
+                all[onePost.id] = onePost;
+            });
+
+            return all;
+
+            // return { ...state, ...action.payload };
         }
         case GET_POST: {
 
             return { ...state, ...action.payload };
         }
-        // case GET_ALL_POSTS:
-
-        //     return { ...state, ...action.posts }
 
         case CREATE_POST: {
-
-            const newState = { ...state }
+            const newState = {...state, [action.payload.posts[0].id]: action.payload.posts[0]}
             return newState;
         }
         case EDIT_POST: {
 
-            const updatedState = { ...state, [action.post.id]: action.post }
+            const updatedState = { ...state, [action.posts.id]: action.posts }
             return updatedState;
         }
         case REMOVE_POST: {

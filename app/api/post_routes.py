@@ -39,9 +39,10 @@ def createPost():
             caption=form.data['caption'],
             timestamp=datetime.now()
         )
+
     else:
         return {'errors': [form.errors]}
-
+    print(new_post, "NEW-POST############################")
     db.session.add(new_post)
     db.session.commit()
 

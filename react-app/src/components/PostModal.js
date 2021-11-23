@@ -1,19 +1,20 @@
 import React, { useState } from "react"
-import { useDispatch } from "react-redux"
-import { useHistory } from 'react-router-dom';
+import { useDispatch} from "react-redux"
+
 import { createPost } from "../store/posts"
 import './PostModal.css'
-import './FileUploader/FileUploader.css'
+
 
 
 
 function PostModal({ setShowModal }) {
     const dispatch = useDispatch();
-    const history = useHistory();
+    // const history = useHistory();
     const [caption, setCaption] = useState('');
     const [url, setUrl] = useState("");
     const [errors, setErrors] = useState([]);
-    const [image, setImage] = useState('')
+    const [image, setImage] = useState('');
+
 
 
     const updateImage = (e) => {
@@ -36,9 +37,8 @@ function PostModal({ setShowModal }) {
     }
 
     const postCreate = async (e) => {
-
+        e.preventDefault();
         let image_url = url;
-        // let image_caption = caption;
 
         if (url !== 'https://i.imgur.com/BPOYKBx.png') {
             let formData = new FormData()
@@ -51,10 +51,13 @@ function PostModal({ setShowModal }) {
             let x = await res.json()
             image_url = x['url']
 
+            await dispatch(createPost(image_url, caption))
+            setShowModal(false)
         }
-        await dispatch(createPost(image_url, caption))
-        history.push("/")
+
+        // window.location.reload(true);
     }
+
 
     return (
         <>
@@ -82,12 +85,12 @@ function PostModal({ setShowModal }) {
                         type="file"
                         accept="image/png, image/gif, image/jpeg, image/pdf, image/jpg"
                         onChange={updateImage}
-                        
+
                     />
 
 
                     <div className="post-buttons">
-                        <button style={{ width: "50%" }} type="submit" className='post-confirm' onClick={postCreate}>{'   '}Create</button>
+                        <button style={{ width: "50%" }} type="submit" className='post-confirm'  onClick={postCreate}>{'   '}Create</button>
                         <button style={{ width: "50%" }} className="post-cancel" onClick={() => setShowModal(false)}>Cancel</button>
                     </div>
                 </div>

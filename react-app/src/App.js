@@ -8,6 +8,7 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import User from './components/ProfilePage/User';
 import HomePage from './components/HomePage'
 import Footer from './components/Footer'
+import NotFound from './components/NotFound'
 import Post from './components/Post'
 import { authenticate } from './store/session';
 
@@ -48,6 +49,7 @@ function App() {
                     <NavBar/>
                     <Post/>
                 </ProtectedRoute>
+                <Route path="*" component={NotFound} />
             </Switch>
         </BrowserRouter>
     );

@@ -13,7 +13,7 @@
     width: 518px;
 }
 .indv-photo {
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     height: 100%;
     width: 100%;

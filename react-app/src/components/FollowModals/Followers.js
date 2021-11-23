@@ -18,7 +18,6 @@ export default function FollowersModal({userId, setShowFollowerModal, setClicked
         currentUsersFollowing.push(u.username)
     })
     const [isFollowing, setIsFollowing] = useState(currentUsersFollowing);
-    // const allUsers = useSelector((state) => Object.values(state.users));
 
     useEffect(() => {
         if (!userId) {
