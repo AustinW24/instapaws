@@ -17,7 +17,7 @@ import './HomePage.css';
 
 export default function HomePage() {
     const dispatch = useDispatch();
-    const posts = useSelector((state) => state.posts?.posts);
+    const posts = useSelector((state) => state?.posts);
     const user = useSelector(state => state.session.user);
     const [clicked, setClicked] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
@@ -32,19 +32,24 @@ export default function HomePage() {
     const [heartId, setHeartId] = useState(0);
     const [body, setBody] = useState({})
 
+    const postObj = posts
+    const values = Object.values(postObj)
 
     useEffect(() => {
-        if (!comments)
-            dispatch(getAllPosts())
-    }, [dispatch, comments])
-
-    useEffect(() => {
-        if (!posts) {
+        if (!comments || !posts){
             dispatch(getAllPosts())
         } else {
             dispatch(getAllPosts())
         }
-    }, [dispatch, heartColor])
+    }, [dispatch, comments, heartColor])
+
+    // useEffect(() => {
+    //     if (!posts) {
+    //         dispatch(getAllPosts())
+    //     } else {
+    //         dispatch(getAllPosts())
+    //     }
+    // }, [dispatch, heartColor])
 
 
     const handleNewSubmit = async e => {
@@ -57,9 +62,7 @@ export default function HomePage() {
         setComments('')
         await dispatch(createComment(payload))
     }
-    // const bodyScroll = () => {
-    //     document.body.style.overflow = 'hidden'
-    // }
+
 
 
     const handleCommentClick = (comment) => {
@@ -117,13 +120,11 @@ export default function HomePage() {
         <>
             <div className='home-container' style={{ height: showEditModal || showDeleteModal ? "100vh" : null, "overflowY": showEditModal || showDeleteModal ? "hidden" : null }}>
                 <ul value={body} className='post-list' >
-                    {posts?.slice(0).reverse().map((post, idx) => {
-
+                    {values?.slice(0).reverse().map((post, idx) => {
+                    // {for(const [idx, post] of Object.entries(postObj)){
                         return (
                             <li key={idx} className="indv-post">
-
                                 <div className="post-header">
-
                                     <img className="profile-pic" src={post?.user.profile_picture} alt="user"></img>
                                     <a href={`users/${post?.user.id}`} className="homepage-username">{post?.user.username}{" "}</a>
                                     {post.user_id === user.id &&
@@ -155,16 +156,10 @@ export default function HomePage() {
                                                 <DeleteModal post={post} setShowDeleteModal={setShowDeleteModal} setClicked={setClicked} />
                                             </Modal>
                                         </OutsideClickHandler>
-
                                     )
                                     }
-
-
-
                                 </div>
                                 <div className="photo-container"><div className="indv-photo" style={{ backgroundImage: `url(${post.picture_url})` }}></div></div>
-
-
                                 <div className="post-footer" >
                                     <div className="post-footer-head">
                                         <button onClick={() => postLikes(post)} className="homepage-heart-btn" style={{ 'backgroundColor': 'transparent', width: '20px', 'marginLeft': '14px', 'border': 'none', 'padding': '0px' }}>
@@ -240,7 +235,7 @@ export default function HomePage() {
                                                 </div>
                                             </div>)
                                         }
-                                        { }
+                                       
 
                                     </div>
                                     <div className="footer-comment">
@@ -252,10 +247,16 @@ export default function HomePage() {
                                 </div>
                             </li>
                         )
-                    })}
+                    }
+                    )
+                    }
                 </ul>
             </div>
-        </>
-    )
+                    {/* {for (const [idx, post] of Object.values(postObj)) {
 
+                    }} */}
+
+        </>
+
+    )
 }

@@ -37,7 +37,9 @@ function PostModal({ setShowModal }) {
     }
 
     const postCreate = async (e) => {
+        e.preventDefault();
         let image_url = url;
+
         if (url !== 'https://i.imgur.com/BPOYKBx.png') {
             let formData = new FormData()
             formData.append('image', image)
@@ -48,11 +50,12 @@ function PostModal({ setShowModal }) {
             });
             let x = await res.json()
             image_url = x['url']
-            console.log(image_url)
+
             await dispatch(createPost(image_url, caption))
+            setShowModal(false)
         }
 
-        window.location.reload(true);
+        // window.location.reload(true);
     }
 
 
