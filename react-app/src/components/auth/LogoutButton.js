@@ -11,7 +11,7 @@ const LogoutButton = () => {
     const dispatch = useDispatch()
     const [clicked, setClicked] = useState(false)
     const current_user = useSelector(state => state.session.user)
-
+  
 
     const onLogout = async (e) => {
         dispatch(logout());
@@ -31,7 +31,7 @@ const LogoutButton = () => {
             <>
               <div className='profile-dropdown-div'>
 
-                <Link to={`/users/${current_user.id}`} className="profile-dropdown__b" onClick={() => setClicked(false)}>
+                <Link to={`/users/${current_user?.id}`} className="profile-dropdown__b" onClick={() => setClicked(false)}>
                   profile
                 </Link>
                 <Link to="/" className='profile-dropdown__a' onClick={onLogout}>

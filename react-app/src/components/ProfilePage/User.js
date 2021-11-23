@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState} from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import OutsideClickHandler from 'react-outside-click-handler'
@@ -21,14 +21,23 @@ function User() {
     const [showFollowerModal, setShowFollowerModal] = useState(false);
     const [showFollowingModal, setShowFollowingModal] = useState(false);
     const [clicked, setClicked] = useState(false);
-    const [hidden, setHidden] = useState(false);
     const [isFollowing, setIsFollowing] = useState(
         currentUser.follows.map((u) => +u.id).includes(id)
     );
 
-
     const [user, setUser] = useState({});
-    const ref = useRef();
+
+
+    // useEffect(() => {
+    //     if (!userId) {
+    //         return;
+    //     }
+    //     (async () => {
+    //         const response = await fetch(`/api/users/${id}`);
+    //         const user = await response.json();
+    //         setUser(user)
+    //     })();
+    // }, [id])
 
 
     useEffect(() => {
@@ -38,16 +47,8 @@ function User() {
         (async () => {
             const response = await fetch(`/api/users/${id}`);
             const user = await response.json();
-            setUser(user)
-        })();
-    }, [id])
-
-
-    useEffect(() => {
-        (async () => {
-            const response = await fetch(`/api/users/${id}`);
-            const user = await response.json();
             setUser(user);
+            getAUser(id)
         })();
         setUpdate(false)
 

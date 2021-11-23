@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 // import { useHistory } from "react-router-dom"
 import { getAllPosts, likePost } from '../../store/posts';
-import { createComment, getComments } from '../../store/comments';
+import { createComment} from '../../store/comments';
 import EditModal from '../EditModal.js';
 import DeleteModal from '../DeleteModal.js';
 import CommentModal from '../CommentModal.js';
@@ -57,9 +57,9 @@ export default function HomePage() {
         setComments('')
         await dispatch(createComment(payload))
     }
-    const bodyScroll = () => {
-        document.body.style.overflow = 'hidden'
-    }
+    // const bodyScroll = () => {
+    //     document.body.style.overflow = 'hidden'
+    // }
 
 
     const handleCommentClick = (comment) => {
@@ -98,11 +98,11 @@ export default function HomePage() {
         }
     }
 
-    const handleEditModal = (post) => {
-        bodyScroll()
-        setPostsId(post.id);
-        setShowEditModal(true)
-    }
+    // const handleEditModal = (post) => {
+    //     bodyScroll()
+    //     setPostsId(post.id);
+    //     setShowEditModal(true)
+    // }
 
     const handleModal = (post, e) => {
         setPostsId(post.id);

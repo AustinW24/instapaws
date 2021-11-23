@@ -109,6 +109,7 @@ export const editPost = (post) => async dispatch => {
 
 
 export const createPost = ( image_url, caption) => async dispatch => {
+    console.log("INSIDE CREATE POST", image_url, caption)
     const req = await fetch('/api/posts/', {
         method: "POST",
         headers: {
@@ -121,10 +122,7 @@ export const createPost = ( image_url, caption) => async dispatch => {
 
         )
     });
-
     if (req.ok) {
-        console.log("REQ IS OKAY IN CREATEPOST THUNK")
-
         const data = await req.json();
         await dispatch(actionCreatePost(data))
 

@@ -32,9 +32,9 @@
 #     return f"{Config.S3_LOCATION}{file.filename}"
 
 import boto3
-import botocore
 import os
 import uuid
+
 
 BUCKET_NAME = os.environ.get("S3_BUCKET_NAME")
 S3_LOCATION = f"https://{BUCKET_NAME}.s3.amazonaws.com/"

@@ -138,14 +138,14 @@ function Post() {
                         )}
                         {showDeleteModal && (
                             <Modal onClose={() => setShowDeleteModal(false)}>
-                                <DeleteModal post={postObj} setShowDeleteModal={setShowDeleteModal} setClicked={setClicked} />
+                                <DeleteModal post={postObj} setShowDeleteModal={setShowDeleteModal} user={user} setClicked={setClicked} />
                             </Modal>
                         )}
                     </div>
 
                     <div className="user-caption"><img className="bottom-profile-pic" src={postObj?.user.profile_picture} alt="cool person"></img>
 
-                        <p ><span  className="caption-span" style={{"font-weight": "bold"}} ><a style={{"marginLeft": "12px"}} href={`/users/${postObj?.user_id}`} >{postObj?.user.username}{"      "}</a></span>{"      "}{postObj?.caption}</p>
+                        <p ><span  className="caption-span" style={{"fontWeight": "bold"}} ><a style={{"marginLeft": "12px"}} href={`/users/${postObj?.user_id}`} >{postObj?.user.username}{"      "}</a></span>{"      "}{postObj?.caption}</p>
                     </div>
                     <div className="comment-scroll">
                         <div>{postObj?.post_comments.map((comm, idx) =>
