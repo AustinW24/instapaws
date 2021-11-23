@@ -62,18 +62,15 @@ export const getAllPosts = () => {
 
 export const getPost = (id) => async dispatch => {
     const res = await fetch(`/api/posts/${id}`)
-    // console.log('inside thunk for getPost')
     if (res.ok) {
-        // console.log("RES IS OK for thunk getPost")
         const post = await res.json()
-        // console.log(post)
         dispatch(setPost(post))
     }
     return res
 }
 
 export const removePost = (id) => async dispatch => {
-    console.log("INSIDE REMOVE POST")
+
     const res = await fetch(`/api/posts/${id}`, {
         method: "DELETE",
     })
@@ -109,7 +106,7 @@ export const editPost = (post) => async dispatch => {
 
 
 export const createPost = ( image_url, caption) => async dispatch => {
-    console.log("INSIDE CREATE POST", image_url, caption)
+
     const req = await fetch('/api/posts/', {
         method: "POST",
         headers: {
