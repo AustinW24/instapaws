@@ -12,11 +12,11 @@ comment_routes = Blueprint('comments', __name__)
 @comment_routes.route('/<id>', methods=['POST'])
 @login_required
 def createComment(id):
-    
+
     form = CommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    print('before validate', form.data)
+
     if form.validate_on_submit():
         new_comment = Comment(
             comment=form.data['comments'],
@@ -29,7 +29,7 @@ def createComment(id):
 
     db.session.add(new_comment)
     db.session.commit()
-    print('inside validation p', new_comment.to_dict())
+
     return {'comments': [new_comment.to_dict()]}
 
 @comment_routes.route('/<id>', methods=['DELETE'])

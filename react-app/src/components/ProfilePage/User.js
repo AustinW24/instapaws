@@ -28,7 +28,7 @@ function User() {
 
     const [user, setUser] = useState({});
 
-        console.log(posts)
+
     // useEffect(() => {
     //     if (!userId) {
     //         return;

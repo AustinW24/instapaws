@@ -42,7 +42,7 @@ def createPost():
 
     else:
         return {'errors': [form.errors]}
-    print(new_post, "NEW-POST############################")
+
     db.session.add(new_post)
     db.session.commit()
 

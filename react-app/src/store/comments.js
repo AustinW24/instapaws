@@ -28,7 +28,7 @@ export const getComments = (postId) => async dispatch => {
 export const createComment = (payload) => async dispatch => {
     const { comments, post_id, user_id } = payload;
 
-        console.log("before fetching comments", payload)
+      
     const res = await fetch(`/api/comments/${post_id}`, {
         method: "POST",
         headers: {
@@ -40,7 +40,7 @@ export const createComment = (payload) => async dispatch => {
     });
 
     if (res.ok) {
-        console.log("RES OKAY")
+
         const data = await res.json();
         dispatch(setComment(data))
         return data
@@ -55,7 +55,7 @@ export const createComment = (payload) => async dispatch => {
 }
 
 export const deleteComment = (id) => async dispatch => {
-    console.log("before fetch delete")
+
     const res = await fetch(`/api/comments/${id}`, {
         method: 'DELETE'
     })
