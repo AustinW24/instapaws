@@ -232,22 +232,11 @@ position: absolute;
 
 }
 
-
-/* .post-user-comment {
-    display: flex;
-    margin-right: 3px;
-    margin-left: 10px;
-} */
-
 .caption-span {
     position: relative;
     right: 5px;
     font-size: 12px;
-
-
 }
-
-
 
 .comment-row2 {
     display: flex;

@@ -40,15 +40,13 @@ export default function DeleteModal({ post, setShowDeleteModal, setClicked }) {
     }
 
     const handleDelete = async (e) => {
-        e.preventDefault();
-        await dispatch(removePost(post.id))
+        setShowDeleteModal(false);
         if(url.includes("post")){
             handleClick();
         } else {
             window.location.reload(true);
-
         }
-        // setShowDeleteModal(false);
+        await dispatch(removePost(post.id))
     }
 
 

@@ -38,6 +38,7 @@ function PostModal({ setShowModal }) {
 
     const postCreate = async (e) => {
         e.preventDefault();
+        setShowModal(false)
         let image_url = url;
 
         if (url !== 'https://i.imgur.com/BPOYKBx.png') {
@@ -52,7 +53,6 @@ function PostModal({ setShowModal }) {
             image_url = x['url']
 
             await dispatch(createPost(image_url, caption))
-            setShowModal(false)
         }
 
         // window.location.reload(true);
