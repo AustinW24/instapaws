@@ -34,6 +34,7 @@ export default function HomePage() {
 
     const postObj = posts
     const values = Object.values(postObj)
+    console.log(values)
 
     useEffect(() => {
         if (!comments || !posts){
@@ -125,9 +126,9 @@ export default function HomePage() {
                         return (
                             <li key={idx} className="indv-post">
                                 <div className="post-header">
-                                    <img className="profile-pic" src={post?.user.profile_picture} alt="user"></img>
-                                    <a href={`users/${post?.user.id}`} className="homepage-username">{post?.user.username}{" "}</a>
-                                    {post.user_id === user.id &&
+                                    <img className="profile-pic" src={post?.user?.profile_picture} alt="user"></img>
+                                    <a href={`users/${post?.user?.id}`} className="homepage-username">{post?.user?.username}{" "}</a>
+                                    {post?.user_id === user?.id &&
                                         <button className='post-dropdown' onClick={() => show(post)}><BiDotsHorizontalRounded /></button>
                                     }
                                     {clicked && postsId === post.id &&
@@ -159,11 +160,11 @@ export default function HomePage() {
                                     )
                                     }
                                 </div>
-                                <div className="photo-container"><div className="indv-photo" style={{ backgroundImage: `url(${post.picture_url})` }}></div></div>
+                                <div className="photo-container"><div className="indv-photo" style={{ backgroundImage: `url(${post?.picture_url})` }}></div></div>
                                 <div className="post-footer" >
                                     <div className="post-footer-head">
                                         <button onClick={() => postLikes(post)} className="homepage-heart-btn" style={{ 'backgroundColor': 'transparent', width: '20px', 'marginLeft': '14px', 'border': 'none', 'padding': '0px' }}>
-                                            {post?.postLikes.includes(user.id) ? (
+                                            {post?.postLikes?.includes(user.id) ? (
                                                 <FontAwesomeIcon style={{ 'color': 'red' }} className="homepage-heart" icon={faHeart}>
                                                 </FontAwesomeIcon>
                                             ) : (
@@ -172,22 +173,22 @@ export default function HomePage() {
                                             )}
                                         </button>
                                         <div className="home-likes-span">
-                                            {post?.postLikes.length !== 0 ? (
-                                                <span style={{ "fontWeight": "bold" }}>{post?.postLikes.length} liked</span>
+                                            {post?.postLikes?.length !== 0 ? (
+                                                <span style={{ "fontWeight": "bold" }}>{post?.postLikes?.length} liked</span>
                                             ) : (
                                                 ""
                                             )
                                             }
                                         </div>
                                         <div>
-                                            <a href={`/users/${post.user.id}`} className="bottom-homepage-username">{post.user.username}</a>
+                                            <a href={`/users/${post.user?.id}`} className="bottom-homepage-username">{post.user?.username}</a>
                                             <span className="post-caption">{post.caption}</span>
                                         </div>
 
                                     </div>
                                     <div className="homepage-comments">
-                                        {post?.post_comments.length < 2 &&
-                                            <div className="comment-row">{post?.post_comments.map((comm, idx) => <div className='home-indv-comment' key={idx}>
+                                        {post?.post_comments?.length < 2 &&
+                                            <div className="comment-row">{post?.post_comments?.map((comm, idx) => <div className='home-indv-comment' key={idx}>
                                                 <div className="home-pic-comment" style={{ "marginTop": "5px" }}>
                                                     <img className="home-profile-pic" src={comm?.user_pic} alt="cool person"></img>
                                                 </div>
@@ -216,15 +217,15 @@ export default function HomePage() {
                                             </div>)}
                                             </div>
                                         }
-                                        {post?.post_comments.length > 1 && (
+                                        {post?.post_comments?.length > 1 && (
                                             <div>
                                                 <a href={`/posts/${post?.id}`} className="viewall">view all comments</a>
                                                 <div className="home-indv-comment">
                                                     <img className="home-post-profile-pic" src={post?.post_comments[post?.post_comments.length - 1].user_pic} alt="list of comments"></img>
-                                                    <a href={`/users/${post?.post_comments['0'].user_id}`} className="span-username" ><strong>{post?.post_comments[post?.post_comments.length - 1].user}</strong></a>
+                                                    <a href={`/users/${post?.post_comments['0'].user_id}`} className="span-username" ><strong>{post?.post_comments[post?.post_comments?.length - 1].user}</strong></a>
                                                     <div className="shown-comment" onMouseEnter={() => { handleMouseEnter(post?.post_comments[[post?.post_comments.length - 1]]) }} onMouseLeave={e => { setRemoveDiv({ display: 'none' }) }}>{"  "}{post?.post_comments[post?.post_comments.length - 1].comment}</div>
-                                                    {commentId === post?.post_comments[[post?.post_comments.length - 1]].id && user.id === post?.post_comments[post?.post_comments.length - 1].user_id &&
-                                                        <button className="comment-dot" onClick={() => handleCommentClick(post?.post_comments[[post?.post_comments.length - 1]])} style={removeDiv} onMouseEnter={() => { handleMouseEnter(post?.post_comments[[post?.post_comments.length - 1]]) }} onMouseLeave={() => { setRemoveDiv({ display: 'none' }) }}><BiDotsHorizontalRounded /></button>
+                                                    {commentId === post?.post_comments[[post?.post_comments?.length - 1]].id && user.id === post?.post_comments[post?.post_comments?.length - 1].user_id &&
+                                                        <button className="comment-dot" onClick={() => handleCommentClick(post?.post_comments[[post?.post_comments?.length - 1]])} style={removeDiv} onMouseEnter={() => { handleMouseEnter(post?.post_comments[[post?.post_comments.length - 1]]) }} onMouseLeave={() => { setRemoveDiv({ display: 'none' }) }}><BiDotsHorizontalRounded /></button>
                                                     }
                                                     {showCommentModal && (
                                                         <Modal onClose={() => setShowCommentModal(false)}>
@@ -235,13 +236,13 @@ export default function HomePage() {
                                                 </div>
                                             </div>)
                                         }
-                                       
+                                        { }
 
                                     </div>
                                     <div className="footer-comment">
                                         <form className='home-comment-form' onSubmit={handleNewSubmit}>
                                             <textarea className="text-box-home" placeholder="Add a comment..." onClick={() => setPostsId(post?.id)} value={postsId === post?.id ? comments : ""} onChange={e => setComments(e.target.value)}></textarea>
-                                            <button onClick={() => postDetails(post?.id, post?.user.id)} className="postt-button" type="submit">Post</button>
+                                            <button onClick={() => postDetails(post?.id, post?.user?.id)} className="postt-button" type="submit">Post</button>
                                         </form>
                                     </div>
                                 </div>
