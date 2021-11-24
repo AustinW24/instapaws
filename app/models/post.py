@@ -16,9 +16,9 @@ class Post(db.Model):
     timestamp = db.Column(db.DateTime, default=datetime.now)
 
 
-    users = db.relationship("User", back_populates="posts")
-    comments = db.relationship("Comment", back_populates="posts")
-    postLikes = db.relationship("User", secondary=likes, back_populates="userLikes")
+    users = db.relationship("User", back_populates="posts", lazy="joined")
+    comments = db.relationship("Comment", back_populates="posts", lazy="joined")
+    postLikes = db.relationship("User", secondary=likes, back_populates="userLikes", lazy="joined")
 
     def to_dict(self):
         user = User.query.filter(User.id == self.user_id).first()

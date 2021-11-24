@@ -29,16 +29,16 @@ function User() {
     const [user, setUser] = useState({});
 
 
-    // useEffect(() => {
-    //     if (!userId) {
-    //         return;
-    //     }
-    //     (async () => {
-    //         const response = await fetch(`/api/users/${id}`);
-    //         const user = await response.json();
-    //         setUser(user)
-    //     })();
-    // }, [id])
+    useEffect(() => {
+        if (!userId) {
+            return;
+        }
+        (async () => {
+            const response = await fetch(`/api/users/${id}`);
+            const user = await response.json();
+            setUser(user)
+        })();
+    }, [id])
 
 
     useEffect(() => {
@@ -68,7 +68,7 @@ function User() {
     const numOfPosts = (posts) => {
         let count = 0;
         values?.map(post => {
-            if (+post.user_id === user.id) {
+            if (+post?.user_id === user.id) {
                 count += 1
             }
         }
