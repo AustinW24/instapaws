@@ -37,10 +37,10 @@ function PostModal({ setShowModal }) {
     }
 
     const postCreate = async (e) => {
-        e.preventDefault();
-        setShowModal(false)
+        // e.preventDefault();
         let image_url = url;
 
+        setShowModal(false)
         if (url !== 'https://i.imgur.com/BPOYKBx.png') {
             let formData = new FormData()
             formData.append('image', image)

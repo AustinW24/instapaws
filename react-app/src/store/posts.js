@@ -42,6 +42,7 @@ const actionLikePost = (post) => ({
 
 
 export const getAllPosts = () => {
+    // debugger
     return async (dispatch) => {
         const response = await fetch('/api/posts/', {
             headers: {
@@ -116,7 +117,6 @@ export const createPost = ( image_url, caption) => async dispatch => {
             image_url,
             caption,
         }
-
         )
     });
     if (req.ok) {
@@ -143,7 +143,7 @@ export const likePost = (post) => async dispatch => {
 
     if (res.ok) {
         const response = await res.json();
-        dispatch(actionLikePost(res))
+        dispatch(actionLikePost(response))
         return response
     };
 };
@@ -155,7 +155,7 @@ const initialState = {}
 export default function posts(state = initialState, action) {
     switch (action.type) {
         case GET_POSTS: {
-
+            // debugger
             const all = {...state};
             action.payload.posts.forEach((onePost) => {
                 all[onePost.id] = onePost;
@@ -171,7 +171,9 @@ export default function posts(state = initialState, action) {
         }
 
         case CREATE_POST: {
+
             const newState = {...state, [action.payload.posts[0].id]: action.payload.posts[0]}
+
             return newState;
         }
         case EDIT_POST: {
@@ -186,7 +188,9 @@ export default function posts(state = initialState, action) {
             return removedState
         }
         case LIKE_POST: {
+
             const newState = { ...state, [action.post.id]: action.post };
+
             return newState;
         }
         default:
